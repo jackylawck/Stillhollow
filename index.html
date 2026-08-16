@@ -46,21 +46,10 @@
         }
         .container { max-width: 640px; width: 100%; }
 
-        .top-bar {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
+        .top-bar { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 12px; }
         .lang-btn, .sos-mini-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 4px 14px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.2s;
+            background: transparent; border: 1px solid var(--border); color: var(--muted);
+            padding: 4px 14px; border-radius: 30px; font-size: 0.8rem; cursor: pointer; transition: 0.2s;
         }
         .lang-btn.active { background: var(--warm); color: #fff; border-color: var(--warm); }
         .sos-mini-btn { border-color: var(--rose); color: var(--rose); font-weight: 500; }
@@ -70,29 +59,16 @@
         .hero p { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
 
         .card {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 24px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--soft-shadow);
-            border: 1px solid var(--border);
-            transition: background 0.3s, border 0.3s;
+            background: var(--card); border-radius: var(--radius); padding: 24px 20px;
+            margin-bottom: 18px; box-shadow: var(--soft-shadow); border: 1px solid var(--border); transition: background 0.3s, border 0.3s;
         }
 
         .breath-area { text-align: center; padding: 6px 0; }
         .breath-circle {
-            width: 80px; height: 80px;
-            margin: 0 auto 10px;
-            border-radius: 50%;
+            width: 80px; height: 80px; margin: 0 auto 10px; border-radius: 50%;
             background: radial-gradient(circle, rgba(132,169,140,0.15) 0%, transparent 70%);
-            border: 2px solid var(--sage);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            color: var(--sage);
-            transition: transform 3.8s ease-in-out, border-color 0.3s;
-            cursor: default;
+            border: 2px solid var(--sage); display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: var(--sage); transition: transform 3.8s ease-in-out, border-color 0.3s; cursor: default;
         }
         .breath-inhale { transform: scale(1.35); border-color: var(--sage); }
         .breath-hold { transform: scale(1.35); border-color: var(--warm); color: var(--warm); }
@@ -101,14 +77,8 @@
 
         .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 6px; }
         .tag {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: 0.15s;
+            background: transparent; border: 1px solid var(--border); color: var(--muted);
+            padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; cursor: pointer; transition: 0.15s;
         }
         .tag.active { background: var(--warm); color: #fff; border-color: var(--warm); }
 
@@ -116,99 +86,66 @@
         .slider-header { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted); }
         .slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
         input[type=range] {
-            width: 100%; height: 4px;
-            -webkit-appearance: none; appearance: none;
+            width: 100%; height: 4px; -webkit-appearance: none; appearance: none;
             background: var(--border); border-radius: 4px; outline: none; margin: 8px 0;
         }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none;
-            width: 18px; height: 18px; border-radius: 50%;
-            background: var(--warm); cursor: pointer; border: 2px solid var(--card);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%;
+            background: var(--warm); cursor: pointer; border: 2px solid var(--card); box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .tabs {
-            display: flex; gap: 4px; background: var(--bg);
-            border-radius: 40px; padding: 4px; margin: 14px 0 12px;
-        }
+        .tabs { display: flex; gap: 4px; background: var(--bg); border-radius: 40px; padding: 4px; margin: 14px 0 12px; }
         .tab {
-            flex: 1; background: transparent; border: none;
-            color: var(--muted); padding: 8px 6px; border-radius: 30px;
-            font-size: 0.85rem; cursor: pointer; transition: 0.2s;
+            flex: 1; background: transparent; border: none; color: var(--muted); padding: 8px 6px;
+            border-radius: 30px; font-size: 0.85rem; cursor: pointer; transition: 0.2s;
         }
         .tab.active { background: var(--card); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-weight: 500; }
 
         textarea, input[type="text"] {
-            width: 100%; padding: 14px 16px; border-radius: 14px;
-            border: 1px solid var(--border); background: var(--bg);
-            color: var(--text); font-size: 0.95rem; line-height: 1.6; font-family: inherit;
+            width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border);
+            background: var(--bg); color: var(--text); font-size: 0.95rem; line-height: 1.6; font-family: inherit;
         }
         textarea { min-height: 140px; resize: vertical; }
         input[type="text"] { margin: 6px 0; }
 
-        .gentle-suggestion {
-            display: none;
-            text-align: center;
-            margin: 12px 0 4px;
-            animation: fadeIn 0.4s ease;
-        }
+        .gentle-suggestion { display: none; text-align: center; margin: 12px 0 4px; animation: fadeIn 0.4s ease; }
         .gentle-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: 0.2s;
+            background: transparent; border: 1px solid var(--border); color: var(--muted);
+            padding: 8px 20px; border-radius: 30px; font-size: 0.85rem; cursor: pointer; transition: 0.2s;
         }
         .gentle-btn:hover { background: var(--bg); color: var(--text); }
 
         .btn-row { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
         .btn-primary {
-            flex: 2; background: var(--warm); color: #fff; border: none;
-            padding: 14px 10px; border-radius: 40px; font-weight: 500;
-            font-size: 1rem; cursor: pointer; transition: 0.2s; min-width: 140px;
+            flex: 2; background: var(--warm); color: #fff; border: none; padding: 14px 10px;
+            border-radius: 40px; font-weight: 500; font-size: 1rem; cursor: pointer; transition: 0.2s; min-width: 140px;
         }
         .btn-primary:hover { opacity: 0.9; transform: scale(0.99); }
         .btn-secondary {
-            flex: 1; background: transparent; border: 1px solid var(--border);
-            color: var(--muted); padding: 14px 10px; border-radius: 40px;
-            font-size: 0.9rem; cursor: pointer; transition: 0.2s; min-width: 100px;
+            flex: 1; background: transparent; border: 1px solid var(--border); color: var(--muted);
+            padding: 14px 10px; border-radius: 40px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; min-width: 100px;
         }
         .btn-secondary:hover { background: var(--bg); color: var(--text); }
 
         .toolbar { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
-        .tool-btn {
-            background: transparent; border: none; color: var(--muted);
-            font-size: 0.8rem; padding: 4px 8px; cursor: pointer; border-radius: 20px;
-        }
+        .tool-btn { background: transparent; border: none; color: var(--muted); font-size: 0.8rem; padding: 4px 8px; cursor: pointer; border-radius: 20px; }
         .tool-btn:hover { text-decoration: underline; }
 
-        .footer-card {
-            text-align: center; font-size: 0.8rem; color: var(--muted);
-            line-height: 1.6; border-top: 1px solid var(--border);
-            padding-top: 16px; margin-top: 8px;
-        }
+        .footer-card { text-align: center; font-size: 0.8rem; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 8px; }
         .footer-card strong { color: var(--warm); }
 
         .modal-mask {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
             justify-content: center; align-items: center; padding: 20px; z-index: 999;
         }
         .modal-box {
-            background: var(--card); border-radius: var(--radius);
-            max-width: 480px; width: 100%; padding: 28px 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25); text-align: center;
+            background: var(--card); border-radius: var(--radius); max-width: 480px; width: 100%;
+            padding: 28px 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); text-align: center;
         }
         .modal-actions { display: flex; gap: 10px; margin-top: 16px; }
         .modal-actions button { flex: 1; }
 
-        .grounding-step {
-            font-size: 1.05rem; padding: 10px 14px; background: var(--bg);
-            border-radius: 12px; margin: 8px 0; color: var(--text); text-align: left;
-        }
+        .grounding-step { font-size: 1.05rem; padding: 10px 14px; background: var(--bg); border-radius: 12px; margin: 8px 0; color: var(--text); text-align: left; }
         .grounding-step small { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
@@ -229,13 +166,13 @@
         <button class="sos-mini-btn" onclick="openSOS()">🆘 即時熱線</button>
     </div>
 
-    <!-- 品牌主標題 (純正面肯定句) -->
+    <!-- 品牌主標題 -->
     <div class="hero">
         <h1 id="i18n-title">🌿 棲心樹洞 · Stillhollow</h1>
         <p id="i18n-sub">你此刻的存在，就已經足夠。此處純粹接納，為你留下一方安寧天地。</p>
     </div>
 
-    <!-- 1. 呼吸調息 (正面引導) -->
+    <!-- 1. 呼吸調息 -->
     <div class="card">
         <div class="breath-area">
             <div class="breath-circle" id="breathCircle">吸氣</div>
@@ -297,7 +234,7 @@
 
     <!-- 守護提示與免責聲明 -->
     <div class="footer-card">
-        <p id="i18n-crisis">💛 始終有人願意溫柔傾聽：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong></p>
+        <p id="i18n-crisis">💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong></p>
         <p style="font-size:0.75rem; margin-top:6px;" id="i18n-disclaimer">
             本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。
         </p>
@@ -307,24 +244,24 @@
     </div>
 </div>
 
-<!-- 🍃 溫柔釋放彈窗 -->
+<!-- 🍃 溫柔釋放彈窗 (修正：無條件釋放) -->
 <div class="modal-mask" id="releaseModal">
     <div class="modal-box">
         <h3 id="i18n-modal-title" style="font-weight:500; margin-bottom:8px;">🍃 溫柔地與文字道別</h3>
-        <p id="i18n-modal-desc" style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">在文字隨風消散前，請寫下一句送給自己的祝福（至少 3 個字）：</p>
+        <p id="i18n-modal-desc" style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">在文字隨風消散前，可以留下一句送給自己的話（留白也完全沒關係，直接放下即可）：</p>
         <input type="text" id="blessingInput" placeholder="例如：我已盡力，此刻我選擇休息。">
         <div class="modal-actions">
             <button class="btn-secondary" onclick="closeRelease()" id="i18n-modal-back">回到書寫</button>
-            <button class="btn-primary" onclick="confirmRelease()" id="i18n-modal-confirm">確認祝福，隨風而逝</button>
+            <button class="btn-primary" onclick="confirmRelease()" id="i18n-modal-confirm">輕柔放下，隨風而逝</button>
         </div>
     </div>
 </div>
 
-<!-- 🆘 即時熱線彈窗 -->
+<!-- 🆘 即時熱線彈窗 (修正：期望值管理) -->
 <div class="modal-mask" id="sosModal">
     <div class="modal-box" style="text-align: left;">
         <h3 style="color:var(--rose); font-weight:500; margin-bottom:10px;">💛 我們一直在這裡</h3>
-        <p style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">始終有人願意溫柔傾聽並陪伴身旁：</p>
+        <p style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">當你需要聲音的陪伴時，這些專線為你開放：</p>
         <div style="background:var(--bg); border-radius:12px; padding:12px; margin-bottom:14px;">
             <p><strong>🇭🇰 香港</strong> · 生命熱線 <a href="tel:23820000" style="color:var(--warm); font-weight:bold;">2382 0000</a></p>
             <p><strong>🇭🇰 香港</strong> · 撒瑪利亞 <a href="tel:23892222" style="color:var(--warm); font-weight:bold;">2389 2222</a></p>
@@ -344,7 +281,7 @@
         <div class="grounding-step">🖐️ 觸 (4) <small>感受 <strong>4</strong> 種不同的材質觸感（桌面、衣物、掌心、椅背...）</small></div>
         <div class="grounding-step">👂 聽 (3) <small>仔細聽 <strong>3</strong> 種環境的聲音（風扇、呼吸聲、窗外的聲音...）</small></div>
         <div class="grounding-step">👃 聞 (2) <small>覺察 <strong>2</strong> 種氣味（空氣、手上的氣味...）</small></div>
-        <div class="grounding-step">👄 嚐 (1) <small>感受 <strong>1</strong> 種口中的味道（喝一口水，感受溫度）</small></div>
+        <div class="grounding-step">👄 嚐 (1) <small>感受 <strong>1</strong> 種口中的味道（喝一口溫水，感受溫度）</small></div>
         
         <button class="btn-primary" style="width:100%; margin-top:14px;" onclick="closeGrounding()">我感覺平靜一些了，回到書寫</button>
     </div>
@@ -368,12 +305,12 @@ const LANG = {
         tabCompassion: "💛 溫柔對話",
         btnLetGo: "🍃 輕柔放下",
         btnSave: "🔒 封存於此",
-        crisis: "💛 始終有人願意溫柔傾聽：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong>",
+        crisis: "💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong>",
         disclaimer: "本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。",
         modalTitle: "🍃 溫柔地與文字道別",
-        modalDesc: "在文字隨風消散前，請寫下一句送給自己的祝福（至少 3 個字）：",
+        modalDesc: "在文字隨風消散前，可以留下一句送給自己的話（留白也完全沒關係，直接放下即可）：",
         modalBack: "回到書寫",
-        modalConfirm: "確認祝福，隨風而逝",
+        modalConfirm: "輕柔放下，隨風而逝",
         placeholder: "你可以從這裡開始…\n• 今天我感覺到最強烈的身體感受是…\n• 其實我真正想說的是…\n寫下一字一句，或是任何符號，都剛剛好。"
     },
     en: {
@@ -391,12 +328,12 @@ const LANG = {
         tabCompassion: "💛 Self-Compassion",
         btnLetGo: "🍃 Gently Release",
         btnSave: "🔒 Seal Here",
-        crisis: "💛 Caring hearts are always here to listen: HK Samaritan <strong>2389 2222</strong> ｜ Taiwan <strong>1925</strong>",
+        crisis: "💛 When you need a voice, these lines are open: HK Samaritan <strong>2389 2222</strong> ｜ Taiwan <strong>1925</strong>",
         disclaimer: "This is a self-reflection aid offering quiet space. For clinical care, please seek qualified professionals.",
         modalTitle: "🍃 Mindfully Releasing",
-        modalDesc: "Write a brief blessing to yourself (at least 3 words):",
+        modalDesc: "Leave a gentle whisper for yourself, or simply journey on (leaving it blank is perfectly fine):",
         modalBack: "Return",
-        modalConfirm: "Confirm & Release",
+        modalConfirm: "Gently Release",
         placeholder: "Start from here…\n• What I physically feel most today is…\n• What I truly want to say is…\nA single word, a symbol, or anything you share is wonderful."
     }
 };
@@ -473,7 +410,7 @@ document.querySelectorAll('.tag').forEach(btn => {
     });
 });
 
-// 5. 協議切換
+// 5. 協議切換 (CBT 提示去客觀化壓迫)
 function switchTab(type, btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
@@ -484,7 +421,7 @@ function switchTab(type, btn) {
         container.innerHTML = `<textarea id="mainInput" placeholder="${t.placeholder}"></textarea>`;
     } else if (type === 'perspective') {
         container.innerHTML = `
-            <input type="text" id="cbt_fact" placeholder="【客觀事實】剛才發生了什麼事？（不加形容詞）">
+            <input type="text" id="cbt_fact" placeholder="【如實看見】像是用相機拍下剛才的畫面，發生了什麼事？">
             <input type="text" id="cbt_thought" placeholder="【腦中念頭】你對自己說了什麼苛刻的話？">
             <textarea id="cbt_friend" placeholder="【摯友視角】如果是你最疼惜的好友身處此境，你會如何溫柔支持他？"></textarea>
         `;
@@ -514,27 +451,31 @@ function checkRumination() {
         if (choice) {
             alert(curLang === 'zh' ? '🪑 給自己 3 分鐘，閉上眼睛，感受呼吸的起伏。' : '🪑 Take 3 minutes to rest. Feel your breath.');
         } else {
-            alert(curLang === 'zh' ? '☕ 慢慢喝杯水，感受水的溫度。我們隨時都在。' : '☕ Take your time with water. We are here.');
+            alert(curLang === 'zh' ? '☕ 慢慢喝口溫水，感受水的溫度。我們隨時都在。' : '☕ Take your time with water. We are here.');
         }
         ruminationCounter = 0;
     }
 }
 
-// 7. 釋放儀式
+// 7. 釋放儀式 (無條件接納)
 function openRelease() { document.getElementById('releaseModal').style.display = 'flex'; }
 function closeRelease() { document.getElementById('releaseModal').style.display = 'none'; }
 
 function confirmRelease() {
     const blessing = document.getElementById('blessingInput').value.trim();
-    if (blessing.length < 3) {
-        alert(curLang === 'zh' ? '請寫下至少 3 個字的祝福，好好感謝此刻的自己。' : 'Please write at least 3 words.');
-        return;
-    }
+    // 徹底移除字數限制，實現無條件釋放
     checkRumination();
     document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
     document.getElementById('blessingInput').value = '';
     closeRelease();
-    alert(`🍃「${blessing}」\n\n${curLang === 'zh' ? '文字已隨風釋放，願這份祝福陪伴你。' : 'Words gently released.'}`);
+    
+    let msg = curLang === 'zh' ? '文字已隨風釋放，願清風帶給你安寧。' : 'Words gently released into the wind.';
+    if (blessing) {
+        msg = `🍃「${blessing}」\n\n` + msg;
+    } else {
+        msg = `🍃\n\n` + msg;
+    }
+    alert(msg);
 }
 
 // 8. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256)
