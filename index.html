@@ -4,14 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 🌿 1. SEO & Open Graph (棲心樹洞 Stillhollow) -->
     <title>棲心樹洞 Stillhollow · 安放心事，歸於靜謐</title>
-    <meta name="description" content="純本地 600,000 次 PBKDF2 + AES-GCM 256 加密空間。零雲端、防 AI 採集。這裡沒有 KPI、沒有對錯，只有一個不被打擾的安靜角落。">
-    <meta name="keywords" content="棲心樹洞, Stillhollow, 離線樹洞, 零知識加密, AES-GCM, 心理安全, 情緒衛生, 創傷知情, 溫暖陪伴">
-    <meta name="author" content="Jacky Law & Open Source Contributors">
-    <meta name="robots" content="index, follow">
-
-    <!-- 🛡️ 2. Enterprise Content Security Policy -->
+    <meta name="description" content="純本地 600,000 次 PBKDF2 + AES-GCM 256 加密空間。零雲端、純粹接納。此處為你留下一方安寧天地。">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self' data:; frame-ancestors 'none';">
 
     <style>
@@ -152,7 +146,6 @@
         textarea { min-height: 140px; resize: vertical; }
         input[type="text"] { margin: 6px 0; }
 
-        /* 低調分流按鈕 */
         .gentle-suggestion {
             display: none;
             text-align: center;
@@ -199,7 +192,6 @@
         }
         .footer-card strong { color: var(--warm); }
 
-        /* 彈窗體系 */
         .modal-mask {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
@@ -237,17 +229,17 @@
         <button class="sos-mini-btn" onclick="openSOS()">🆘 即時熱線</button>
     </div>
 
-    <!-- 品牌主標題 -->
+    <!-- 品牌主標題 (純正面肯定句) -->
     <div class="hero">
         <h1 id="i18n-title">🌿 棲心樹洞 · Stillhollow</h1>
-        <p id="i18n-sub">你此刻的存在，就已經足夠。這裡沒有評判，只有一個不被打擾的角落。</p>
+        <p id="i18n-sub">你此刻的存在，就已經足夠。此處純粹接納，為你留下一方安寧天地。</p>
     </div>
 
-    <!-- 1. 呼吸調息 -->
+    <!-- 1. 呼吸調息 (正面引導) -->
     <div class="card">
         <div class="breath-area">
             <div class="breath-circle" id="breathCircle">吸氣</div>
-            <div class="breath-hint" id="breathHint">如果你願意，可以跟著這個圓圈呼吸。如果不願意，光是看著它，也是一種休息。</div>
+            <div class="breath-hint" id="breathHint">隨心跟隨圓圈呼吸，或是靜靜看著，都是溫柔的放鬆。</div>
         </div>
     </div>
 
@@ -255,7 +247,7 @@
     <div class="card">
         <div style="font-size:0.85rem; color:var(--muted); margin-bottom:4px;" id="i18n-emotion-label">此刻的感受（挑一個最順眼的就好）：</div>
         <div class="tag-group" id="emotionGroup">
-            <button class="tag active" data-val="☁️ 說不清楚">☁️ 說不清楚</button>
+            <button class="tag active" data-val="☁️ 順其自然 · 隨意感受">☁️ 順其自然 · 隨意感受</button>
             <button class="tag" data-val="☀️ 平靜自在">☀️ 平靜自在</button>
             <button class="tag" data-val="🌤️ 微微擔憂">🌤️ 微微擔憂</button>
             <button class="tag" data-val="🌧️ 鬱悶低落">🌧️ 鬱悶低落</button>
@@ -264,7 +256,6 @@
             <button class="tag" data-val="🌫️ 迷茫孤單">🌫️ 迷茫孤單</button>
         </div>
 
-        <!-- 軀體導向 SUDS 滑塊 -->
         <div class="slider-wrap">
             <div class="slider-header">
                 <span id="i18n-suds-label">目前身體的緊繃感</span>
@@ -277,7 +268,6 @@
             </div>
         </div>
 
-        <!-- 三個引導模式 -->
         <div class="tabs">
             <button class="tab active" onclick="switchTab('free', this)" id="tabFree">📝 自由傾訴</button>
             <button class="tab" onclick="switchTab('perspective', this)" id="tabPerspective">🔍 換個濾鏡</button>
@@ -285,17 +275,15 @@
         </div>
 
         <div id="inputArea">
-            <textarea id="mainInput" placeholder="你可以從這裡開始…&#10;• 今天我感覺到最強烈的身體感受是…&#10;• 其實我真正想說的是…&#10;哪怕只寫一個字也好。"></textarea>
+            <textarea id="mainInput" placeholder="你可以從這裡開始…&#10;• 今天我感覺到最強烈的身體感受是…&#10;• 其實我真正想說的是…&#10;寫下一字一句，或是任何符號，都剛剛好。"></textarea>
         </div>
 
-        <!-- 低調分流按鈕（SUDS >= 7 默默出現，不貼標籤） -->
         <div class="gentle-suggestion" id="gentleSuggestion">
             <button class="gentle-btn" onclick="openGrounding()" id="i18n-gentle-btn">
                 🌱 感覺到身體有點緊繃？試試 1 分鐘感官著陸
             </button>
         </div>
 
-        <!-- 主要按鈕 -->
         <div class="btn-row">
             <button class="btn-secondary" id="btnLetGo" onclick="openRelease()">🍃 輕柔放下</button>
             <button class="btn-primary" id="btnSave" onclick="saveVault()">🔒 封存於此</button>
@@ -309,12 +297,12 @@
 
     <!-- 守護提示與免責聲明 -->
     <div class="footer-card">
-        <p id="i18n-crisis">💛 若你正承受難以負荷的痛苦：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong></p>
+        <p id="i18n-crisis">💛 始終有人願意溫柔傾聽：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong></p>
         <p style="font-size:0.75rem; margin-top:6px;" id="i18n-disclaimer">
-            本工具為自我探索與情緒梳理輔助，<strong>絕不構成專業心理諮商或醫療診斷</strong>。若持續感到痛苦請務必尋求專業協助。
+            本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。
         </p>
         <p style="font-size:0.65rem; opacity:0.5; margin-top:4px;">
-            棲心樹洞 Stillhollow · Zero-Knowledge · AES-GCM 256 · 完全離線守護
+            棲心樹洞 Stillhollow · Zero-Knowledge · AES-GCM 256 · 純本地完全離線守護
         </p>
     </div>
 </div>
@@ -336,7 +324,7 @@
 <div class="modal-mask" id="sosModal">
     <div class="modal-box" style="text-align: left;">
         <h3 style="color:var(--rose); font-weight:500; margin-bottom:10px;">💛 我們一直在這裡</h3>
-        <p style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">你不需要獨自承受這一切。請撥打以下電話，有人願意傾聽：</p>
+        <p style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">始終有人願意溫柔傾聽並陪伴身旁：</p>
         <div style="background:var(--bg); border-radius:12px; padding:12px; margin-bottom:14px;">
             <p><strong>🇭🇰 香港</strong> · 生命熱線 <a href="tel:23820000" style="color:var(--warm); font-weight:bold;">2382 0000</a></p>
             <p><strong>🇭🇰 香港</strong> · 撒瑪利亞 <a href="tel:23892222" style="color:var(--warm); font-weight:bold;">2389 2222</a></p>
@@ -355,7 +343,7 @@
         <div class="grounding-step">👀 看 (5) <small>找到身邊 <strong>5</strong> 種不同的顏色（例如：白色的牆、綠色盆栽...）</small></div>
         <div class="grounding-step">🖐️ 觸 (4) <small>感受 <strong>4</strong> 種不同的材質觸感（桌面、衣物、掌心、椅背...）</small></div>
         <div class="grounding-step">👂 聽 (3) <small>仔細聽 <strong>3</strong> 種環境的聲音（風扇、呼吸聲、窗外的聲音...）</small></div>
-        <div class="grounding-step">👃 聞 (2) <small>覺察 <strong>2</strong> 種氣味（空氣、手上的味道...）</small></div>
+        <div class="grounding-step">👃 聞 (2) <small>覺察 <strong>2</strong> 種氣味（空氣、手上的氣味...）</small></div>
         <div class="grounding-step">👄 嚐 (1) <small>感受 <strong>1</strong> 種口中的味道（喝一口水，感受溫度）</small></div>
         
         <button class="btn-primary" style="width:100%; margin-top:14px;" onclick="closeGrounding()">我感覺平靜一些了，回到書寫</button>
@@ -363,13 +351,13 @@
 </div>
 
 <script>
-// 1. 雙語字典
+// 1. 純正面肯定雙語字典
 const LANG = {
     zh: {
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
         title: "🌿 棲心樹洞 · Stillhollow",
-        sub: "你此刻的存在，就已經足夠。這裡沒有評判，只有一個不被打擾的角落。",
-        breath: "如果你願意，可以跟著這個圓圈呼吸。如果不願意，光是看著它，也是一種休息。",
+        sub: "你此刻的存在，就已經足夠。此處純粹接納，為你留下一方安寧天地。",
+        breath: "隨心跟隨圓圈呼吸，或是靜靜看著，都是溫柔的放鬆。",
         emotion: "此刻的感受（挑一個最順眼的就好）：",
         suds: "目前身體的緊繃感",
         sudsLow: "0 · 輕鬆舒展",
@@ -380,19 +368,19 @@ const LANG = {
         tabCompassion: "💛 溫柔對話",
         btnLetGo: "🍃 輕柔放下",
         btnSave: "🔒 封存於此",
-        crisis: "💛 若你正承受難以負荷的痛苦：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong>",
-        disclaimer: "本工具為自我探索與情緒梳理輔助，<strong>絕不構成專業心理諮商或醫療診斷</strong>。若持續感到痛苦請務必尋求專業協助。",
+        crisis: "💛 始終有人願意溫柔傾聽：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong>",
+        disclaimer: "本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。",
         modalTitle: "🍃 溫柔地與文字道別",
         modalDesc: "在文字隨風消散前，請寫下一句送給自己的祝福（至少 3 個字）：",
         modalBack: "回到書寫",
         modalConfirm: "確認祝福，隨風而逝",
-        placeholder: "你可以從這裡開始…\n• 今天我感覺到最強烈的身體感受是…\n• 其實我真正想說的是…\n哪怕只寫一個字也好。"
+        placeholder: "你可以從這裡開始…\n• 今天我感覺到最強烈的身體感受是…\n• 其實我真正想說的是…\n寫下一字一句，或是任何符號，都剛剛好。"
     },
     en: {
         docTitle: "Stillhollow · A Sanctuary for the Unspoken",
         title: "🌿 Stillhollow",
-        sub: "You are already enough, just as you are. A quiet corner for your unspoken thoughts.",
-        breath: "If you like, breathe with this circle. Or just watch it—that's rest too.",
+        sub: "You are already enough, just as you are. A sanctuary of pure acceptance and quiet ease.",
+        breath: "Breathe along gently with the circle, or simply rest your eyes here.",
         emotion: "Right now, what feels closest (pick whatever feels easy):",
         suds: "Current physical tension level",
         sudsLow: "0 · Relaxed & Ease",
@@ -403,13 +391,13 @@ const LANG = {
         tabCompassion: "💛 Self-Compassion",
         btnLetGo: "🍃 Gently Release",
         btnSave: "🔒 Seal Here",
-        crisis: "💛 If in crisis: HK Samaritan <strong>2389 2222</strong> ｜ Taiwan <strong>1925</strong>",
-        disclaimer: "This is a self-reflection aid. <strong>NOT a substitute for professional counseling or medical advice</strong>.",
+        crisis: "💛 Caring hearts are always here to listen: HK Samaritan <strong>2389 2222</strong> ｜ Taiwan <strong>1925</strong>",
+        disclaimer: "This is a self-reflection aid offering quiet space. For clinical care, please seek qualified professionals.",
         modalTitle: "🍃 Mindfully Releasing",
         modalDesc: "Write a brief blessing to yourself (at least 3 words):",
         modalBack: "Return",
         modalConfirm: "Confirm & Release",
-        placeholder: "Start from here…\n• What I physically feel most today is…\n• What I truly want to say is…\nEven just one word is enough."
+        placeholder: "Start from here…\n• What I physically feel most today is…\n• What I truly want to say is…\nA single word, a symbol, or anything you share is wonderful."
     }
 };
 
@@ -464,7 +452,7 @@ function runBreath() {
 setInterval(runBreath, 3800);
 runBreath();
 
-// 3. SUDS 觸發低調分流（去標籤化）
+// 3. SUDS 分流
 function handleSudsChange(val) {
     document.getElementById('sudsValue').innerText = val;
     const suggestion = document.getElementById('gentleSuggestion');
@@ -476,7 +464,7 @@ function handleSudsChange(val) {
 }
 
 // 4. 心情標籤
-let currentEmotion = '☁️ 說不清楚';
+let currentEmotion = '☁️ 順其自然 · 隨意感受';
 document.querySelectorAll('.tag').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('.tag').forEach(b => b.classList.remove('active'));
@@ -508,7 +496,7 @@ function switchTab(type, btn) {
     }
 }
 
-// 6. 邀請式反芻煞車（溫柔二選一）
+// 6. 邀請式反芻煞車
 let ruminationCounter = 0;
 let lastActionTime = 0;
 function checkRumination() {
@@ -526,7 +514,7 @@ function checkRumination() {
         if (choice) {
             alert(curLang === 'zh' ? '🪑 給自己 3 分鐘，閉上眼睛，感受呼吸的起伏。' : '🪑 Take 3 minutes to rest. Feel your breath.');
         } else {
-            alert(curLang === 'zh' ? '☕ 慢慢喝杯水，感受水的溫度。不急，我們隨時都在。' : '☕ Take your time with water. We are here.');
+            alert(curLang === 'zh' ? '☕ 慢慢喝杯水，感受水的溫度。我們隨時都在。' : '☕ Take your time with water. We are here.');
         }
         ruminationCounter = 0;
     }
