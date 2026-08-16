@@ -1,0 +1,21 @@
+{
+  "name": "心靈避風港 Mindful Vault",
+  "short_name": "MindfulVault",
+  "description": "純本地軍規加密、零知識、無雲端的情緒沉澱與自我對話空間。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1c1816",
+  "theme_color": "#c97b63",
+  "icons": [
+    {
+      "src": "./DAILYOFFicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./DAILYOFFicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
