@@ -46,10 +46,21 @@
         }
         .container { max-width: 640px; width: 100%; }
 
-        .top-bar { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 12px; }
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
         .lang-btn, .sos-mini-btn {
-            background: transparent; border: 1px solid var(--border); color: var(--muted);
-            padding: 4px 14px; border-radius: 30px; font-size: 0.8rem; cursor: pointer; transition: 0.2s;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
         }
         .lang-btn.active { background: var(--warm); color: #fff; border-color: var(--warm); }
         .sos-mini-btn { border-color: var(--rose); color: var(--rose); font-weight: 500; }
@@ -59,16 +70,29 @@
         .hero p { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
 
         .card {
-            background: var(--card); border-radius: var(--radius); padding: 24px 20px;
-            margin-bottom: 18px; box-shadow: var(--soft-shadow); border: 1px solid var(--border); transition: background 0.3s, border 0.3s;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            margin-bottom: 18px;
+            box-shadow: var(--soft-shadow);
+            border: 1px solid var(--border);
+            transition: background 0.3s, border 0.3s;
         }
 
         .breath-area { text-align: center; padding: 6px 0; }
         .breath-circle {
-            width: 80px; height: 80px; margin: 0 auto 10px; border-radius: 50%;
+            width: 80px; height: 80px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
             background: radial-gradient(circle, rgba(132,169,140,0.15) 0%, transparent 70%);
-            border: 2px solid var(--sage); display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; color: var(--sage); transition: transform 3.8s ease-in-out, border-color 0.3s; cursor: default;
+            border: 2px solid var(--sage);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--sage);
+            transition: transform 3.8s ease-in-out, border-color 0.3s;
+            cursor: default;
         }
         .breath-inhale { transform: scale(1.35); border-color: var(--sage); }
         .breath-hold { transform: scale(1.35); border-color: var(--warm); color: var(--warm); }
@@ -77,8 +101,14 @@
 
         .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 6px; }
         .tag {
-            background: transparent; border: 1px solid var(--border); color: var(--muted);
-            padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; cursor: pointer; transition: 0.15s;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.15s;
         }
         .tag.active { background: var(--warm); color: #fff; border-color: var(--warm); }
 
@@ -86,66 +116,99 @@
         .slider-header { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted); }
         .slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
         input[type=range] {
-            width: 100%; height: 4px; -webkit-appearance: none; appearance: none;
+            width: 100%; height: 4px;
+            -webkit-appearance: none; appearance: none;
             background: var(--border); border-radius: 4px; outline: none; margin: 8px 0;
         }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%;
-            background: var(--warm); cursor: pointer; border: 2px solid var(--card); box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            -webkit-appearance: none; appearance: none;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: var(--warm); cursor: pointer; border: 2px solid var(--card);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .tabs { display: flex; gap: 4px; background: var(--bg); border-radius: 40px; padding: 4px; margin: 14px 0 12px; }
+        .tabs {
+            display: flex; gap: 4px; background: var(--bg);
+            border-radius: 40px; padding: 4px; margin: 14px 0 12px;
+        }
         .tab {
-            flex: 1; background: transparent; border: none; color: var(--muted); padding: 8px 6px;
-            border-radius: 30px; font-size: 0.85rem; cursor: pointer; transition: 0.2s;
+            flex: 1; background: transparent; border: none;
+            color: var(--muted); padding: 8px 6px; border-radius: 30px;
+            font-size: 0.85rem; cursor: pointer; transition: 0.2s;
         }
         .tab.active { background: var(--card); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-weight: 500; }
 
         textarea, input[type="text"] {
-            width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border);
-            background: var(--bg); color: var(--text); font-size: 0.95rem; line-height: 1.6; font-family: inherit;
+            width: 100%; padding: 14px 16px; border-radius: 14px;
+            border: 1px solid var(--border); background: var(--bg);
+            color: var(--text); font-size: 0.95rem; line-height: 1.6; font-family: inherit;
         }
         textarea { min-height: 140px; resize: vertical; }
         input[type="text"] { margin: 6px 0; }
 
-        .gentle-suggestion { display: none; text-align: center; margin: 12px 0 4px; animation: fadeIn 0.4s ease; }
+        .gentle-suggestion {
+            display: none;
+            text-align: center;
+            margin: 12px 0 4px;
+            animation: fadeIn 0.4s ease;
+        }
         .gentle-btn {
-            background: transparent; border: 1px solid var(--border); color: var(--muted);
-            padding: 8px 20px; border-radius: 30px; font-size: 0.85rem; cursor: pointer; transition: 0.2s;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
         }
         .gentle-btn:hover { background: var(--bg); color: var(--text); }
 
         .btn-row { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
         .btn-primary {
-            flex: 2; background: var(--warm); color: #fff; border: none; padding: 14px 10px;
-            border-radius: 40px; font-weight: 500; font-size: 1rem; cursor: pointer; transition: 0.2s; min-width: 140px;
+            flex: 2; background: var(--warm); color: #fff; border: none;
+            padding: 14px 10px; border-radius: 40px; font-weight: 500;
+            font-size: 1rem; cursor: pointer; transition: 0.2s; min-width: 140px;
         }
         .btn-primary:hover { opacity: 0.9; transform: scale(0.99); }
         .btn-secondary {
-            flex: 1; background: transparent; border: 1px solid var(--border); color: var(--muted);
-            padding: 14px 10px; border-radius: 40px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; min-width: 100px;
+            flex: 1; background: transparent; border: 1px solid var(--border);
+            color: var(--muted); padding: 14px 10px; border-radius: 40px;
+            font-size: 0.9rem; cursor: pointer; transition: 0.2s; min-width: 100px;
         }
         .btn-secondary:hover { background: var(--bg); color: var(--text); }
 
         .toolbar { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
-        .tool-btn { background: transparent; border: none; color: var(--muted); font-size: 0.8rem; padding: 4px 8px; cursor: pointer; border-radius: 20px; }
+        .tool-btn {
+            background: transparent; border: none; color: var(--muted);
+            font-size: 0.8rem; padding: 4px 8px; cursor: pointer; border-radius: 20px;
+        }
         .tool-btn:hover { text-decoration: underline; }
 
-        .footer-card { text-align: center; font-size: 0.8rem; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 8px; }
+        .footer-card {
+            text-align: center; font-size: 0.8rem; color: var(--muted);
+            line-height: 1.6; border-top: 1px solid var(--border);
+            padding-top: 16px; margin-top: 8px;
+        }
         .footer-card strong { color: var(--warm); }
 
         .modal-mask {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
             justify-content: center; align-items: center; padding: 20px; z-index: 999;
         }
         .modal-box {
-            background: var(--card); border-radius: var(--radius); max-width: 480px; width: 100%;
-            padding: 28px 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); text-align: center;
+            background: var(--card); border-radius: var(--radius);
+            max-width: 480px; width: 100%; padding: 28px 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25); text-align: center;
         }
         .modal-actions { display: flex; gap: 10px; margin-top: 16px; }
         .modal-actions button { flex: 1; }
 
-        .grounding-step { font-size: 1.05rem; padding: 10px 14px; background: var(--bg); border-radius: 12px; margin: 8px 0; color: var(--text); text-align: left; }
+        .grounding-step {
+            font-size: 1.05rem; padding: 10px 14px; background: var(--bg);
+            border-radius: 12px; margin: 8px 0; color: var(--text); text-align: left;
+        }
         .grounding-step small { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
@@ -234,7 +297,7 @@
 
     <!-- 守護提示與免責聲明 -->
     <div class="footer-card">
-        <p id="i18n-crisis">💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong></p>
+        <p id="i18n-crisis">💛 始終有人願意溫柔傾聽：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong></p>
         <p style="font-size:0.75rem; margin-top:6px;" id="i18n-disclaimer">
             本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。
         </p>
@@ -244,7 +307,7 @@
     </div>
 </div>
 
-<!-- 🍃 溫柔釋放彈窗 (修正：無條件釋放) -->
+<!-- 🍃 溫柔釋放彈窗 (無條件接納) -->
 <div class="modal-mask" id="releaseModal">
     <div class="modal-box">
         <h3 id="i18n-modal-title" style="font-weight:500; margin-bottom:8px;">🍃 溫柔地與文字道別</h3>
@@ -257,7 +320,7 @@
     </div>
 </div>
 
-<!-- 🆘 即時熱線彈窗 (修正：期望值管理) -->
+<!-- 🆘 即時熱線彈窗 (期望值管理) -->
 <div class="modal-mask" id="sosModal">
     <div class="modal-box" style="text-align: left;">
         <h3 style="color:var(--rose); font-weight:500; margin-bottom:10px;">💛 我們一直在這裡</h3>
@@ -410,7 +473,7 @@ document.querySelectorAll('.tag').forEach(btn => {
     });
 });
 
-// 5. 協議切換 (CBT 提示去客觀化壓迫)
+// 5. 協議切換
 function switchTab(type, btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
@@ -463,7 +526,6 @@ function closeRelease() { document.getElementById('releaseModal').style.display 
 
 function confirmRelease() {
     const blessing = document.getElementById('blessingInput').value.trim();
-    // 徹底移除字數限制，實現無條件釋放
     checkRumination();
     document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
     document.getElementById('blessingInput').value = '';
@@ -478,7 +540,7 @@ function confirmRelease() {
     alert(msg);
 }
 
-// 8. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256)
+// 8. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256 + 空白密碼防呆 + 品牌命名統一)
 async function deriveKey(pwd, salt) {
     const enc = new TextEncoder();
     const km = await crypto.subtle.importKey('raw', enc.encode(pwd), 'PBKDF2', false, ['deriveKey']);
@@ -494,7 +556,11 @@ async function deriveKey(pwd, salt) {
 async function saveVault() {
     checkRumination();
     const pwd = prompt(curLang === 'zh' ? '請輸入你的本地主密鑰（用於 AES-256 加密，絕不上傳）：' : 'Enter master key for local AES-256 encryption:');
-    if (!pwd) return;
+    if (!pwd) return; 
+    if (pwd.trim() === '') {
+        alert(curLang === 'zh' ? '請輸入一串密鑰，或按「取消」放棄儲存。' : 'Please enter a key, or click Cancel.');
+        return;
+    }
 
     let text = '';
     document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(el => text += el.value + '\n---\n');
@@ -513,17 +579,19 @@ async function saveVault() {
         data: Array.from(new Uint8Array(encrypted)),
         date: new Date().toLocaleDateString()
     };
-    const history = JSON.parse(localStorage.getItem('mindful_vault') || '[]');
+    
+    // 品牌命名統一: stillhollow_vault
+    const history = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
     history.push(record);
-    localStorage.setItem('mindful_vault', JSON.stringify(history));
+    localStorage.setItem('stillhollow_vault', JSON.stringify(history));
 
     alert(curLang === 'zh' ? '🔒 已加密封存於本機（600k PBKDF2 + AES-256）。' : '🔒 Sealed locally.');
     document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
 }
 
-// 9. 輔助彈窗
+// 9. 輔助彈窗 (品牌命名統一)
 function exportBackup() {
-    const data = localStorage.getItem('mindful_vault') || '[]';
+    const data = localStorage.getItem('stillhollow_vault') || '[]';
     const blob = new Blob([data], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
