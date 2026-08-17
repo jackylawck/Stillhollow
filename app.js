@@ -1,4 +1,4 @@
-// 1. 全站 100% 完整雙語字典
+// 1. 全站 100% 完整雙語字典 (含所有自訂彈窗文案)
 const LANG = {
     zh: {
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
@@ -63,6 +63,21 @@ const LANG = {
             { icon: "👄", name: "嚐 (1)", desc: "感受 <strong>1</strong> 種口中的味道（喝一口溫水，感受溫度）" }
         ],
         groundingClose: "我感覺平靜一些了，回到書寫",
+        promptSaveTitle: "🔒 封存此篇心事",
+        promptSaveDesc: "請設定一組專屬於你的私密密鑰（此密鑰僅儲存於你的裝置，絕不上傳）：",
+        promptSavePlaceholder: "請輸入密鑰...",
+        promptBackupTitle: "📦 設定備份密碼",
+        promptBackupDesc: "請設定一組「備份專屬密碼」（用於雙重保護備份檔案，請務必牢記）：",
+        promptBackupPlaceholder: "請輸入備份密碼...",
+        promptImportTitle: "📂 匯入備份檔案",
+        promptImportDesc: "請輸入此備份檔案的「專屬密碼」以進行解密還原：",
+        promptImportPlaceholder: "請輸入備份密碼...",
+        promptConfirm: "確認",
+        promptCancel: "取消",
+        ruminationTitle: "🧡 溫柔的小歇",
+        ruminationDesc: "你已經在這裡沉澱一會兒了。大腦跟身體一樣需要休息。",
+        ruminationWater: "☕ 去喝口溫水",
+        ruminationRest: "🪑 閉眼深呼吸",
         toastRest: "🪑 給自己 3 分鐘，閉上眼睛，感受呼吸的起伏。",
         toastWater: "☕ 慢慢喝口溫水，感受水的溫度。我們隨時都在。",
         toastReleased: "文字已隨風釋放，願清風帶給你安寧。",
@@ -141,6 +156,21 @@ const LANG = {
             { icon: "👄", name: "Taste (1)", desc: "Notice <strong>1</strong> taste (take a sip of warm water, sense temperature)" }
         ],
         groundingClose: "I feel more grounded, back to writing",
+        promptSaveTitle: "🔒 Seal Your Thoughts",
+        promptSaveDesc: "Enter your private key (used only for on-device encryption, never uploaded):",
+        promptSavePlaceholder: "Enter key...",
+        promptBackupTitle: "📦 Set Backup Password",
+        promptBackupDesc: "Set a dedicated password for this backup file (keep it safe):",
+        promptBackupPlaceholder: "Enter backup password...",
+        promptImportTitle: "📂 Import Backup Vault",
+        promptImportDesc: "Enter the dedicated password for this backup file to restore:",
+        promptImportPlaceholder: "Enter backup password...",
+        promptConfirm: "Confirm",
+        promptCancel: "Cancel",
+        ruminationTitle: "🧡 Gentle Pause",
+        ruminationDesc: "You have been reflecting for a while. The mind needs gentle rest too.",
+        ruminationWater: "☕ Sip Warm Water",
+        ruminationRest: "🪑 Rest & Breathe",
         toastRest: "🪑 Take 3 minutes to rest your eyes and feel your breath.",
         toastWater: "☕ Take your time sipping warm water. We are here.",
         toastReleased: "Words gently released into the wind.",
@@ -267,7 +297,7 @@ function switchTab(type, btn) {
     renderTabs();
 }
 
-// 3. 浮動提示 Toast
+// 3. 自訂溫柔浮動提示 Toast (取代 alert)
 let toastTimer = null;
 function showToast(msg) {
     const toast = document.getElementById('gentle-toast');
@@ -277,7 +307,48 @@ function showToast(msg) {
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3500);
 }
 
-// 4. 呼吸動畫
+// 4. 自訂密鑰彈窗函式 (取代原生 prompt)
+function customPrompt({ title, desc, placeholder }) {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('promptModal');
+        const titleEl = document.getElementById('promptTitle');
+        const descEl = document.getElementById('promptDesc');
+        const inputEl = document.getElementById('promptInput');
+        const confirmBtn = document.getElementById('promptConfirmBtn');
+        const cancelBtn = document.getElementById('promptCancelBtn');
+        const t = LANG[curLang];
+
+        titleEl.innerText = title;
+        descEl.innerText = desc;
+        inputEl.placeholder = placeholder || '';
+        inputEl.value = '';
+        confirmBtn.innerText = t.promptConfirm;
+        cancelBtn.innerText = t.promptCancel;
+
+        modal.style.display = 'flex';
+        inputEl.focus();
+
+        const handleConfirm = () => { cleanup(); resolve(inputEl.value); };
+        const handleCancel = () => { cleanup(); resolve(null); };
+        const handleKey = (e) => {
+            if (e.key === 'Enter') handleConfirm();
+            if (e.key === 'Escape') handleCancel();
+        };
+
+        function cleanup() {
+            modal.style.display = 'none';
+            confirmBtn.removeEventListener('click', handleConfirm);
+            cancelBtn.removeEventListener('click', handleCancel);
+            inputEl.removeEventListener('keydown', handleKey);
+        }
+
+        confirmBtn.addEventListener('click', handleConfirm);
+        cancelBtn.addEventListener('click', handleCancel);
+        inputEl.addEventListener('keydown', handleKey);
+    });
+}
+
+// 5. 呼吸調息
 let breathState = 0;
 const breathCircle = document.getElementById('breathCircle');
 function updateBreathText() {
@@ -295,14 +366,14 @@ function runBreath() {
 setInterval(runBreath, 3800);
 runBreath();
 
-// 5. SUDS 軀體滑塊
+// 6. SUDS 軀體滑塊
 function handleSudsChange(val) {
     document.getElementById('sudsValue').innerText = val;
     const suggestion = document.getElementById('gentleSuggestion');
     suggestion.style.display = parseInt(val) >= 7 ? 'block' : 'none';
 }
 
-// 6. 邀請式反芻煞車
+// 7. 自訂邀請式反芻煞車 (取代原生 confirm)
 let ruminationCounter = 0;
 let lastActionTime = 0;
 function checkRumination() {
@@ -312,18 +383,36 @@ function checkRumination() {
     lastActionTime = now;
 
     if (ruminationCounter >= 3) {
-        const choice = confirm(
-            curLang === 'zh'
-            ? '🧡 你已經在這裡沉澱一會兒了。大腦跟身體一樣需要休息。\n\n• 確定 → 閉眼深呼吸 3 分鐘\n• 取消 → 去喝杯溫水再回來'
-            : '🧡 You have been here a while. Brains need gentle rest too.\n\n• OK → Rest for 3 min\n• Cancel → Grab a cup of water'
-        );
-        const t = LANG[curLang];
-        showToast(choice ? t.toastRest : t.toastWater);
         ruminationCounter = 0;
+        const modal = document.getElementById('ruminationModal');
+        const titleEl = document.getElementById('ruminationTitle');
+        const descEl = document.getElementById('ruminationDesc');
+        const waterBtn = document.getElementById('ruminationWaterBtn');
+        const restBtn = document.getElementById('ruminationRestBtn');
+        const t = LANG[curLang];
+
+        titleEl.innerText = t.ruminationTitle;
+        descEl.innerText = t.ruminationDesc;
+        waterBtn.innerText = t.ruminationWater;
+        restBtn.innerText = t.ruminationRest;
+
+        modal.style.display = 'flex';
+
+        const handleWater = () => { cleanup(); showToast(t.toastWater); };
+        const handleRest = () => { cleanup(); showToast(t.toastRest); };
+
+        function cleanup() {
+            modal.style.display = 'none';
+            waterBtn.removeEventListener('click', handleWater);
+            restBtn.removeEventListener('click', handleRest);
+        }
+
+        waterBtn.addEventListener('click', handleWater);
+        restBtn.addEventListener('click', handleRest);
     }
 }
 
-// 7. 釋放儀式
+// 8. 釋放儀式
 function openRelease() { document.getElementById('releaseModal').style.display = 'flex'; }
 function closeRelease() { document.getElementById('releaseModal').style.display = 'none'; }
 
@@ -342,7 +431,7 @@ function confirmRelease() {
     }
 }
 
-// 8. 軍規加密 (600k PBKDF2 + AES-GCM 256)
+// 9. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256)
 async function deriveKey(pwd, salt) {
     const enc = new TextEncoder();
     const km = await crypto.subtle.importKey('raw', enc.encode(pwd), 'PBKDF2', false, ['deriveKey']);
@@ -358,8 +447,13 @@ async function deriveKey(pwd, salt) {
 async function saveVault() {
     checkRumination();
     const t = LANG[curLang];
-    let pwd = prompt(curLang === 'zh' ? '請輸入你的本地主密鑰（用於 AES-256 加密，絕不上傳）：' : 'Enter master key for local AES-256 encryption:');
-    if (!pwd) return; 
+    let pwd = await customPrompt({
+        title: t.promptSaveTitle,
+        desc: t.promptSaveDesc,
+        placeholder: t.promptSavePlaceholder
+    });
+
+    if (pwd === null) return; 
     if (pwd.trim() === '') {
         showToast(t.toastEmptyPwd);
         return;
@@ -393,7 +487,7 @@ async function saveVault() {
     pwd = null; payload = null; text = null;
 }
 
-// 9. 備份雙重加密匯出
+// 10. 雙重加密備份匯出
 async function exportBackup() {
     const t = LANG[curLang];
     const data = localStorage.getItem('stillhollow_vault') || '[]';
@@ -402,12 +496,13 @@ async function exportBackup() {
         return;
     }
 
-    let backupPwd = prompt(
-        curLang === 'zh' 
-        ? '請設定「備份檔專屬密碼」（此密碼用於雙重加密整個備份檔案，請務必牢記）：' 
-        : 'Set a password for this backup file (keep it safe):'
-    );
-    if (!backupPwd) return;
+    let backupPwd = await customPrompt({
+        title: t.promptBackupTitle,
+        desc: t.promptBackupDesc,
+        placeholder: t.promptBackupPlaceholder
+    });
+
+    if (backupPwd === null) return;
     if (backupPwd.trim() === '') {
         showToast(t.toastBackupPwdEmpty);
         return;
@@ -443,7 +538,7 @@ async function exportBackup() {
     }
 }
 
-// 10. 備份匯入（非同步 + 去重）
+// 11. 備份解密匯入 (非同步排程 + 指紋去重)
 async function importBackup(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -460,12 +555,13 @@ async function importBackup(event) {
                 return;
             }
 
-            let backupPwd = prompt(
-                curLang === 'zh' 
-                ? '請輸入此備份檔的「備份專屬密碼」：' 
-                : 'Enter the password for this backup file:'
-            );
-            if (!backupPwd) return;
+            let backupPwd = await customPrompt({
+                title: t.promptImportTitle,
+                desc: t.promptImportDesc,
+                placeholder: t.promptImportPlaceholder
+            });
+
+            if (backupPwd === null) return;
 
             showToast(t.toastDecrypting);
 
@@ -513,12 +609,12 @@ async function importBackup(event) {
     reader.readAsText(file);
 }
 
-// 11. 彈窗控制
+// 12. 彈窗控制
 function openSOS() { document.getElementById('sosModal').style.display = 'flex'; }
 function closeSOS() { document.getElementById('sosModal').style.display = 'none'; }
 function openGrounding() { document.getElementById('groundingModal').style.display = 'flex'; }
 function closeGrounding() { document.getElementById('groundingModal').style.display = 'none'; }
 
-// 初始化語言
+// 初始化語言偵測
 const browserLang = navigator.language || 'zh';
 setLang(browserLang.startsWith('zh') ? 'zh' : 'en');
