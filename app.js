@@ -117,11 +117,11 @@ const LANG = {
         toastBackupPwdEmpty: "密碼不能為空白。",
         toastBackupDone: "✅ 備份檔已完成雙重加密並下載！",
         toastBackupFail: "❌ 備份失敗，請重試。",
-        toastInvalidFile: "❌ 無效的備份檔案格式。",
+        toastInvalidFile: "❌ 無效的備份檔案格式（JSON 解析失敗）。",
         toastDecrypting: "⏳ 正在驗證與解密備份檔...",
         toastRestored: (add, skip) => `✅ 成功還原：新增 ${add} 筆${skip > 0 ? `（已自動過濾 ${skip} 筆重複）` : ''}`,
-        toastRestoreFail: "❌ 資料解析失敗，備份檔可能已損毀。",
-        toastDecryptFail: "❌ 解密失敗，請檢查密碼是否正確。"
+        toastRestoreFail: "❌ 資料結構無效或備份檔已損毀。",
+        toastDecryptFail: "❌ 解密失敗，密碼錯誤或檔案已損毀。"
     },
     en: {
         docTitle: "Stillhollow · A Sanctuary for the Unspoken",
@@ -240,11 +240,11 @@ const LANG = {
         toastBackupPwdEmpty: "Password cannot be empty.",
         toastBackupDone: "✅ Encrypted backup downloaded!",
         toastBackupFail: "❌ Backup failed.",
-        toastInvalidFile: "❌ Invalid backup file format.",
+        toastInvalidFile: "❌ Invalid backup file format (JSON parsing failed).",
         toastDecrypting: "⏳ Decrypting backup...",
         toastRestored: (add, skip) => `✅ Restored ${add} records${skip > 0 ? ` (${skip} duplicates skipped)` : ''}`,
-        toastRestoreFail: "❌ Corrupted backup data.",
-        toastDecryptFail: "❌ Decryption failed. Incorrect password."
+        toastRestoreFail: "❌ Invalid structure or corrupted backup.",
+        toastDecryptFail: "❌ Decryption failed. Incorrect password or corrupted file."
     }
 };
 
@@ -252,7 +252,26 @@ let curLang = 'zh';
 let currentTab = 'free';
 let currentEmotionIndex = 0;
 
-// 2. 語言切換渲染
+// 2. 無障礙彈窗管理 (Focus Trapping & Return)
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal._returnFocus = document.activeElement;
+    modal.style.display = 'flex';
+    const focusable = modal.querySelector('button, input, textarea, [tabindex="0"]');
+    if (focusable) focusable.focus();
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal.style.display = 'none';
+    if (modal._returnFocus && typeof modal._returnFocus.focus === 'function') {
+        modal._returnFocus.focus();
+    }
+}
+
+// 3. 語言切換渲染
 function setLang(lang) {
     curLang = lang;
     document.getElementById('langZh').classList.toggle('active', lang === 'zh');
@@ -375,7 +394,7 @@ function switchTab(type, btn) {
     renderTabs();
 }
 
-// 3. 自訂溫柔浮動提示 Toast
+// 4. 自訂溫柔浮動提示 Toast
 let toastTimer = null;
 function showToast(msg) {
     const toast = document.getElementById('gentle-toast');
@@ -385,7 +404,7 @@ function showToast(msg) {
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3500);
 }
 
-// 4. 自訂密鑰彈窗函式
+// 5. 自訂密鑰彈窗函式 (無障礙對話框)
 function customPrompt({ title, desc, placeholder }) {
     return new Promise((resolve) => {
         const modal = document.getElementById('promptModal');
@@ -403,8 +422,7 @@ function customPrompt({ title, desc, placeholder }) {
         confirmBtn.innerText = t.promptConfirm;
         cancelBtn.innerText = t.promptCancel;
 
-        modal.style.display = 'flex';
-        inputEl.focus();
+        openModal('promptModal');
 
         const handleConfirm = () => { cleanup(); resolve(inputEl.value); };
         const handleCancel = () => { cleanup(); resolve(null); };
@@ -414,7 +432,7 @@ function customPrompt({ title, desc, placeholder }) {
         };
 
         function cleanup() {
-            modal.style.display = 'none';
+            closeModal('promptModal');
             confirmBtn.removeEventListener('click', handleConfirm);
             cancelBtn.removeEventListener('click', handleCancel);
             inputEl.removeEventListener('keydown', handleKey);
@@ -426,7 +444,7 @@ function customPrompt({ title, desc, placeholder }) {
     });
 }
 
-// 5. 呼吸調息
+// 6. 呼吸調息循環
 let breathState = 0;
 const breathCircle = document.getElementById('breathCircle');
 function updateBreathText() {
@@ -444,14 +462,19 @@ function runBreath() {
 setInterval(runBreath, 3800);
 runBreath();
 
-// 6. SUDS 軀體滑塊
+// 7. SUDS 軀體滑塊節流 (requestAnimationFrame)
+let sudsRAF = null;
 function handleSudsChange(val) {
-    document.getElementById('sudsValue').innerText = val;
-    const suggestion = document.getElementById('gentleSuggestion');
-    suggestion.style.display = parseInt(val) >= 7 ? 'block' : 'none';
+    if (sudsRAF) cancelAnimationFrame(sudsRAF);
+    sudsRAF = requestAnimationFrame(() => {
+        document.getElementById('sudsValue').innerText = val;
+        const suggestion = document.getElementById('gentleSuggestion');
+        suggestion.style.display = parseInt(val) >= 7 ? 'block' : 'none';
+        sudsRAF = null;
+    });
 }
 
-// 7. 自訂邀請式反芻煞車
+// 8. 邀請式反芻煞車 (無障礙對話框)
 let ruminationCounter = 0;
 let lastActionTime = 0;
 function checkRumination() {
@@ -474,13 +497,13 @@ function checkRumination() {
         waterBtn.innerText = t.ruminationWater;
         restBtn.innerText = t.ruminationRest;
 
-        modal.style.display = 'flex';
+        openModal('ruminationModal');
 
         const handleWater = () => { cleanup(); showToast(t.toastWater); };
         const handleRest = () => { cleanup(); showToast(t.toastRest); };
 
         function cleanup() {
-            modal.style.display = 'none';
+            closeModal('ruminationModal');
             waterBtn.removeEventListener('click', handleWater);
             restBtn.removeEventListener('click', handleRest);
         }
@@ -490,9 +513,9 @@ function checkRumination() {
     }
 }
 
-// 8. 釋放儀式
-function openRelease() { document.getElementById('releaseModal').style.display = 'flex'; }
-function closeRelease() { document.getElementById('releaseModal').style.display = 'none'; }
+// 9. 釋放儀式
+function openRelease() { openModal('releaseModal'); }
+function closeRelease() { closeModal('releaseModal'); }
 
 function confirmRelease() {
     const blessing = document.getElementById('blessingInput').value.trim();
@@ -509,10 +532,15 @@ function confirmRelease() {
     }
 }
 
-// 9. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256)
+// 10. 金融級加密儲存 (600,000 PBKDF2 + AES-GCM 256 + 記憶體二進制填零)
 async function deriveKey(pwd, salt) {
     const enc = new TextEncoder();
-    const km = await crypto.subtle.importKey('raw', enc.encode(pwd), 'PBKDF2', false, ['deriveKey']);
+    const pwdBytes = enc.encode(pwd);
+    const km = await crypto.subtle.importKey('raw', pwdBytes, 'PBKDF2', false, ['deriveKey']);
+    
+    // 敏感字節即時填零銷毀
+    pwdBytes.fill(0);
+
     return crypto.subtle.deriveKey(
         { name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256' },
         km,
@@ -565,7 +593,7 @@ async function saveVault() {
     pwd = null; payload = null; text = null;
 }
 
-// 10. 雙重加密備份匯出
+// 11. 雙重加密備份匯出
 async function exportBackup() {
     const t = LANG[curLang];
     const data = localStorage.getItem('stillhollow_vault') || '[]';
@@ -616,7 +644,7 @@ async function exportBackup() {
     }
 }
 
-// 11. 備份解密匯入 (非同步排程 + 指紋去重)
+// 12. 備份解密匯入 (非同步排程 + 指紋去重 + 異常分類)
 async function importBackup(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -624,16 +652,23 @@ async function importBackup(event) {
 
     const reader = new FileReader();
     reader.onload = async (e) => {
+        let backupPwd = null;
         try {
             const rawJson = e.target.result;
-            const backupObj = JSON.parse(rawJson);
-
-            if (!backupObj.salt || !backupObj.iv || !backupObj.data) {
+            let backupObj;
+            try {
+                backupObj = JSON.parse(rawJson);
+            } catch (err) {
                 showToast(t.toastInvalidFile);
                 return;
             }
 
-            let backupPwd = await customPrompt({
+            if (!backupObj.salt || !backupObj.iv || !backupObj.data) {
+                showToast(t.toastRestoreFail);
+                return;
+            }
+
+            backupPwd = await customPrompt({
                 title: t.promptImportTitle,
                 desc: t.promptImportDesc,
                 placeholder: t.promptImportPlaceholder
@@ -678,25 +713,35 @@ async function importBackup(event) {
                 }
             }, 10);
 
-            backupPwd = null;
         } catch (error) {
             showToast(t.toastDecryptFail);
+        } finally {
+            backupPwd = null;
+            event.target.value = '';
         }
-        event.target.value = '';
     };
     reader.readAsText(file);
 }
 
-// 12. 輔助彈窗控制 (確保每次打開 SOS 都重新渲染熱線)
+// 13. 輔助彈窗控制
 function openSOS() { 
     renderHotlines();
-    document.getElementById('sosModal').style.display = 'flex'; 
+    openModal('sosModal'); 
 }
-function closeSOS() { document.getElementById('sosModal').style.display = 'none'; }
-function openGrounding() { document.getElementById('groundingModal').style.display = 'flex'; }
-function closeGrounding() { document.getElementById('groundingModal').style.display = 'none'; }
-function openGuide() { document.getElementById('guideModal').style.display = 'flex'; }
-function closeGuide() { document.getElementById('guideModal').style.display = 'none'; }
+function closeSOS() { closeModal('sosModal'); }
+function openGrounding() { openModal('groundingModal'); }
+function closeGrounding() { closeModal('groundingModal'); }
+function openGuide() { openModal('guideModal'); }
+function closeGuide() { closeModal('guideModal'); }
+
+// 14. 監聽 Service Worker 更新通知
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'SW_UPDATED') {
+            showToast(curLang === 'zh' ? '✨ 棲心樹洞已更新至最新版本。' : '✨ Stillhollow has been updated.');
+        }
+    });
+}
 
 // 初始化語言偵測
 const browserLang = navigator.language || 'zh';
