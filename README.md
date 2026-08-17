@@ -138,12 +138,7 @@ python3 -m http.server 8000
 
 ### ⚠️ Disclaimer
 
-**Stillhollow** is a self-care aid intended for personal reflection and mindfulness. **It does NOT provide medical advice, diagnosis, or crisis counseling.** If you are experiencing acute distress, please reach out to qualified healthcare providers or crisis hotlines:
-
-* 🇭🇰 Hong Kong: Suicide Prevention `2382 0000` ｜ Samaritans `2389 2222`
-* 🇹🇼 Taiwan: PeaceLine `1925`
-* 🇺🇸 US: Suicide & Crisis Lifeline `988`
-* 🇬🇧 UK: Samaritans `116 123`
+**Stillhollow** is a self-care aid intended for personal reflection and mindfulness. **It does NOT provide medical advice, diagnosis, or crisis counseling.** If you are experiencing acute distress, please reach out to qualified healthcare providers or crisis hotlines.
 
 ---
 
