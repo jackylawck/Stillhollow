@@ -167,10 +167,12 @@
 
     <!-- 頁尾守護資訊與使用說明入口 -->
     <div class="footer-card">
-        <p style="margin-bottom: 8px;">
+        <p style="margin-bottom: 6px;">
             <button class="tool-btn" onclick="openGuide()" id="i18n-btn-guide" style="font-size:0.85rem; text-decoration:underline;">📖 使用指引與隱私說明</button>
         </p>
-        <p id="i18n-crisis">💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 台灣 <strong>1925</strong></p>
+        <p style="margin-bottom: 6px;">
+            <button class="tool-btn" onclick="openSOS()" id="i18n-crisis-btn" style="font-size:0.85rem; color:var(--warm); text-decoration:underline; font-weight:500;">需要即時傾聽？查看各地支援專線</button>
+        </p>
         <p class="disclaimer-text" id="i18n-disclaimer">
             本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。
         </p>
@@ -194,7 +196,7 @@
     </div>
 </div>
 
-<!-- 2. 即時熱線彈窗 (支援亞洲及國際求助專線) -->
+<!-- 2. 即時熱線彈窗 -->
 <div class="modal-mask" id="sosModal" role="dialog" aria-modal="true">
     <div class="modal-box left-align" style="max-height:85vh; overflow-y:auto;">
         <h3 id="i18n-sos-title" class="rose-text">💛 我們一直在這裡</h3>
