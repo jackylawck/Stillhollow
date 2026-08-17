@@ -1,4 +1,4 @@
-// 1. 全站 100% 完整雙語字典
+// 1. 全站 100% 完整雙語字典 (含頁尾底層技術聲明)
 const LANG = {
     zh: {
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
@@ -35,6 +35,7 @@ const LANG = {
         btnGuide: "📖 使用指引與隱私說明",
         crisisBtn: "需要即時傾聽？查看各地支援專線",
         disclaimer: "本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。",
+        cryptoMeta: "棲心樹洞 Stillhollow · Zero-Knowledge · AES-GCM 256 · 純本地完全離線守護",
         modalTitle: "🍃 溫柔地與文字道別",
         modalDesc: "在文字隨風消散前，可以留下一句送給自己的話（留白也完全沒關係，直接放下即可）：",
         modalPlaceholder: "例如：我已盡力，此刻我選擇休息。",
@@ -158,6 +159,7 @@ const LANG = {
         btnGuide: "📖 Guide & Privacy FAQ",
         crisisBtn: "Need someone to listen? View crisis support lines",
         disclaimer: "This is a self-reflection aid offering quiet space. For clinical care, please seek qualified professionals.",
+        cryptoMeta: "Stillhollow · Zero-Knowledge · AES-GCM 256 · Fully Offline & Local",
         modalTitle: "🍃 Mindfully Releasing",
         modalDesc: "Leave a gentle whisper for yourself, or simply journey on (leaving it blank is perfectly fine):",
         modalPlaceholder: "e.g., I did my best, and I choose to rest now.",
@@ -302,6 +304,7 @@ function setLang(lang) {
     document.getElementById('i18n-btn-guide').innerText = t.btnGuide;
     document.getElementById('i18n-crisis-btn').innerText = t.crisisBtn;
     document.getElementById('i18n-disclaimer').innerHTML = t.disclaimer;
+    document.getElementById('i18n-crypto-meta').innerText = t.cryptoMeta;
     
     document.getElementById('i18n-modal-title').innerText = t.modalTitle;
     document.getElementById('i18n-modal-desc').innerText = t.modalDesc;
@@ -404,7 +407,7 @@ function showToast(msg) {
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3500);
 }
 
-// 5. 自訂密鑰彈窗函式 (無障礙對話框)
+// 5. 自訂密鑰彈窗函式
 function customPrompt({ title, desc, placeholder }) {
     return new Promise((resolve) => {
         const modal = document.getElementById('promptModal');
@@ -462,7 +465,7 @@ function runBreath() {
 setInterval(runBreath, 3800);
 runBreath();
 
-// 7. SUDS 軀體滑塊節流 (requestAnimationFrame)
+// 7. SUDS 軀體滑塊節流
 let sudsRAF = null;
 function handleSudsChange(val) {
     if (sudsRAF) cancelAnimationFrame(sudsRAF);
@@ -474,7 +477,7 @@ function handleSudsChange(val) {
     });
 }
 
-// 8. 邀請式反芻煞車 (無障礙對話框)
+// 8. 邀請式反芻煞車
 let ruminationCounter = 0;
 let lastActionTime = 0;
 function checkRumination() {
@@ -538,7 +541,6 @@ async function deriveKey(pwd, salt) {
     const pwdBytes = enc.encode(pwd);
     const km = await crypto.subtle.importKey('raw', pwdBytes, 'PBKDF2', false, ['deriveKey']);
     
-    // 敏感字節即時填零銷毀
     pwdBytes.fill(0);
 
     return crypto.subtle.deriveKey(
@@ -644,7 +646,7 @@ async function exportBackup() {
     }
 }
 
-// 12. 備份解密匯入 (非同步排程 + 指紋去重 + 異常分類)
+// 12. 備份解密匯入
 async function importBackup(event) {
     const file = event.target.files[0];
     if (!file) return;
