@@ -17,7 +17,7 @@
     <meta name="description" content="純本地 600,000 次 PBKDF2 + AES-GCM 256 加密空間。零雲端、防 AI 數據採集、純粹接納。此處為你留下一方安寧天地。| Zero-Knowledge Trauma-Informed Local Sanctuary.">
     <meta name="keywords" content="羅子淇, Jacky Law, 棲心樹洞, Stillhollow, 心理樹洞, 離線日記, 零知識加密, AES-GCM, PWA, 創傷知情, 感官著陸, 呼吸放鬆, 心理安全, Zero-Knowledge Journal, Mental Health Sanctuary, Polyvagal">
     
-    <!-- 👤 Author & Creator Metadata (Code-level Only, 頁面完全不顯示) -->
+    <!-- 👤 Author & Creator Metadata (Code-level Only) -->
     <meta name="author" content="羅子淇 Jacky Law">
     <meta name="creator" content="羅子淇 Jacky Law">
     <meta name="publisher" content="羅子淇 Jacky Law">
@@ -26,10 +26,10 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://jackylawck.github.io/Stillhollow/">
 
-    <!-- 🔍 Google Search Console Verification Tag (如需啟用請替換 content 值) -->
+    <!-- 🔍 Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="JZ5UohX-CcP_fQV0_DI9VadkKY4ZoTTkUifL88-fIcY" />
 
-    <!-- 🌐 2. Open Graph Protocol (Facebook, WhatsApp, LinkedIn, Discord 預覽卡片) -->
+    <!-- 🌐 2. Open Graph Protocol -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jackylawck.github.io/Stillhollow/">
     <meta property="og:title" content="棲心樹洞 Stillhollow · 安放心事，歸於靜謐">
@@ -48,7 +48,7 @@
     <meta name="twitter:description" content="A zero-knowledge, trauma-informed offline emotional sanctuary. Pure acceptance, zero cloud.">
     <meta name="twitter:image" content="https://jackylawck.github.io/Stillhollow/Stillhollowicon-512.png">
 
-    <!-- 🛡️ 4. Enterprise-Grade Content Security Policy (CSP) & Cache Protection -->
+    <!-- 🛡️ 4. Content Security Policy (CSP) & Cache Control -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self' data:; frame-ancestors 'none';">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -62,7 +62,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="棲心樹洞">
 
-    <!-- 💡 6. JSON-LD Structured Data for Google Rich Snippets & Person Attribution (提升 SEO 權威) -->
+    <!-- 💡 6. JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -93,7 +93,6 @@
     }
     </script>
 
-    <!-- 樣式表引用 -->
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -171,7 +170,7 @@
         <p style="margin-bottom: 8px;">
             <button class="tool-btn" onclick="openGuide()" id="i18n-btn-guide" style="font-size:0.85rem; text-decoration:underline;">📖 使用指引與隱私說明</button>
         </p>
-        <p id="i18n-crisis">💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong></p>
+        <p id="i18n-crisis">💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 台灣 <strong>1925</strong></p>
         <p class="disclaimer-text" id="i18n-disclaimer">
             本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。
         </p>
@@ -195,17 +194,13 @@
     </div>
 </div>
 
-<!-- 2. 即時熱線彈窗 -->
+<!-- 2. 即時熱線彈窗 (支援亞洲及國際求助專線) -->
 <div class="modal-mask" id="sosModal" role="dialog" aria-modal="true">
-    <div class="modal-box left-align">
+    <div class="modal-box left-align" style="max-height:85vh; overflow-y:auto;">
         <h3 id="i18n-sos-title" class="rose-text">💛 我們一直在這裡</h3>
-        <p id="i18n-sos-desc">當你需要聲音的陪伴時，這些專線為你開放：</p>
-        <div class="hotline-box">
-            <p><strong>🇭🇰 <span id="i18n-hk">香港</span></strong> · <span id="i18n-hl-1">生命熱線</span> <a href="tel:23820000" class="hotline-link">2382 0000</a></p>
-            <p><strong>🇭🇰 <span id="i18n-hk2">香港</span></strong> · <span id="i18n-hl-2">撒瑪利亞</span> <a href="tel:23892222" class="hotline-link">2389 2222</a></p>
-            <p class="hotline-tw"><strong>🇹🇼 <span id="i18n-tw">台灣</span></strong> · <span id="i18n-hl-3">安心專線</span> <a href="tel:1925" class="hotline-link">1925</a></p>
-        </div>
-        <button class="btn-primary full-width" onclick="closeSOS()" id="i18n-sos-close">我知道了，先回到呼吸</button>
+        <p id="i18n-sos-desc">當你需要聲音的陪伴時，各地的專業求助專線為你開放：</p>
+        <div id="hotlineListContainer"></div>
+        <button class="btn-primary full-width modal-top-gap" onclick="closeSOS()" id="i18n-sos-close">我知道了，先回到呼吸</button>
     </div>
 </div>
 
