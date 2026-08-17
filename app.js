@@ -1,4 +1,4 @@
-// 1. 全站 100% 完整雙語字典 (含日本、韓國、大中華及國際支援熱線)
+// 1. 全站 100% 完整雙語字典
 const LANG = {
     zh: {
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
@@ -33,7 +33,7 @@ const LANG = {
         btnImport: "📂 匯入備份",
         btnPrint: "🖨️ 紙本留存",
         btnGuide: "📖 使用指引與隱私說明",
-        crisis: "💛 始終有人願意溫柔傾聽：香港生命熱線 <strong>2382 0000</strong> ｜ 台灣 <strong>1925</strong> ｜ 內地 <strong>400-161-9995</strong>",
+        crisisBtn: "需要即時傾聽？查看各地支援專線",
         disclaimer: "本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。",
         modalTitle: "🍃 溫柔地與文字道別",
         modalDesc: "在文字隨風消散前，可以留下一句送給自己的話（留白也完全沒關係，直接放下即可）：",
@@ -156,7 +156,7 @@ const LANG = {
         btnImport: "📂 Import Vault",
         btnPrint: "🖨️ Print View",
         btnGuide: "📖 Guide & Privacy FAQ",
-        crisis: "💛 When you need a voice: HK <strong>2382 0000</strong> ｜ Taiwan <strong>1925</strong> ｜ US <strong>988</strong> ｜ UK <strong>116 123</strong>",
+        crisisBtn: "Need someone to listen? View crisis support lines",
         disclaimer: "This is a self-reflection aid offering quiet space. For clinical care, please seek qualified professionals.",
         modalTitle: "🍃 Mindfully Releasing",
         modalDesc: "Leave a gentle whisper for yourself, or simply journey on (leaving it blank is perfectly fine):",
@@ -281,8 +281,7 @@ function setLang(lang) {
     document.getElementById('i18n-btn-import').innerText = t.btnImport;
     document.getElementById('i18n-btn-print').innerText = t.btnPrint;
     document.getElementById('i18n-btn-guide').innerText = t.btnGuide;
-    
-    document.getElementById('i18n-crisis').innerHTML = t.crisis;
+    document.getElementById('i18n-crisis-btn').innerText = t.crisisBtn;
     document.getElementById('i18n-disclaimer').innerHTML = t.disclaimer;
     
     document.getElementById('i18n-modal-title').innerText = t.modalTitle;
