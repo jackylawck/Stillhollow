@@ -687,8 +687,11 @@ async function importBackup(event) {
     reader.readAsText(file);
 }
 
-// 12. 輔助彈窗控制
-function openSOS() { document.getElementById('sosModal').style.display = 'flex'; }
+// 12. 輔助彈窗控制 (確保每次打開 SOS 都重新渲染熱線)
+function openSOS() { 
+    renderHotlines();
+    document.getElementById('sosModal').style.display = 'flex'; 
+}
 function closeSOS() { document.getElementById('sosModal').style.display = 'none'; }
 function openGrounding() { document.getElementById('groundingModal').style.display = 'flex'; }
 function closeGrounding() { document.getElementById('groundingModal').style.display = 'none'; }
