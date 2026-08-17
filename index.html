@@ -103,6 +103,7 @@
 </div>
 
 <!-- 彈窗體系 -->
+<!-- 1. 溫柔釋放彈窗 -->
 <div class="modal-mask" id="releaseModal">
     <div class="modal-box">
         <h3 id="i18n-modal-title">🍃 溫柔地與文字道別</h3>
@@ -115,6 +116,7 @@
     </div>
 </div>
 
+<!-- 2. 即時熱線彈窗 -->
 <div class="modal-mask" id="sosModal">
     <div class="modal-box left-align">
         <h3 id="i18n-sos-title" class="rose-text">💛 我們一直在這裡</h3>
@@ -128,6 +130,7 @@
     </div>
 </div>
 
+<!-- 3. 感官著陸彈窗 -->
 <div class="modal-mask" id="groundingModal">
     <div class="modal-box wide-box">
         <h3 id="i18n-grounding-title" class="sage-text">🌱 5-4-3-2-1 感官著陸</h3>
@@ -137,9 +140,35 @@
     </div>
 </div>
 
+<!-- 4. 自訂密鑰輸入彈窗 (徹底取代原生 prompt) -->
+<div class="modal-mask" id="promptModal">
+    <div class="modal-box">
+        <h3 id="promptTitle">🔒 封存密鑰</h3>
+        <p id="promptDesc">請設定一組專屬於你的私密密鑰（此密鑰僅儲存於你的裝置，絕不上傳）：</p>
+        <input type="password" id="promptInput" style="text-align:center; font-size:1.1rem; letter-spacing:2px;">
+        <div class="modal-actions">
+            <button class="btn-secondary" id="promptCancelBtn">取消</button>
+            <button class="btn-primary" id="promptConfirmBtn">確定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 5. 邀請式反芻煞車對話框 (徹底取代原生 confirm) -->
+<div class="modal-mask" id="ruminationModal">
+    <div class="modal-box">
+        <h3 id="ruminationTitle" class="rose-text">🧡 溫柔的小歇</h3>
+        <p id="ruminationDesc">你已經在這裡沉澱一會兒了。大腦跟身體一樣需要休息。</p>
+        <div class="modal-actions">
+            <button class="btn-secondary" id="ruminationWaterBtn">☕ 去喝杯溫水</button>
+            <button class="btn-primary" id="ruminationRestBtn">🪑 閉眼深呼吸</button>
+        </div>
+    </div>
+</div>
+
+<!-- 浮動提示 Toast -->
 <div id="gentle-toast"></div>
 
-<!-- 載入邏輯 -->
+<!-- 載入核心邏輯 -->
 <script src="./app.js"></script>
 </body>
 </html>
