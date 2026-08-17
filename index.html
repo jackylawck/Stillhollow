@@ -186,7 +186,7 @@
         }
         .btn-secondary:hover { background: var(--bg); color: var(--text); }
 
-        .toolbar { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+        .toolbar { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
         .tool-btn {
             background: transparent; border: none; color: var(--muted);
             font-size: 0.8rem; padding: 4px 8px; cursor: pointer; border-radius: 20px;
@@ -219,7 +219,6 @@
         }
         .grounding-step small { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
 
-        /* 🍃 客製化溫柔浮動提示 (取代 alert) */
         #gentle-toast {
             display: none; position: fixed; bottom: 32px; left: 50%;
             transform: translateX(-50%); background: var(--card);
@@ -310,7 +309,9 @@
         </div>
         <div class="toolbar">
             <button class="tool-btn" onclick="openGrounding()">🧘 感官著陸</button>
-            <button class="tool-btn" onclick="exportBackup()">📦 打包備份</button>
+            <button class="tool-btn" onclick="exportBackup()" id="i18n-btn-export">📦 打包備份</button>
+            <button class="tool-btn" onclick="document.getElementById('importFileInput').click()" id="i18n-btn-import">📂 匯入備份</button>
+            <input type="file" id="importFileInput" accept=".vault" style="display:none" onchange="importBackup(event)">
             <button class="tool-btn" onclick="window.print()">🖨️ 紙本留存</button>
         </div>
     </div>
@@ -391,6 +392,8 @@ const LANG = {
         tabCompassion: "💛 溫柔對話",
         btnLetGo: "🍃 輕柔放下",
         btnSave: "🔒 封存於此",
+        btnExport: "📦 打包備份",
+        btnImport: "📂 匯入備份",
         crisis: "💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong>",
         disclaimer: "本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。",
         modalTitle: "🍃 溫柔地與文字道別",
@@ -414,6 +417,8 @@ const LANG = {
         tabCompassion: "💛 Self-Compassion",
         btnLetGo: "🍃 Gently Release",
         btnSave: "🔒 Seal Here",
+        btnExport: "📦 Backup Vault",
+        btnImport: "📂 Import Vault",
         crisis: "💛 When you need a voice, these lines are open: HK Samaritan <strong>2389 2222</strong> ｜ Taiwan <strong>1925</strong>",
         disclaimer: "This is a self-reflection aid offering quiet space. For clinical care, please seek qualified professionals.",
         modalTitle: "🍃 Mindfully Releasing",
@@ -446,6 +451,8 @@ function setLang(lang) {
     document.getElementById('tabCompassion').innerText = t.tabCompassion;
     document.getElementById('btnLetGo').innerText = t.btnLetGo;
     document.getElementById('btnSave').innerText = t.btnSave;
+    document.getElementById('i18n-btn-export').innerText = t.btnExport;
+    document.getElementById('i18n-btn-import').innerText = t.btnImport;
     document.getElementById('i18n-crisis').innerHTML = t.crisis;
     document.getElementById('i18n-disclaimer').innerHTML = t.disclaimer;
     document.getElementById('i18n-modal-title').innerText = t.modalTitle;
@@ -467,7 +474,7 @@ function showToast(msg) {
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
         toast.style.display = 'none';
-    }, 3200);
+    }, 3500);
 }
 
 // 3. 呼吸動畫
@@ -555,7 +562,7 @@ function checkRumination() {
     }
 }
 
-// 8. 釋放儀式 (無條件接納 + Toast)
+// 8. 釋放儀式 (無條件接納)
 function openRelease() { document.getElementById('releaseModal').style.display = 'flex'; }
 function closeRelease() { document.getElementById('releaseModal').style.display = 'none'; }
 
@@ -573,7 +580,7 @@ function confirmRelease() {
     }
 }
 
-// 9. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256 + 空白密碼防呆 + Toast)
+// 9. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256 + 空白密碼防呆)
 async function deriveKey(pwd, salt) {
     const enc = new TextEncoder();
     const km = await crypto.subtle.importKey('raw', enc.encode(pwd), 'PBKDF2', false, ['deriveKey']);
@@ -582,7 +589,7 @@ async function deriveKey(pwd, salt) {
         km,
         { name: 'AES-GCM', length: 256 },
         false,
-        ['encrypt']
+        ['encrypt', 'decrypt']
     );
 }
 
@@ -621,15 +628,104 @@ async function saveVault() {
     document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
 }
 
-// 10. 輔助彈窗
-function exportBackup() {
+// 10. 雙重加密備份匯出 (Envelope Encryption)
+async function exportBackup() {
     const data = localStorage.getItem('stillhollow_vault') || '[]';
-    const blob = new Blob([data], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `Stillhollow_Backup_${new Date().toISOString().slice(0,10)}.vault`;
-    a.click();
+    if (data === '[]') {
+        showToast(curLang === 'zh' ? '目前沒有儲存任何紀錄，無需備份。' : 'No records to backup.');
+        return;
+    }
+
+    const backupPwd = prompt(
+        curLang === 'zh' 
+        ? '請設定「備份檔專屬密碼」（此密碼用於雙重加密整個備份檔案，請務必牢記）：' 
+        : 'Set a password for this backup file (keep it safe):'
+    );
+    if (!backupPwd) return;
+    if (backupPwd.trim() === '') {
+        showToast(curLang === 'zh' ? '密碼不能為空白。' : 'Password cannot be empty.');
+        return;
+    }
+
+    try {
+        const enc = new TextEncoder();
+        const plaintext = enc.encode(data);
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const key = await deriveKey(backupPwd, salt);
+
+        const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plaintext);
+
+        const finalBlobData = {
+            salt: Array.from(salt),
+            iv: Array.from(iv),
+            data: Array.from(new Uint8Array(encrypted)),
+            version: 1
+        };
+
+        const blob = new Blob([JSON.stringify(finalBlobData)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Stillhollow_Backup_${new Date().toISOString().slice(0,10)}.vault`;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        showToast(curLang === 'zh' ? '✅ 備份檔已完成雙重加密並下載！' : '✅ Encrypted backup downloaded!');
+    } catch (e) {
+        showToast(curLang === 'zh' ? '❌ 備份失敗，請重試。' : '❌ Backup failed.');
+    }
 }
+
+// 11. 備份解密匯入與安全合併
+async function importBackup(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+        try {
+            const rawJson = e.target.result;
+            const backupObj = JSON.parse(rawJson);
+
+            if (!backupObj.salt || !backupObj.iv || !backupObj.data) {
+                showToast(curLang === 'zh' ? '❌ 無效的備份檔案格式。' : '❌ Invalid backup file format.');
+                return;
+            }
+
+            const backupPwd = prompt(
+                curLang === 'zh' 
+                ? '請輸入此備份檔的「備份專屬密碼」：' 
+                : 'Enter the password for this backup file:'
+            );
+            if (!backupPwd) return;
+
+            const salt = new Uint8Array(backupObj.salt);
+            const iv = new Uint8Array(backupObj.iv);
+            const encryptedData = new Uint8Array(backupObj.data);
+            const key = await deriveKey(backupPwd, salt);
+
+            const decryptedBuffer = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, encryptedData);
+            const decryptedString = new TextDecoder().decode(decryptedBuffer);
+            const records = JSON.parse(decryptedString);
+
+            if (!Array.isArray(records)) throw new Error('Invalid data structure');
+
+            // 預設採用安全合併，避免誤觸覆蓋
+            const existing = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
+            const merged = [...existing, ...records];
+            localStorage.setItem('stillhollow_vault', JSON.stringify(merged));
+
+            showToast(curLang === 'zh' ? `✅ 已安全還原並合併 ${records.length} 筆紀錄！` : `✅ Successfully restored ${records.length} records!`);
+        } catch (error) {
+            showToast(curLang === 'zh' ? '❌ 解密失敗，請檢查密碼是否正確。' : '❌ Decryption failed. Incorrect password.');
+        }
+        event.target.value = '';
+    };
+    reader.readAsText(file);
+}
+
+// 12. 輔助彈窗
 function openSOS() { document.getElementById('sosModal').style.display = 'flex'; }
 function closeSOS() { document.getElementById('sosModal').style.display = 'none'; }
 function openGrounding() { document.getElementById('groundingModal').style.display = 'flex'; }
