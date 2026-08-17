@@ -1,7 +1,7 @@
 {
-  "name": "心靈避風港 Mindful Vault",
-  "short_name": "MindfulVault",
-  "description": "純本地軍規加密、零知識、無雲端的情緒沉澱與自我對話空間。",
+  "name": "棲心樹洞 Stillhollow",
+  "short_name": "棲心樹洞",
+  "description": "安放心事，歸於靜謐。一個只屬於你的私密沉澱角落。",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#1c1816",
