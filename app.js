@@ -1,4 +1,4 @@
-// 1. 全站 100% 完整雙語字典
+// 1. 全站 100% 完整雙語字典 (含日本、韓國、大中華及國際支援熱線)
 const LANG = {
     zh: {
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
@@ -33,7 +33,7 @@ const LANG = {
         btnImport: "📂 匯入備份",
         btnPrint: "🖨️ 紙本留存",
         btnGuide: "📖 使用指引與隱私說明",
-        crisis: "💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong>",
+        crisis: "💛 始終有人願意溫柔傾聽：香港生命熱線 <strong>2382 0000</strong> ｜ 台灣 <strong>1925</strong> ｜ 內地 <strong>400-161-9995</strong>",
         disclaimer: "本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。",
         modalTitle: "🍃 溫柔地與文字道別",
         modalDesc: "在文字隨風消散前，可以留下一句送給自己的話（留白也完全沒關係，直接放下即可）：",
@@ -47,13 +47,24 @@ const LANG = {
         placeholderAct1: "【覺察念頭】寫下當下的困擾（例如：『我覺察到我正在焦慮...』）",
         placeholderAct2: "【給自己的擁抱】無論如何，此刻的我已經盡力了。寫下一句安慰自己的話...",
         sosTitle: "💛 我們一直在這裡",
-        sosDesc: "當你需要聲音的陪伴時，這些專線為你開放：",
-        hk: "香港",
-        tw: "台灣",
-        hl1: "生命熱線",
-        hl2: "撒瑪利亞",
-        hl3: "安心專線",
+        sosDesc: "當你需要聲音的陪伴時，各地的專業求助專線為你開放：",
         sosClose: "我知道了，先回到呼吸",
+        hotlines: [
+            { region: "🇭🇰 香港", name: "生命熱線", tel: "23820000", display: "2382 0000" },
+            { region: "🇭🇰 香港", name: "撒瑪利亞防止自殺會", tel: "23892222", display: "2389 2222" },
+            { region: "🇭🇰 香港", name: "情緒通 24小時熱線", tel: "18111", display: "18111" },
+            { region: "🇹🇼 台灣", name: "衛福部安心專線", tel: "1925", display: "1925" },
+            { region: "🇹🇼 台灣", name: "生命線協談專線", tel: "1995", display: "1995" },
+            { region: "🇨🇳 內地", name: "希望24熱線 (全國)", tel: "4001619995", display: "400-161-9995" },
+            { region: "🇨🇳 內地", name: "北京心理危機干預熱線", tel: "01082951332", display: "010-82951332" },
+            { region: "🇲🇴 澳門", name: "明愛生命熱線", tel: "28525222", display: "2852 5222" },
+            { region: "🇯🇵 日本", name: "心之健康相談 (こころの健康相談)", tel: "0570064556", display: "0570-064-556" },
+            { region: "🇯🇵 日本", name: "生命之電話 (いのちの電話)", tel: "0120783556", display: "0120-783-556" },
+            { region: "🇰🇷 韓國", name: "精神健康諮詢熱線 (정신건강상담전화)", tel: "15770199", display: "1577-0199" },
+            { region: "🇰🇷 韓國", name: "自殺預防專線 (자살예방상담전화)", tel: "109", display: "109" },
+            { region: "🇸🇬 新加坡", name: "Samaritans of Singapore (SOS)", tel: "1767", display: "1767" },
+            { region: "🇲🇾 馬來西亞", name: "Befrienders 心靈扶助會", tel: "0376272929", display: "03-7627 2929" }
+        ],
         groundingTitle: "🌱 5-4-3-2-1 感官著陸",
         groundingDesc: "跟著步驟，慢慢將注意力拉回此時此刻的身體：",
         groundingSteps: [
@@ -145,7 +156,7 @@ const LANG = {
         btnImport: "📂 Import Vault",
         btnPrint: "🖨️ Print View",
         btnGuide: "📖 Guide & Privacy FAQ",
-        crisis: "💛 When you need a voice, these lines are open: HK Samaritan <strong>2389 2222</strong> ｜ Taiwan <strong>1925</strong>",
+        crisis: "💛 When you need a voice: HK <strong>2382 0000</strong> ｜ Taiwan <strong>1925</strong> ｜ US <strong>988</strong> ｜ UK <strong>116 123</strong>",
         disclaimer: "This is a self-reflection aid offering quiet space. For clinical care, please seek qualified professionals.",
         modalTitle: "🍃 Mindfully Releasing",
         modalDesc: "Leave a gentle whisper for yourself, or simply journey on (leaving it blank is perfectly fine):",
@@ -159,13 +170,24 @@ const LANG = {
         placeholderAct1: "[Notice] Write down the disturbance (e.g., 'I notice I am feeling anxious...')",
         placeholderAct2: "[Self-Hug] Regardless, I have done my best. A kind word for myself...",
         sosTitle: "💛 We Are Always Here",
-        sosDesc: "When you need a voice, these compassionate lines are open:",
-        hk: "Hong Kong",
-        tw: "Taiwan",
-        hl1: "Suicide Prevention",
-        hl2: "Samaritans",
-        hl3: "PeaceLine",
+        sosDesc: "When you need a compassionate voice, these support lines are available:",
         sosClose: "Understood, back to breathing",
+        hotlines: [
+            { region: "🇭🇰 Hong Kong", name: "Suicide Prevention Services", tel: "23820000", display: "2382 0000" },
+            { region: "🇭🇰 Hong Kong", name: "The Samaritans (Multilingual)", tel: "28960000", display: "2896 0000" },
+            { region: "🇹🇼 Taiwan", name: "PeaceLine", tel: "1925", display: "1925" },
+            { region: "🇨🇳 Mainland China", name: "HopeLine (National)", tel: "4001619995", display: "400-161-9995" },
+            { region: "🇲🇴 Macau", name: "Caritas Life Hope Hotline", tel: "28525222", display: "2852 5222" },
+            { region: "🇯🇵 Japan", name: "TELL Lifeline (English/Japanese)", tel: "0357740992", display: "03-5774-0992" },
+            { region: "🇯🇵 Japan", name: "Inochi no Denwa (生命之電話)", tel: "0120783556", display: "0120-783-556" },
+            { region: "🇰🇷 South Korea", name: "Mental Health Hotline (정신건강상담)", tel: "15770199", display: "1577-0199" },
+            { region: "🇰🇷 South Korea", name: "Crisis Hotline (자살예방상담)", tel: "109", display: "109" },
+            { region: "🇸🇬 Singapore", name: "SOS 24h CareLine", tel: "1767", display: "1767" },
+            { region: "🇲🇾 Malaysia", name: "Befrienders KL", tel: "0376272929", display: "03-7627 2929" },
+            { region: "🇺🇸 USA & Canada", name: "Suicide & Crisis Lifeline", tel: "988", display: "988" },
+            { region: "🇬🇧 UK", name: "Samaritans UK", tel: "116123", display: "116 123" },
+            { region: "🇦🇺 Australia", name: "Lifeline", tel: "131114", display: "13 11 14" }
+        ],
         groundingTitle: "🌱 5-4-3-2-1 Sensory Grounding",
         groundingDesc: "Gently guide your attention back to your body and surroundings:",
         groundingSteps: [
@@ -271,12 +293,6 @@ function setLang(lang) {
 
     document.getElementById('i18n-sos-title').innerText = t.sosTitle;
     document.getElementById('i18n-sos-desc').innerText = t.sosDesc;
-    document.getElementById('i18n-hk').innerText = t.hk;
-    document.getElementById('i18n-hk2').innerText = t.hk;
-    document.getElementById('i18n-tw').innerText = t.tw;
-    document.getElementById('i18n-hl-1').innerText = t.hl1;
-    document.getElementById('i18n-hl-2').innerText = t.hl2;
-    document.getElementById('i18n-hl-3').innerText = t.hl3;
     document.getElementById('i18n-sos-close').innerText = t.sosClose;
 
     document.getElementById('i18n-grounding-title').innerText = t.groundingTitle;
@@ -290,6 +306,7 @@ function setLang(lang) {
     renderEmotions();
     renderGroundingSteps();
     renderTabs();
+    renderHotlines();
     updateBreathText();
 }
 
@@ -312,6 +329,25 @@ function renderGroundingSteps() {
     container.innerHTML = t.groundingSteps.map(s => `
         <div class="grounding-step">${s.icon} ${s.name} <small>${s.desc}</small></div>
     `).join('');
+}
+
+function renderHotlines() {
+    const container = document.getElementById('hotlineListContainer');
+    if (!container) return;
+    const t = LANG[curLang];
+    
+    container.innerHTML = `
+        <div class="hotline-box" style="display:flex; flex-direction:column; gap:8px; max-height:260px; overflow-y:auto; padding:10px 14px;">
+            ${t.hotlines.map(h => `
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:6px;">
+                    <div>
+                        <strong>${h.region}</strong> · <span style="font-size:0.85rem; color:var(--muted);">${h.name}</span>
+                    </div>
+                    <a href="tel:${h.tel}" class="hotline-link" style="white-space:nowrap; margin-left:8px;">${h.display}</a>
+                </div>
+            `).join('')}
+        </div>
+    `;
 }
 
 function renderTabs() {
@@ -340,7 +376,7 @@ function switchTab(type, btn) {
     renderTabs();
 }
 
-// 3. 自訂溫柔浮動提示 Toast (取代 alert)
+// 3. 自訂溫柔浮動提示 Toast
 let toastTimer = null;
 function showToast(msg) {
     const toast = document.getElementById('gentle-toast');
@@ -350,7 +386,7 @@ function showToast(msg) {
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3500);
 }
 
-// 4. 自訂密鑰彈窗函式 (取代原生 prompt)
+// 4. 自訂密鑰彈窗函式
 function customPrompt({ title, desc, placeholder }) {
     return new Promise((resolve) => {
         const modal = document.getElementById('promptModal');
@@ -416,7 +452,7 @@ function handleSudsChange(val) {
     suggestion.style.display = parseInt(val) >= 7 ? 'block' : 'none';
 }
 
-// 7. 自訂邀請式反芻煞車 (取代原生 confirm)
+// 7. 自訂邀請式反芻煞車
 let ruminationCounter = 0;
 let lastActionTime = 0;
 function checkRumination() {
