@@ -7,7 +7,7 @@
     <title>棲心樹洞 Stillhollow · 安放心事，歸於靜謐</title>
     <meta name="description" content="純本地 600,000 次 PBKDF2 + AES-GCM 256 加密空間。零雲端、純粹接納。此處為你留下一方安寧天地。">
     
-    <!-- 📱 1. PWA & Icon Assets -->
+    <!-- 📱 1. PWA & Icon Assets (支援外部 PNG 與 Fallback) -->
     <link rel="icon" type="image/png" sizes="192x192" href="./Stillhollowicon-192.png">
     <link rel="apple-touch-icon" href="./Stillhollowicon-512.png">
     <link rel="manifest" href="./manifest.json">
@@ -15,6 +15,8 @@
 
     <!-- 🛡️ 2. 嚴格 CSP 物理斷網 -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self' data:; frame-ancestors 'none';">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
 
     <style>
         :root {
@@ -465,7 +467,7 @@ function setLang(lang) {
     updateBreathText();
 }
 
-// 2. 溫柔浮動提示函式 (取代 alert)
+// 2. 溫柔浮動提示函式
 let toastTimer = null;
 function showToast(msg) {
     const toast = document.getElementById('gentle-toast');
@@ -562,7 +564,7 @@ function checkRumination() {
     }
 }
 
-// 8. 釋放儀式 (無條件接納)
+// 8. 釋放儀式
 function openRelease() { document.getElementById('releaseModal').style.display = 'flex'; }
 function closeRelease() { document.getElementById('releaseModal').style.display = 'none'; }
 
@@ -580,7 +582,7 @@ function confirmRelease() {
     }
 }
 
-// 9. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256 + 空白密碼防呆)
+// 9. 軍規加密儲存 (PBKDF2 600,000 + AES-GCM 256 + 記憶體即時解構)
 async function deriveKey(pwd, salt) {
     const enc = new TextEncoder();
     const km = await crypto.subtle.importKey('raw', enc.encode(pwd), 'PBKDF2', false, ['deriveKey']);
@@ -595,7 +597,7 @@ async function deriveKey(pwd, salt) {
 
 async function saveVault() {
     checkRumination();
-    const pwd = prompt(curLang === 'zh' ? '請輸入你的本地主密鑰（用於 AES-256 加密，絕不上傳）：' : 'Enter master key for local AES-256 encryption:');
+    let pwd = prompt(curLang === 'zh' ? '請輸入你的本地主密鑰（用於 AES-256 加密，絕不上傳）：' : 'Enter master key for local AES-256 encryption:');
     if (!pwd) return; 
     if (pwd.trim() === '') {
         showToast(curLang === 'zh' ? '請輸入一串密鑰，或按「取消」放棄儲存。' : 'Please enter a key, or click Cancel.');
@@ -605,7 +607,7 @@ async function saveVault() {
     let text = '';
     document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(el => text += el.value + '\n---\n');
     const suds = document.getElementById('sudsSlider').value;
-    const payload = JSON.stringify({ emotion: currentEmotion, suds, text, time: new Date().toISOString() });
+    let payload = JSON.stringify({ emotion: currentEmotion, suds, text, time: new Date().toISOString() });
 
     const enc = new TextEncoder();
     const salt = crypto.getRandomValues(new Uint8Array(16));
@@ -626,9 +628,12 @@ async function saveVault() {
 
     showToast(curLang === 'zh' ? '🔒 已加密封存於本機裝置（600k PBKDF2 + AES-256）。' : '🔒 Sealed securely on your local device.');
     document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
+    
+    // 記憶體引用即時釋放
+    pwd = null; payload = null; text = null;
 }
 
-// 10. 雙重加密備份匯出 (Envelope Encryption)
+// 10. 雙重加密備份匯出
 async function exportBackup() {
     const data = localStorage.getItem('stillhollow_vault') || '[]';
     if (data === '[]') {
@@ -636,7 +641,7 @@ async function exportBackup() {
         return;
     }
 
-    const backupPwd = prompt(
+    let backupPwd = prompt(
         curLang === 'zh' 
         ? '請設定「備份檔專屬密碼」（此密碼用於雙重加密整個備份檔案，請務必牢記）：' 
         : 'Set a password for this backup file (keep it safe):'
@@ -672,12 +677,13 @@ async function exportBackup() {
         URL.revokeObjectURL(url);
 
         showToast(curLang === 'zh' ? '✅ 備份檔已完成雙重加密並下載！' : '✅ Encrypted backup downloaded!');
+        backupPwd = null;
     } catch (e) {
         showToast(curLang === 'zh' ? '❌ 備份失敗，請重試。' : '❌ Backup failed.');
     }
 }
 
-// 11. 備份解密匯入與安全合併
+// 11. 備份解密匯入 (非同步排程 + 指紋去重)
 async function importBackup(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -693,12 +699,14 @@ async function importBackup(event) {
                 return;
             }
 
-            const backupPwd = prompt(
+            let backupPwd = prompt(
                 curLang === 'zh' 
                 ? '請輸入此備份檔的「備份專屬密碼」：' 
                 : 'Enter the password for this backup file:'
             );
             if (!backupPwd) return;
+
+            showToast(curLang === 'zh' ? '⏳ 正在驗證與解密備份檔...' : '⏳ Decrypting backup...');
 
             const salt = new Uint8Array(backupObj.salt);
             const iv = new Uint8Array(backupObj.iv);
@@ -706,17 +714,47 @@ async function importBackup(event) {
             const key = await deriveKey(backupPwd, salt);
 
             const decryptedBuffer = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, encryptedData);
-            const decryptedString = new TextDecoder().decode(decryptedBuffer);
-            const records = JSON.parse(decryptedString);
+            
+            // 非同步釋放 UI 線程，防止大型資料凍結
+            setTimeout(() => {
+                try {
+                    const decryptedString = new TextDecoder().decode(decryptedBuffer);
+                    const records = JSON.parse(decryptedString);
 
-            if (!Array.isArray(records)) throw new Error('Invalid data structure');
+                    if (!Array.isArray(records)) throw new Error('Invalid structure');
 
-            // 預設採用安全合併，避免誤觸覆蓋
-            const existing = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
-            const merged = [...existing, ...records];
-            localStorage.setItem('stillhollow_vault', JSON.stringify(merged));
+                    const existing = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
+                    
+                    // 建立精準指紋 Set 進行無感去重
+                    const fingerprintSet = new Set(
+                        existing.map(r => `${r.date}_${(r.data || []).slice(0, 32).join(',')}`)
+                    );
 
-            showToast(curLang === 'zh' ? `✅ 已安全還原並合併 ${records.length} 筆紀錄！` : `✅ Successfully restored ${records.length} records!`);
+                    let addedCount = 0;
+                    const merged = [...existing];
+                    for (const rec of records) {
+                        const fp = `${rec.date}_${(rec.data || []).slice(0, 32).join(',')}`;
+                        if (!fingerprintSet.has(fp)) {
+                            merged.push(rec);
+                            fingerprintSet.add(fp);
+                            addedCount++;
+                        }
+                    }
+
+                    localStorage.setItem('stillhollow_vault', JSON.stringify(merged));
+                    const skipped = records.length - addedCount;
+
+                    showToast(
+                        curLang === 'zh' 
+                        ? `✅ 成功還原：新增 ${addedCount} 筆${skipped > 0 ? `（已自動過濾 ${skipped} 筆重複）` : ''}` 
+                        : `✅ Restored ${addedCount} records${skipped > 0 ? ` (${skipped} duplicates skipped)` : ''}`
+                    );
+                } catch (err) {
+                    showToast(curLang === 'zh' ? '❌ 資料解析失敗，備份檔可能已損毀。' : '❌ Corrupted backup data.');
+                }
+            }, 10);
+
+            backupPwd = null;
         } catch (error) {
             showToast(curLang === 'zh' ? '❌ 解密失敗，請檢查密碼是否正確。' : '❌ Decryption failed. Incorrect password.');
         }
