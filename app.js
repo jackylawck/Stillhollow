@@ -1,4 +1,4 @@
-// 1. 全站 100% 完整雙語字典 (含頁尾底層技術聲明)
+// 1. 全站 100% 完整雙語字典 (含日本、韓國、大中華及國際支援熱線)
 const LANG = {
     zh: {
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
@@ -80,19 +80,20 @@ const LANG = {
         guideClose: "我知道了，回到樹洞",
         guideHtml: `
             <p><strong>1. 這是一個什麼樣的地方？</strong><br>
-            這是一個純本地、無伺服器、不聯網的私密樹洞。你可以跟著節奏深呼吸，挑選此刻的身體感受，自由寫下任何念頭。</p>
+            這是一個純本地、無伺服器、不聯網的私密樹洞。你可以跟著節奏深呼吸，挑選此刻的身體感受，自由寫下任何念頭，不必顧慮格式或長度。</p>
             
-            <p style="margin-top:10px;"><strong>2. 兩種文字處理方式：</strong><br>
-            • <strong>🍃 輕柔放下</strong>：寫完後直接隨風消散，不留任何痕跡。<br>
-            • <strong>🔒 封存於此</strong>：輸入你自訂的密鑰，透過金融級軍規演算法（AES-256）加密儲存於你的瀏覽器本地，任何人都無法偷看。</p>
+            <p style="margin-top:10px;"><strong>2. 書寫時文字會不見嗎？</strong><br>
+            • <strong>書寫中途</strong>：文字會穩妥停留在輸入框內，中途停頓沉思<strong>絕不會自動消失</strong>。<br>
+            • <strong>🔒 封存於此</strong>：輸入你自訂的密鑰，透過金融級軍規演算法（AES-256）加密儲存於你的瀏覽器本地，關閉網頁後依然安全保存。<br>
+            • <strong>🍃 輕柔放下</strong>：當你準備好放下這段情緒時，點擊即可讓文字隨風消散，不留痕跡。</p>
 
             <p style="margin-top:10px;"><strong>3. 數據與隱私承諾：</strong><br>
             • <strong>零雲端</strong>：你的文字絕不上傳至任何伺服器或 AI 模型。<br>
             • <strong>零追蹤</strong>：完全沒有廣告追蹤碼或 Cookie。<br>
-            • <strong>備份與還原</strong>：可透過工具列的「📦 打包備份」將加密資料下載至電腦，日後隨時「📂 匯入備份」還原。</p>
+            • <strong>備份與還原</strong>：可透過工具列的「📦 打包備份」將加密資料下載至本機，日後隨時「📂 匯入備份」還原。</p>
 
             <p style="margin-top:10px;"><strong>4. 溫馨提醒：</strong><br>
-            若清除瀏覽器快取，本地儲存的紀錄將會一併清除，建議定期手動備份。本工具為自我沉澱輔助，若承受極大痛苦請隨時尋求專業醫療或撥打即時熱線。</p>
+            若手動清除瀏覽器快取，本地儲存的紀錄將會一併清除，建議定期手動備份。本工具為自我沉澱輔助，若承受極大痛苦請隨時尋求專業醫療或撥打即時熱線。</p>
         `,
         promptSaveTitle: "🔒 封存此篇心事",
         promptSaveDesc: "請設定一組專屬於你的私密密鑰（此密鑰僅儲存於你的裝置，絕不上傳）：",
@@ -204,11 +205,12 @@ const LANG = {
         guideClose: "Understood, return to sanctuary",
         guideHtml: `
             <p><strong>1. What is Stillhollow?</strong><br>
-            A private, zero-knowledge, offline sanctuary for your thoughts. Breathe along with the circle, notice your feelings, and write freely without judgment.</p>
+            A private, zero-knowledge, offline sanctuary for your thoughts. Breathe along with the circle, notice your feelings, and write freely without fear of judgment or length constraints.</p>
             
-            <p style="margin-top:10px;"><strong>2. Two Ways to Process Thoughts:</strong><br>
-            • <strong>🍃 Gently Release</strong>: Let your words dissipate into the wind without saving any trace.<br>
-            • <strong>🔒 Seal Here</strong>: Encrypt your entry with your own password using on-device AES-256 military-grade encryption.</p>
+            <p style="margin-top:10px;"><strong>2. Will my writing disappear?</strong><br>
+            • <strong>While Writing</strong>: Your text stays safely on your screen. Pausing to reflect will <strong>never cause it to disappear</strong>.<br>
+            • <strong>🔒 Seal Here</strong>: Encrypt your entry with your private key using on-device AES-256 military-grade encryption. Stored safely even if you close the page.<br>
+            • <strong>🍃 Gently Release</strong>: When ready to let go, click to allow your words to dissipate into the wind without leaving any trace.</p>
 
             <p style="margin-top:10px;"><strong>3. Privacy & Security:</strong><br>
             • <strong>Zero Cloud</strong>: Your data never leaves your browser and is never uploaded to any server or AI.<br>
@@ -216,7 +218,7 @@ const LANG = {
             • <strong>Backup & Restore</strong>: Use "📦 Backup Vault" to download an encrypted backup, and "📂 Import Vault" to restore anytime.</p>
 
             <p style="margin-top:10px;"><strong>4. Gentle Reminder:</strong><br>
-            Clearing your browser cache will erase locally stored notes. Please backup regularly. This is a self-care aid, not a clinical substitute. Reach out to crisis lines if in acute distress.</p>
+            Clearing browser data manually will erase locally stored notes. Please backup regularly. This is a self-care aid, not a clinical substitute. Reach out to crisis lines if in acute distress.</p>
         `,
         promptSaveTitle: "🔒 Seal Your Thoughts",
         promptSaveDesc: "Enter your private key (used only for on-device encryption, never uploaded):",
@@ -304,7 +306,9 @@ function setLang(lang) {
     document.getElementById('i18n-btn-guide').innerText = t.btnGuide;
     document.getElementById('i18n-crisis-btn').innerText = t.crisisBtn;
     document.getElementById('i18n-disclaimer').innerHTML = t.disclaimer;
-    document.getElementById('i18n-crypto-meta').innerText = t.cryptoMeta;
+    
+    const cryptoEl = document.getElementById('i18n-crypto-meta');
+    if (cryptoEl) cryptoEl.innerText = t.cryptoMeta;
     
     document.getElementById('i18n-modal-title').innerText = t.modalTitle;
     document.getElementById('i18n-modal-desc').innerText = t.modalDesc;
@@ -736,7 +740,19 @@ function closeGrounding() { closeModal('groundingModal'); }
 function openGuide() { openModal('guideModal'); }
 function closeGuide() { closeModal('guideModal'); }
 
-// 14. 監聽 Service Worker 更新通知
+// 14. 意外離開防護 (防止未儲存文字因誤觸重新整理或關閉分頁而遺失)
+window.addEventListener('beforeunload', (e) => {
+    let hasDraft = false;
+    document.querySelectorAll('#inputArea textarea, #inputArea input').forEach(el => {
+        if (el.value && el.value.trim().length > 0) hasDraft = true;
+    });
+    if (hasDraft) {
+        e.preventDefault();
+        e.returnValue = '';
+    }
+});
+
+// 15. 監聽 Service Worker 更新通知
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'SW_UPDATED') {
