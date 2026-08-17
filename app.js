@@ -1,4 +1,4 @@
-// 1. 全站 100% 完整雙語字典 (含所有自訂彈窗文案)
+// 1. 全站 100% 完整雙語字典
 const LANG = {
     zh: {
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
@@ -32,6 +32,7 @@ const LANG = {
         btnExport: "📦 打包備份",
         btnImport: "📂 匯入備份",
         btnPrint: "🖨️ 紙本留存",
+        btnGuide: "📖 使用指引與隱私說明",
         crisis: "💛 當你需要聲音的陪伴時，這些專線為你開放：香港生命熱線 <strong>2382 0000</strong> ｜ 撒瑪利亞 <strong>2389 2222</strong>",
         disclaimer: "本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。",
         modalTitle: "🍃 溫柔地與文字道別",
@@ -63,6 +64,24 @@ const LANG = {
             { icon: "👄", name: "嚐 (1)", desc: "感受 <strong>1</strong> 種口中的味道（喝一口溫水，感受溫度）" }
         ],
         groundingClose: "我感覺平靜一些了，回到書寫",
+        guideTitle: "🌿 棲心樹洞 · 使用指南與隱私承諾",
+        guideClose: "我知道了，回到樹洞",
+        guideHtml: `
+            <p><strong>1. 這是一個什麼樣的地方？</strong><br>
+            這是一個純本地、無伺服器、不聯網的私密樹洞。你可以跟著節奏深呼吸，挑選此刻的身體感受，自由寫下任何念頭。</p>
+            
+            <p style="margin-top:10px;"><strong>2. 兩種文字處理方式：</strong><br>
+            • <strong>🍃 輕柔放下</strong>：寫完後直接隨風消散，不留任何痕跡。<br>
+            • <strong>🔒 封存於此</strong>：輸入你自訂的密鑰，透過金融級軍規演算法（AES-256）加密儲存於你的瀏覽器本地，任何人都無法偷看。</p>
+
+            <p style="margin-top:10px;"><strong>3. 數據與隱私承諾：</strong><br>
+            • <strong>零雲端</strong>：你的文字絕不上傳至任何伺服器或 AI 模型。<br>
+            • <strong>零追蹤</strong>：完全沒有廣告追蹤碼或 Cookie。<br>
+            • <strong>備份與還原</strong>：可透過工具列的「📦 打包備份」將加密資料下載至電腦，日後隨時「📂 匯入備份」還原。</p>
+
+            <p style="margin-top:10px;"><strong>4. 溫馨提醒：</strong><br>
+            若清除瀏覽器快取，本地儲存的紀錄將會一併清除，建議定期手動備份。本工具為自我沉澱輔助，若承受極大痛苦請隨時尋求專業醫療或撥打即時熱線。</p>
+        `,
         promptSaveTitle: "🔒 封存此篇心事",
         promptSaveDesc: "請設定一組專屬於你的私密密鑰（此密鑰僅儲存於你的裝置，絕不上傳）：",
         promptSavePlaceholder: "請輸入密鑰...",
@@ -125,6 +144,7 @@ const LANG = {
         btnExport: "📦 Backup Vault",
         btnImport: "📂 Import Vault",
         btnPrint: "🖨️ Print View",
+        btnGuide: "📖 Guide & Privacy FAQ",
         crisis: "💛 When you need a voice, these lines are open: HK Samaritan <strong>2389 2222</strong> ｜ Taiwan <strong>1925</strong>",
         disclaimer: "This is a self-reflection aid offering quiet space. For clinical care, please seek qualified professionals.",
         modalTitle: "🍃 Mindfully Releasing",
@@ -156,6 +176,24 @@ const LANG = {
             { icon: "👄", name: "Taste (1)", desc: "Notice <strong>1</strong> taste (take a sip of warm water, sense temperature)" }
         ],
         groundingClose: "I feel more grounded, back to writing",
+        guideTitle: "🌿 Stillhollow · Guide & Privacy",
+        guideClose: "Understood, return to sanctuary",
+        guideHtml: `
+            <p><strong>1. What is Stillhollow?</strong><br>
+            A private, zero-knowledge, offline sanctuary for your thoughts. Breathe along with the circle, notice your feelings, and write freely without judgment.</p>
+            
+            <p style="margin-top:10px;"><strong>2. Two Ways to Process Thoughts:</strong><br>
+            • <strong>🍃 Gently Release</strong>: Let your words dissipate into the wind without saving any trace.<br>
+            • <strong>🔒 Seal Here</strong>: Encrypt your entry with your own password using on-device AES-256 military-grade encryption.</p>
+
+            <p style="margin-top:10px;"><strong>3. Privacy & Security:</strong><br>
+            • <strong>Zero Cloud</strong>: Your data never leaves your browser and is never uploaded to any server or AI.<br>
+            • <strong>Zero Tracking</strong>: No cookies, no analytics, no ads.<br>
+            • <strong>Backup & Restore</strong>: Use "📦 Backup Vault" to download an encrypted backup, and "📂 Import Vault" to restore anytime.</p>
+
+            <p style="margin-top:10px;"><strong>4. Gentle Reminder:</strong><br>
+            Clearing your browser cache will erase locally stored notes. Please backup regularly. This is a self-care aid, not a clinical substitute. Reach out to crisis lines if in acute distress.</p>
+        `,
         promptSaveTitle: "🔒 Seal Your Thoughts",
         promptSaveDesc: "Enter your private key (used only for on-device encryption, never uploaded):",
         promptSavePlaceholder: "Enter key...",
@@ -220,6 +258,7 @@ function setLang(lang) {
     document.getElementById('i18n-btn-export').innerText = t.btnExport;
     document.getElementById('i18n-btn-import').innerText = t.btnImport;
     document.getElementById('i18n-btn-print').innerText = t.btnPrint;
+    document.getElementById('i18n-btn-guide').innerText = t.btnGuide;
     
     document.getElementById('i18n-crisis').innerHTML = t.crisis;
     document.getElementById('i18n-disclaimer').innerHTML = t.disclaimer;
@@ -243,6 +282,10 @@ function setLang(lang) {
     document.getElementById('i18n-grounding-title').innerText = t.groundingTitle;
     document.getElementById('i18n-grounding-desc').innerText = t.groundingDesc;
     document.getElementById('i18n-grounding-close').innerText = t.groundingClose;
+
+    document.getElementById('i18n-guide-title').innerText = t.guideTitle;
+    document.getElementById('i18n-guide-close').innerText = t.guideClose;
+    document.getElementById('guideContent').innerHTML = t.guideHtml;
 
     renderEmotions();
     renderGroundingSteps();
@@ -609,11 +652,13 @@ async function importBackup(event) {
     reader.readAsText(file);
 }
 
-// 12. 彈窗控制
+// 12. 輔助彈窗控制
 function openSOS() { document.getElementById('sosModal').style.display = 'flex'; }
 function closeSOS() { document.getElementById('sosModal').style.display = 'none'; }
 function openGrounding() { document.getElementById('groundingModal').style.display = 'flex'; }
 function closeGrounding() { document.getElementById('groundingModal').style.display = 'none'; }
+function openGuide() { document.getElementById('guideModal').style.display = 'flex'; }
+function closeGuide() { document.getElementById('guideModal').style.display = 'none'; }
 
 // 初始化語言偵測
 const browserLang = navigator.language || 'zh';
