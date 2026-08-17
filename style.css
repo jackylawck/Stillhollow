@@ -134,13 +134,13 @@ input[type=range]::-webkit-slider-thumb {
 }
 .tab.active { background: var(--card); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-weight: 500; }
 
-textarea, input[type="text"] {
+textarea, input[type="text"], input[type="password"] {
     width: 100%; padding: 14px 16px; border-radius: 14px;
     border: 1px solid var(--border); background: var(--bg);
     color: var(--text); font-size: 0.95rem; line-height: 1.6; font-family: inherit;
 }
 textarea { min-height: 140px; resize: vertical; }
-input[type="text"] { margin: 6px 0; }
+input[type="text"], input[type="password"] { margin: 6px 0; }
 
 .gentle-suggestion {
     display: none;
@@ -190,7 +190,7 @@ input[type="text"] { margin: 6px 0; }
 .disclaimer-text { font-size: 0.75rem; margin-top: 6px; }
 .crypto-meta { font-size: 0.65rem; opacity: 0.5; margin-top: 4px; }
 
-/* 彈窗樣式 */
+/* 彈窗體系 */
 .modal-mask {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
