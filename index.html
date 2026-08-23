@@ -19,7 +19,7 @@
     <meta property="og:description" content="純本地軍規加密、零雲端、純粹接納。一個只屬於你的私密沉澱角落。">
     <meta property="og:image" content="https://jackylawck.github.io/Stillhollow/Stillhollowicon-512.png">
     
-    <!-- 🛡️ 收緊的嚴格 CSP：排除 unsafe-inline -->
+    <!-- 🛡️ 嚴格 CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; frame-ancestors 'none';">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
@@ -37,9 +37,9 @@
 
 <div class="container" role="main">
     <header class="top-bar">
-        <button class="lang-btn active" data-action="set-lang" data-lang="zh" aria-label="切換至繁體中文">中</button>
-        <button class="lang-btn" data-action="set-lang" data-lang="en" aria-label="Switch to English">EN</button>
-        <button class="sos-mini-btn" data-action="open-modal" data-target="sosModal" data-i18n="sosMini" aria-label="緊急支援熱線">🆘 即時熱線</button>
+        <button class="lang-btn active" id="langZh" data-action="set-lang" data-lang="zh" aria-label="切換至繁體中文">中</button>
+        <button class="lang-btn" id="langEn" data-action="set-lang" data-lang="en" aria-label="Switch to English">EN</button>
+        <button class="sos-mini-btn" id="i18n-sos-top" data-action="open-modal" data-target="sosModal" data-i18n="sosMini" aria-label="緊急支援熱線">🆘 即時熱線</button>
     </header>
 
     <!-- 品牌標題 -->
@@ -77,9 +77,9 @@
         </div>
 
         <div class="tabs" role="tablist" id="tabGroup" aria-label="書寫模式選擇">
-            <button class="tab active" data-action="switch-tab" data-tab="free" role="tab" aria-selected="true" aria-controls="inputArea" data-i18n="tabFree">📝 自由傾訴</button>
-            <button class="tab" data-action="switch-tab" data-tab="perspective" role="tab" aria-selected="false" aria-controls="inputArea" data-i18n="tabPerspective">🔍 換個濾鏡</button>
-            <button class="tab" data-action="switch-tab" data-tab="compassion" role="tab" aria-selected="false" aria-controls="inputArea" data-i18n="tabCompassion">💛 溫柔對話</button>
+            <button class="tab active" id="tabFree" data-action="switch-tab" data-tab="free" role="tab" aria-selected="true" aria-controls="inputArea" data-i18n="tabFree">📝 自由傾訴</button>
+            <button class="tab" id="tabPerspective" data-action="switch-tab" data-tab="perspective" role="tab" aria-selected="false" aria-controls="inputArea" data-i18n="tabPerspective">🔍 換個濾鏡</button>
+            <button class="tab" id="tabCompassion" data-action="switch-tab" data-tab="compassion" role="tab" aria-selected="false" aria-controls="inputArea" data-i18n="tabCompassion">💛 溫柔對話</button>
         </div>
 
         <div id="inputArea" tabindex="-1"></div>
@@ -121,7 +121,7 @@
     </footer>
 </div>
 
-<!-- 彈窗體系 (WCAG 焦點捕獲) -->
+<!-- 彈窗體系 -->
 <div class="modal-mask" id="releaseModal" role="dialog" aria-modal="true" aria-labelledby="release-modal-title">
     <div class="modal-box">
         <h3 id="release-modal-title" data-i18n="modalTitle">🍃 溫柔地與文字道別</h3>
@@ -185,7 +185,6 @@
     </div>
 </div>
 
-<!-- 浮動提示 Toast -->
 <div id="gentle-toast" role="status" aria-live="polite"></div>
 
 <script src="./app.js"></script>
