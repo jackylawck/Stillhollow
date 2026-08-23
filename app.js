@@ -1,6 +1,6 @@
 /**
  * 🌿 棲心樹洞 Stillhollow
- * Modular Architecture & State-Driven Engine (Production Release 100/100)
+ * Modular Architecture & State-Driven Engine
  */
 
 // --- 1. 雙語字典庫 (I18N Dictionary) ---
@@ -325,18 +325,12 @@ const UI = {
             if (t[key]) el.placeholder = t[key];
         });
 
-        // 多語系切換按鈕狀態同步
+        // 頂部按鈕狀態同步
         const isZh = Store.state.lang === 'zh';
         const zhBtn = document.getElementById('langZh');
         const enBtn = document.getElementById('langEn');
         if (zhBtn) zhBtn.classList.toggle('active', isZh);
         if (enBtn) enBtn.classList.toggle('active', !isZh);
-
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            if (btn.dataset.lang) {
-                btn.classList.toggle('active', btn.dataset.lang === Store.state.lang);
-            }
-        });
     },
 
     renderEmotions() {
@@ -751,21 +745,9 @@ const AntiRumination = {
     }
 };
 
-// --- 7. 全域相容與事件分發 (Event Delegation & Global Handlers) ---
-window.setLang = (lang) => Store.setLang(lang);
-window.switchTab = (tab) => Store.setTab(tab);
-window.openSOS = () => { UI.renderHotlines(); UI.openModal('sosModal'); };
-window.closeSOS = () => UI.closeModal('sosModal');
-window.openGrounding = () => UI.openModal('groundingModal');
-window.closeGrounding = () => UI.closeModal('groundingModal');
-window.openGuide = () => UI.openModal('guideModal');
-window.closeGuide = () => UI.closeModal('guideModal');
-window.openRelease = () => UI.openModal('releaseModal');
-window.closeRelease = () => UI.closeModal('releaseModal');
-
-// 全域點擊委派監聽 (支援 data-action 與 ID 識別)
+// --- 7. 全域相容與事件委派 ---
 document.addEventListener('click', (e) => {
-    // 優先捕獲語言切換按鈕
+    // 語言按鈕點擊捕獲
     const langBtn = e.target.closest('#langZh, #langEn, [data-action="set-lang"]');
     if (langBtn) {
         if (langBtn.id === 'langZh' || langBtn.dataset.lang === 'zh') {
@@ -818,8 +800,8 @@ document.addEventListener('click', (e) => {
             CryptoEngine.export();
             break;
         case 'trigger-import': {
-            const fileInput = document.getElementById('importFileInput');
-            if (fileInput) fileInput.click();
+            const fileInp = document.getElementById('importFileInput');
+            if (fileInp) fileInp.click();
             break;
         }
         case 'print-view':
@@ -831,7 +813,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// SUDS 滑塊節流監聽
+// SUDS 滑塊監聽
 let sudsRAF = null;
 const sudsSlider = document.getElementById('sudsSlider');
 if (sudsSlider) {
@@ -872,7 +854,7 @@ window.addEventListener('beforeunload', (e) => {
     }
 });
 
-// PWA 更新通知廣播監聽
+// PWA 更新廣播監聽
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'SW_UPDATED') {
@@ -881,20 +863,18 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// 全域錯誤邊界
-window.addEventListener('error', () => {
-    UI.showToast(Store.t.toastGlobalError);
-});
-window.addEventListener('unhandledrejection', () => {
-    UI.showToast(Store.t.toastGlobalError);
-});
+// 啟動生命週期管理 (加入直接監聽)
+function bootstrap() {
+    const zhBtn = document.getElementById('langZh');
+    const enBtn = document.getElementById('langEn');
+    if (zhBtn) zhBtn.onclick = () => Store.setLang('zh');
+    if (enBtn) enBtn.onclick = () => Store.setLang('en');
 
-// 初始化啟動
-document.addEventListener('DOMContentLoaded', () => {
     UI.renderAll();
     BreathingEngine.init();
-});
+}
 
-// 立即觸發一次初次渲染
-UI.renderAll();
-BreathingEngine.init();
+document.addEventListener('DOMContentLoaded', bootstrap);
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    bootstrap();
+}
