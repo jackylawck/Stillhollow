@@ -75,9 +75,5 @@ No algorithms. No analytics. No judgment. Your words remain solely yours—inacc
 | **Data Governance** | docs/DATA_GOVERNANCE.md (GDPR, HK PDPO, ISO 27001/27701) |
 ### ⚠️ Disclaimer
 **Stillhollow** is a self-care aid intended for personal reflection and mindfulness. **It does NOT provide medical advice, diagnosis, or crisis counseling.** If you are experiencing acute distress, please reach out to qualified healthcare providers or crisis hotlines.
-## 👤 Author & License
-Designed & Developed with care by **羅子淇 Jacky Law**.
+## 👤 License
 Released under the **MIT License**.
-```
-
-```
