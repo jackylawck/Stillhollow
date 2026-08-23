@@ -1,7 +1,7 @@
 # 🌿 棲心樹洞 · Stillhollow
 > **安放心事，歸於靜謐。｜ A Sanctuary for the Unspoken.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Zero Knowledge](https://img.shields.io/badge/Architecture-Zero--Knowledge-brightgreen.svg)]()
 [![Encryption](https://img.shields.io/badge/Encryption-AES--GCM--256-blue.svg)]()
 [![PWA Ready](https://img.shields.io/badge/PWA-Offline--First-orange.svg)]()
@@ -21,7 +21,7 @@
 
 1. **🔒 金融軍規加密與零知識架構**
    - **PBKDF2 (600,000 次疊代) + AES-GCM-256**：防禦現代 GPU 離線暴力碰撞。
-   - **純客戶端加解密**：密鑰永不離開瀏覽器記憶體，用完即焚。
+   - **純客戶端加解密**：密鑰永不離開瀏覽器記憶體，用完即焚 (`fill(0)`)。
    - **`connect-src 'none'` 物理級斷網**：嚴格 CSP 規則阻絕一切外部網絡請求，徹底杜絕數據外洩與 AI 爬蟲採集。
    - **信封式雙重加密備份**：支援 `.vault` 加密檔案匯出與匯入，自動去重還原。
 
@@ -38,113 +38,46 @@
 
 ---
 
-### 🚀 本地快速啟動
-
-由於專案採用純原生前端設計（Vanilla HTML/CSS/JS），無需任何建置工具：
-
-```bash
-# 1. 複製倉庫
-git clone [https://github.com/jackylawck/Stillhollow.git](https://github.com/jackylawck/Stillhollow.git)
-
-# 2. 進入目錄
-cd Stillhollow
-
-# 3. 使用任何靜態伺服器啟動（或直接使用瀏覽器開啟 index.html）
-# 例如使用 Python:
-python3 -m http.server 8000
-
-```
-
----
-
-### 🛡️ 資安與隱私治理
-
-| 防禦維度 | 規格標準 |
-| --- | --- |
-| **傳輸安全** | GitHub Pages 強制 HTTPS (TLS 1.3) |
-| **數據加密** | AES-GCM-256 (Web Crypto API) |
-| **金鑰衍生** | PBKDF2 (SHA-256, 600,000 iterations) |
-| **網絡隔離** | Content Security Policy: `connect-src 'none'` |
-| **數據主權** | 100% 本地存儲，零 Cookie，零後端追蹤 |
-
----
-
+### 🛡️ 資安、AI 合規與隱私治理
+| 治理維度 | 規格標準 |
+|---|---|
+| **系統架構卡** | SYSTEM_CARD.md (非 AI 確定性系統聲明) |
+| **資安規格** | SECURITY.md (OWASP 推薦標準、二進制清零) |
+| **AI 安全邊界** | docs/AI_SAFETY_COMPLIANCE.md (EU AI Act 豁免、防爬蟲) |
+| **數據治理** | docs/DATA_GOVERNANCE.md (GDPR Art. 5、香港 PDPO、ISO 27001) |
 ### ⚠️ 免責聲明
-
 **棲心樹洞（Stillhollow）** 為自我沉澱、情緒覺察與放鬆輔助工具，**絕不構成亦不可取代專業心理諮商、精神醫學診斷或危機干預治療**。若你或身邊的人正面臨極度痛苦或自我傷害危機，請尋求專業醫療協助或撥打即時求助專線。
-
----
-
 ## 🌐 English
-
 **Stillhollow** is a client-side, zero-knowledge, trauma-informed open-source sanctuary designed for emotional stillness, mindful journaling, and self-compassion.
-
 No algorithms. No analytics. No judgment. Your words remain solely yours—inaccessible even to developers and AI web crawlers.
-
 ### ✨ Key Features
+ 1. **🔒 State-of-the-Art Cryptography & Zero-Knowledge Architecture**
+   * **PBKDF2 (600,000 Iterations) + AES-GCM-256**: Compliant with OWASP cryptographic recommendations against GPU brute-force attacks.
+   * **100% Client-Side**: Private keys never leave browser memory and are wiped immediately after use (fill(0)).
+   * **connect-src 'none' Physical Network Air-Gap**: Strict CSP blocks all outgoing network traffic, preventing telemetry and AI data scraping.
+   * **Double-Encrypted Envelope Backup**: Download and restore .vault backups with automated deduplication.
+ 2. **🌱 Trauma-Informed & Neuroscience-Backed Design**
+   * **Polyvagal Breathing Circle**: Visual biofeedback rhythm to engage the parasympathetic nervous system.
+   * **Somatic SUDS Tension Slider**: Non-pathologizing, body-focused tracking replacing diagnostic labels.
+   * **5-4-3-2-1 Sensory Grounding**: Rapid sensory re-orientation for high-stress moments.
+   * **Three Reflective Protocols**: Free Journaling, Perspective Shift (CBT), and Self-Compassion (ACT).
+   * **Unconditional Release Ritual**: Let thoughts dissipate with no required input barriers.
+ 3. **🌍 Offline-First & PWA Ready**
+   * Fully functional offline after initial load. Installable on iOS/Android home screens.
+   * 100% bilingual UI (Traditional Chinese & English).
 
-1. **🔒 State-of-the-Art Cryptography & Zero-Knowledge Architecture**
-* **PBKDF2 (600,000 Iterations) + AES-GCM-256**: Compliant with OWASP cryptographic recommendations against GPU brute-force attacks.
-* **100% Client-Side**: Private keys never leave browser memory and are wiped immediately after use.
-* **`connect-src 'none'` Physical Network Air-Gap**: Strict CSP blocks all outgoing network traffic, preventing telemetry and AI data scraping.
-* **Double-Encrypted Envelope Backup**: Download and restore `.vault` backups with automated deduplication.
-
-
-2. **🌱 Trauma-Informed & Neuroscience-Backed Design**
-* **Polyvagal Breathing Circle**: Visual biofeedback rhythm to engage the parasympathetic nervous system.
-* **Somatic SUDS Tension Slider**: Non-pathologizing, body-focused tracking replacing diagnostic labels.
-* **5-4-3-2-1 Sensory Grounding**: Rapid sensory re-orientation for high-stress moments.
-* **Three Reflective Protocols**: Free Journaling, Perspective Shift (CBT), and Self-Compassion (ACT).
-* **Unconditional Release Ritual**: Let thoughts dissipate with no required input barriers.
-
-
-3. **🌍 Offline-First & PWA Ready**
-* Fully functional offline after initial load. Installable on iOS/Android home screens.
-* 100% bilingual UI (Traditional Chinese & English).
-
-
-
----
-
-### 🚀 Quick Start
-
-Built entirely with Vanilla Web Standards (HTML5, CSS3, JavaScript Web Crypto API). No build pipeline required:
-
-```bash
-# 1. Clone repository
-git clone [https://github.com/jackylawck/Stillhollow.git](https://github.com/jackylawck/Stillhollow.git)
-
-# 2. Navigate to directory
-cd Stillhollow
-
-# 3. Run with any local server (or open index.html directly)
-python3 -m http.server 8000
-
+### 🛡️ Security, AI Safety & Data Governance
+| Governance Layer | Standard / Implementation |
+|---|---|
+| **System Card** | SYSTEM_CARD.md (Non-AI Deterministic Declaration) |
+| **Security Policy** | SECURITY.md (OWASP Cryptography, Memory Zeroization) |
+| **AI Safety** | docs/AI_SAFETY_COMPLIANCE.md (EU AI Act Exemption, Anti-Scraping) |
+| **Data Governance** | docs/DATA_GOVERNANCE.md (GDPR, HK PDPO, ISO 27001/27701) |
+### ⚠️ Disclaimer
+**Stillhollow** is a self-care aid intended for personal reflection and mindfulness. **It does NOT provide medical advice, diagnosis, or crisis counseling.** If you are experiencing acute distress, please reach out to qualified healthcare providers or crisis hotlines.
+## 👤 Author & License
+Designed & Developed with care by **羅子淇 Jacky Law**.
+Released under the **MIT License**.
 ```
 
----
-
-### 🛡️ Security & Privacy Governance
-
-| Layer | Standard / Implementation |
-| --- | --- |
-| **Transport** | HTTPS Enforced via GitHub Pages (TLS 1.3) |
-| **Encryption** | AES-GCM-256 (Native Web Crypto API) |
-| **Key Derivation** | PBKDF2 (SHA-256, 600,000 iterations) |
-| **Network Guard** | Strict CSP: `connect-src 'none'` |
-| **Data Sovereignty** | 100% On-Device, Zero Cookies, Zero Telemetry |
-
----
-
-### ⚠️ Disclaimer
-
-**Stillhollow** is a self-care aid intended for personal reflection and mindfulness. **It does NOT provide medical advice, diagnosis, or crisis counseling.** If you are experiencing acute distress, please reach out to qualified healthcare providers or crisis hotlines.
-
----
-
-## 👤 Author & License
-
-Designed & Developed with care by **[羅子淇 Jacky Law](https://jackylawck.github.io/jackylawck)**.
-
-Released under the **[MIT License](https://www.google.com/search?q=LICENSE)**.
-
+```
