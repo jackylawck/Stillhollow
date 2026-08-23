@@ -4,225 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 
-      ================================================================
-      🌿 棲心樹洞 Stillhollow
-      Designed & Developed by 羅子淇 Jacky Law
-      Personal Page: https://jackylawck.github.io/jackylawck
-      ================================================================
-    -->
-
-    <!-- 🔍 1. SEO Essentials & Branding -->
-    <title>棲心樹洞 Stillhollow · 安放心事，歸於靜謐 | A Sanctuary for the Unspoken</title>
-    <meta name="description" content="純本地 600,000 次 PBKDF2 + AES-GCM 256 加密空間。零雲端、防 AI 數據採集、純粹接納。此處為你留下一方安寧天地。| Zero-Knowledge Trauma-Informed Local Sanctuary.">
-    <meta name="keywords" content="羅子淇, Jacky Law, 棲心樹洞, Stillhollow, 心理樹洞, 離線日記, 零知識加密, AES-GCM, PWA, 創傷知情, 感官著陸, 呼吸放鬆, 心理安全, Zero-Knowledge Journal, Mental Health Sanctuary, Polyvagal">
-    
-    <!-- 👤 Author & Creator Metadata (Code-level Only) -->
+    <!-- 🔍 SEO & Branding -->
+    <title data-i18n-title="docTitle">棲心樹洞 Stillhollow · 安放心事，歸於靜謐</title>
+    <meta name="description" content="純本地 600,000 次 PBKDF2 + AES-GCM 256 加密空間。零雲端、純粹接納。| Zero-Knowledge Local Sanctuary.">
     <meta name="author" content="羅子淇 Jacky Law">
-    <meta name="creator" content="羅子淇 Jacky Law">
-    <meta name="publisher" content="羅子淇 Jacky Law">
-    <meta name="copyright" content="© 2026 羅子淇 Jacky Law. All rights reserved.">
-    
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://jackylawck.github.io/Stillhollow/">
+    <meta name="google-site-verification" content="JZ5UohX-CcP_fQV0_DI9VadkKY4ZoTTkUifL88-fIcY">
 
-    <!-- 🔍 Google Search Console Verification Tag -->
-    <meta name="google-site-verification" content="JZ5UohX-CcP_fQV0_DI9VadkKY4ZoTTkUifL88-fIcY" />
-
-    <!-- 🌐 2. Open Graph Protocol -->
+    <!-- 🌐 Open Graph & Twitter Card -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jackylawck.github.io/Stillhollow/">
     <meta property="og:title" content="棲心樹洞 Stillhollow · 安放心事，歸於靜謐">
-    <meta property="og:description" content="純本地軍規加密、零雲端、純粹接納。你此刻的存在就已足夠。一個只屬於你的私密沉澱角落。">
+    <meta property="og:description" content="純本地軍規加密、零雲端、純粹接納。一個只屬於你的私密沉澱角落。">
     <meta property="og:image" content="https://jackylawck.github.io/Stillhollow/Stillhollowicon-512.png">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
-    <meta property="og:site_name" content="棲心樹洞 Stillhollow">
-    <meta property="og:locale" content="zh_HK">
-    <meta property="og:locale:alternate" content="en_US">
-
-    <!-- 🐦 3. Twitter / X Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:url" content="https://jackylawck.github.io/Stillhollow/">
-    <meta name="twitter:title" content="Stillhollow · A Sanctuary for the Unspoken">
-    <meta name="twitter:description" content="A zero-knowledge, trauma-informed offline emotional sanctuary. Pure acceptance, zero cloud.">
-    <meta name="twitter:image" content="https://jackylawck.github.io/Stillhollow/Stillhollowicon-512.png">
-
-    <!-- 🛡️ 4. Content Security Policy (CSP) & Cache Control -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self' data:; frame-ancestors 'none';">
+    
+    <!-- 🛡️ 收緊的嚴格 CSP：排除 unsafe-inline -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; frame-ancestors 'none';">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
 
-    <!-- 📱 5. PWA & Device Assets (含內嵌向量圖標後備) -->
+    <!-- 📱 PWA Assets -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23c97b63'/%3E%3Cpath d='M30 40 L70 40 L70 60 L30 60 Z' fill='%23f6f2ed'/%3E%3C/svg%3E">
-    <link rel="icon" type="image/png" sizes="192x192" href="./Stillhollowicon-192.png">
-    <link rel="apple-touch-icon" href="./Stillhollowicon-512.png">
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#1c1816">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="棲心樹洞">
-
-    <!-- 💡 6. JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "棲心樹洞 Stillhollow",
-      "alternateName": ["Stillhollow", "棲心樹洞", "Stillhollow Sanctuary"],
-      "url": "https://jackylawck.github.io/Stillhollow/",
-      "description": "純本地 600,000 次 PBKDF2 與 AES-GCM 256 加密情緒疏導空間。無伺服器、防 AI 爬蟲採集，結合多迷走神經呼吸與創傷知情感官著陸設計。",
-      "applicationCategory": "HealthApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript. Requires HTML5.",
-      "author": {
-        "@type": "Person",
-        "name": "羅子淇 Jacky Law",
-        "alternateName": "Jacky Law",
-        "url": "https://jackylawck.github.io/jackylawck"
-      },
-      "creator": {
-        "@type": "Person",
-        "name": "羅子淇 Jacky Law",
-        "url": "https://jackylawck.github.io/jackylawck"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "HKD"
-      }
-    }
-    </script>
 
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
+<!-- ♿ 無障礙快速跳轉錨點 (Skip Link) -->
+<a href="#inputArea" class="skip-link" data-i18n="skipLink">跳至主要書寫區</a>
+
 <div class="container" role="main">
-    <div class="top-bar">
-        <button class="lang-btn active" id="langZh" onclick="setLang('zh')" aria-label="切換至繁體中文">中</button>
-        <button class="lang-btn" id="langEn" onclick="setLang('en')" aria-label="Switch to English">EN</button>
-        <button class="sos-mini-btn" id="i18n-sos-top" onclick="openSOS()" aria-label="緊急支援熱線">🆘 即時熱線</button>
-    </div>
+    <header class="top-bar">
+        <button class="lang-btn active" data-action="set-lang" data-lang="zh" aria-label="切換至繁體中文">中</button>
+        <button class="lang-btn" data-action="set-lang" data-lang="en" aria-label="Switch to English">EN</button>
+        <button class="sos-mini-btn" data-action="open-modal" data-target="sosModal" data-i18n="sosMini" aria-label="緊急支援熱線">🆘 即時熱線</button>
+    </header>
 
     <!-- 品牌標題 -->
-    <div class="hero">
-        <h1 id="i18n-title">🌿 棲心樹洞 · Stillhollow</h1>
-        <p id="i18n-sub">你此刻的存在，就已經足夠。此處純粹接納，為你留下一方安寧天地。</p>
-    </div>
+    <section class="hero">
+        <h1 data-i18n="title">🌿 棲心樹洞 · Stillhollow</h1>
+        <p data-i18n="sub">你此刻的存在，就已經足夠。此處純粹接納，為你留下一方安寧天地。</p>
+    </section>
 
     <!-- 1. 呼吸調息 -->
-    <div class="card">
+    <section class="card" aria-labelledby="breath-heading">
+        <h2 id="breath-heading" class="sr-only" data-i18n="breathHeading">呼吸調節</h2>
         <div class="breath-area">
-            <div class="breath-circle" id="breathCircle">吸氣</div>
-            <div class="breath-hint" id="breathHint">隨心跟隨圓圈呼吸，或是靜靜看著，都是溫柔的放鬆。</div>
+            <div class="breath-circle" id="breathCircle" aria-live="polite">吸氣</div>
+            <div class="breath-hint" data-i18n="breath">隨心跟隨圓圈呼吸，或是靜靜看著，都是溫柔的放鬆。</div>
         </div>
-    </div>
+    </section>
 
     <!-- 2. 感受與書寫區 -->
-    <div class="card">
-        <div class="field-label" id="i18n-emotion-label">此刻的感受（挑一個最順眼的就好）：</div>
-        <div class="tag-group" id="emotionGroup" role="group" aria-label="情緒標籤"></div>
+    <section class="card" aria-labelledby="journal-heading">
+        <h2 id="journal-heading" class="sr-only" data-i18n="journalHeading">情緒覺察與文字梳理</h2>
+        
+        <label id="emotion-label" class="field-label" data-i18n="emotionLabel">此刻的感受（挑一個最順眼的就好）：</label>
+        <div class="tag-group" id="emotionGroup" role="radiogroup" aria-labelledby="emotion-label"></div>
 
         <div class="slider-wrap">
             <div class="slider-header">
-                <span id="i18n-suds-label">目前身體的緊繃感</span>
-                <strong id="sudsValue">3</strong>
+                <label for="sudsSlider" id="suds-label" data-i18n="sudsLabel">目前身體的緊繃感</label>
+                <strong id="sudsValue" aria-live="polite">3</strong>
             </div>
-            <input type="range" id="sudsSlider" min="0" max="10" value="3" oninput="handleSudsChange(this.value)" aria-label="身體緊繃程度滑塊">
-            <div class="slider-labels">
-                <span id="i18n-suds-low">0 · 輕鬆舒展</span>
-                <span id="i18n-suds-high">10 · 身體需要溫柔關注</span>
+            <input type="range" id="sudsSlider" min="0" max="10" value="3" aria-labelledby="suds-label">
+            <div class="slider-labels" aria-hidden="true">
+                <span data-i18n="sudsLow">0 · 輕鬆舒展</span>
+                <span data-i18n="sudsHigh">10 · 身體需要溫柔關注</span>
             </div>
         </div>
 
-        <div class="tabs" role="tablist">
-            <button class="tab active" onclick="switchTab('free', this)" id="tabFree" role="tab">📝 自由傾訴</button>
-            <button class="tab" onclick="switchTab('perspective', this)" id="tabPerspective" role="tab">🔍 換個濾鏡</button>
-            <button class="tab" onclick="switchTab('compassion', this)" id="tabCompassion" role="tab">💛 溫柔對話</button>
+        <div class="tabs" role="tablist" id="tabGroup" aria-label="書寫模式選擇">
+            <button class="tab active" data-action="switch-tab" data-tab="free" role="tab" aria-selected="true" aria-controls="inputArea" data-i18n="tabFree">📝 自由傾訴</button>
+            <button class="tab" data-action="switch-tab" data-tab="perspective" role="tab" aria-selected="false" aria-controls="inputArea" data-i18n="tabPerspective">🔍 換個濾鏡</button>
+            <button class="tab" data-action="switch-tab" data-tab="compassion" role="tab" aria-selected="false" aria-controls="inputArea" data-i18n="tabCompassion">💛 溫柔對話</button>
         </div>
 
-        <div id="inputArea">
-            <textarea id="mainInput" aria-label="書寫空間"></textarea>
-        </div>
+        <div id="inputArea" tabindex="-1"></div>
 
         <div class="gentle-suggestion" id="gentleSuggestion">
-            <button class="gentle-btn" onclick="openGrounding()" id="i18n-gentle-btn">
+            <button class="gentle-btn" data-action="open-modal" data-target="groundingModal" data-i18n="gentleBtn">
                 🌱 感覺到身體有點緊繃？試試 1 分鐘感官著陸
             </button>
         </div>
 
         <div class="btn-row">
-            <button class="btn-secondary" id="btnLetGo" onclick="openRelease()">🍃 輕柔放下</button>
-            <button class="btn-primary" id="btnSave" onclick="saveVault()">🔒 封存於此</button>
+            <button class="btn-secondary" data-action="open-modal" data-target="releaseModal" data-i18n="btnLetGo">🍃 輕柔放下</button>
+            <button class="btn-primary" data-action="save-vault" data-i18n="btnSave">🔒 封存於此</button>
         </div>
 
         <div class="toolbar">
-            <button class="tool-btn" id="i18n-btn-ground" onclick="openGrounding()">🧘 感官著陸</button>
-            <button class="tool-btn" id="i18n-btn-export" onclick="exportBackup()">📦 打包備份</button>
-            <button class="tool-btn" id="i18n-btn-import" onclick="document.getElementById('importFileInput').click()">📂 匯入備份</button>
-            <input type="file" id="importFileInput" accept=".vault" style="display:none" onchange="importBackup(event)">
-            <button class="tool-btn" id="i18n-btn-print" onclick="window.print()">🖨️ 紙本留存</button>
+            <button class="tool-btn" data-action="open-modal" data-target="groundingModal" data-i18n="btnGround">🧘 感官著陸</button>
+            <button class="tool-btn" data-action="export-backup" data-i18n="btnExport">📦 打包備份</button>
+            <button class="tool-btn" data-action="trigger-import" data-i18n="btnImport">📂 匯入備份</button>
+            <input type="file" id="importFileInput" accept=".vault" class="sr-only" aria-label="匯入備份檔案">
+            <button class="tool-btn" data-action="print-view" data-i18n="btnPrint">🖨️ 紙本留存</button>
         </div>
-    </div>
+    </section>
 
-    <!-- 頁尾守護資訊與使用說明入口 -->
-    <div class="footer-card">
-        <p style="margin-bottom: 6px;">
-            <button class="tool-btn" onclick="openGuide()" id="i18n-btn-guide" style="font-size:0.85rem; text-decoration:underline;">📖 使用指引與隱私說明</button>
+    <!-- 頁尾 -->
+    <footer class="footer-card">
+        <p class="footer-link-row">
+            <button class="tool-btn link-style" data-action="open-modal" data-target="guideModal" data-i18n="btnGuide">📖 使用指引與隱私說明</button>
         </p>
-        <p style="margin-bottom: 6px;">
-            <button class="tool-btn" onclick="openSOS()" id="i18n-crisis-btn" style="font-size:0.85rem; color:var(--warm); text-decoration:underline; font-weight:500;">需要即時傾聽？查看各地支援專線</button>
+        <p class="footer-link-row">
+            <button class="tool-btn link-style warm-text" data-action="open-modal" data-target="sosModal" data-i18n="crisisBtn">需要即時傾聽？查看各地支援專線</button>
         </p>
-        <p class="disclaimer-text" id="i18n-disclaimer">
+        <p class="disclaimer-text" data-i18n="disclaimer">
             本工具為自我探索與情緒梳理輔助，提供溫柔沉澱空間，醫療與診斷請尋求合格專業人員。
         </p>
-        <p class="crypto-meta" id="i18n-crypto-meta">
+        <p class="crypto-meta" data-i18n="cryptoMeta">
             棲心樹洞 Stillhollow · Zero-Knowledge · AES-GCM 256 · 純本地完全離線守護
         </p>
-    </div>
+    </footer>
 </div>
 
-<!-- 彈窗體系 -->
-<!-- 1. 溫柔釋放彈窗 -->
-<div class="modal-mask" id="releaseModal" role="dialog" aria-modal="true">
+<!-- 彈窗體系 (WCAG 焦點捕獲) -->
+<div class="modal-mask" id="releaseModal" role="dialog" aria-modal="true" aria-labelledby="release-modal-title">
     <div class="modal-box">
-        <h3 id="i18n-modal-title">🍃 溫柔地與文字道別</h3>
-        <p id="i18n-modal-desc">在文字隨風消散前，可以留下一句送給自己的話（留白也完全沒關係，直接放下即可）：</p>
-        <input type="text" id="blessingInput" aria-label="給自己的祝福輸入框">
+        <h3 id="release-modal-title" data-i18n="modalTitle">🍃 溫柔地與文字道別</h3>
+        <p data-i18n="modalDesc">在文字隨風消散前，可以留下一句送給自己的話：</p>
+        <label for="blessingInput" class="sr-only" data-i18n="blessingLabel">給自己的話</label>
+        <input type="text" id="blessingInput" data-i18n-placeholder="modalPlaceholder">
         <div class="modal-actions">
-            <button class="btn-secondary" onclick="closeRelease()" id="i18n-modal-back">回到書寫</button>
-            <button class="btn-primary" onclick="confirmRelease()" id="i18n-modal-confirm">輕柔放下，隨風而逝</button>
+            <button class="btn-secondary" data-action="close-modal" data-target="releaseModal" data-i18n="modalBack">回到書寫</button>
+            <button class="btn-primary" data-action="confirm-release" data-i18n="modalConfirm">輕柔放下，隨風而逝</button>
         </div>
     </div>
 </div>
 
-<!-- 2. 即時熱線彈窗 -->
-<div class="modal-mask" id="sosModal" role="dialog" aria-modal="true">
-    <div class="modal-box left-align" style="max-height:85vh; overflow-y:auto;">
-        <h3 id="i18n-sos-title" class="rose-text">💛 我們一直在這裡</h3>
-        <p id="i18n-sos-desc">當你需要聲音的陪伴時，各地的專業求助專線為你開放：</p>
+<div class="modal-mask" id="sosModal" role="dialog" aria-modal="true" aria-labelledby="sos-modal-title">
+    <div class="modal-box left-align scrollable-box">
+        <h3 id="sos-modal-title" class="rose-text" data-i18n="sosTitle">💛 我們一直在這裡</h3>
+        <p data-i18n="sosDesc">當你需要聲音的陪伴時，各地的專業求助專線為你開放：</p>
         <div id="hotlineListContainer"></div>
-        <button class="btn-primary full-width modal-top-gap" onclick="closeSOS()" id="i18n-sos-close">我知道了，先回到呼吸</button>
+        <button class="btn-primary full-width modal-top-gap" data-action="close-modal" data-target="sosModal" data-i18n="sosClose">我知道了，先回到呼吸</button>
     </div>
 </div>
 
-<!-- 3. 感官著陸彈窗 -->
-<div class="modal-mask" id="groundingModal" role="dialog" aria-modal="true">
+<div class="modal-mask" id="groundingModal" role="dialog" aria-modal="true" aria-labelledby="grounding-modal-title">
     <div class="modal-box wide-box">
-        <h3 id="i18n-grounding-title" class="sage-text">🌱 5-4-3-2-1 感官著陸</h3>
-        <p id="i18n-grounding-desc">跟著步驟，慢慢將注意力拉回此時此刻的身體：</p>
+        <h3 id="grounding-modal-title" class="sage-text" data-i18n="groundingTitle">🌱 5-4-3-2-1 感官著陸</h3>
+        <p data-i18n="groundingDesc">跟著步驟，慢慢將注意力拉回此時此刻的身體：</p>
         <div id="groundingSteps"></div>
-        <button class="btn-primary full-width modal-top-gap" onclick="closeGrounding()" id="i18n-grounding-close">我感覺平靜一些了，回到書寫</button>
+        <button class="btn-primary full-width modal-top-gap" data-action="close-modal" data-target="groundingModal" data-i18n="groundingClose">我感覺平靜一些了，回到書寫</button>
     </div>
 </div>
 
-<!-- 4. 自訂密鑰輸入彈窗 -->
-<div class="modal-mask" id="promptModal" role="dialog" aria-modal="true">
+<div class="modal-mask" id="promptModal" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
     <div class="modal-box">
         <h3 id="promptTitle">🔒 封存密鑰</h3>
-        <p id="promptDesc">請設定一組專屬於你的私密密鑰（此密鑰僅儲存於你的裝置，絕不上傳）：</p>
-        <input type="password" id="promptInput" style="text-align:center; font-size:1.1rem; letter-spacing:2px;" aria-label="密鑰輸入框">
+        <p id="promptDesc">請設定一組專屬於你的私密密鑰：</p>
+        <label for="promptInput" class="sr-only">密鑰輸入</label>
+        <input type="password" id="promptInput" class="password-field">
         <div class="modal-actions">
             <button class="btn-secondary" id="promptCancelBtn">取消</button>
             <button class="btn-primary" id="promptConfirmBtn">確定</button>
@@ -230,31 +166,28 @@
     </div>
 </div>
 
-<!-- 5. 邀請式反芻煞車對話框 -->
-<div class="modal-mask" id="ruminationModal" role="dialog" aria-modal="true">
+<div class="modal-mask" id="ruminationModal" role="dialog" aria-modal="true" aria-labelledby="rumination-modal-title">
     <div class="modal-box">
-        <h3 id="ruminationTitle" class="rose-text">🧡 溫柔的小歇</h3>
-        <p id="ruminationDesc">你已經在這裡沉澱一會兒了。大腦跟身體一樣需要休息。</p>
+        <h3 id="rumination-modal-title" class="rose-text" data-i18n="ruminationTitle">🧡 溫柔的小歇</h3>
+        <p data-i18n="ruminationDesc">你已經在這裡沉澱一會兒了。大腦跟身體一樣需要休息。</p>
         <div class="modal-actions">
-            <button class="btn-secondary" id="ruminationWaterBtn">☕ 去喝杯溫水</button>
-            <button class="btn-primary" id="ruminationRestBtn">🪑 閉眼深呼吸</button>
+            <button class="btn-secondary" id="ruminationWaterBtn" data-i18n="ruminationWater">☕ 去喝杯溫水</button>
+            <button class="btn-primary" id="ruminationRestBtn" data-i18n="ruminationRest">🪑 閉眼深呼吸</button>
         </div>
     </div>
 </div>
 
-<!-- 6. 使用指引與隱私說明彈窗 -->
-<div class="modal-mask" id="guideModal" role="dialog" aria-modal="true">
-    <div class="modal-box wide-box left-align" style="max-height:80vh; overflow-y:auto;">
-        <h3 id="i18n-guide-title" style="text-align:center; margin-bottom:14px;">🌿 棲心樹洞 · 使用指南</h3>
-        <div id="guideContent" style="font-size:0.88rem; line-height:1.7; color:var(--text);"></div>
-        <button class="btn-primary full-width modal-top-gap" onclick="closeGuide()" id="i18n-guide-close">回到樹洞</button>
+<div class="modal-mask" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guide-modal-title">
+    <div class="modal-box wide-box left-align scrollable-box">
+        <h3 id="guide-modal-title" class="text-center" data-i18n="guideTitle">🌿 棲心樹洞 · 使用指南</h3>
+        <div id="guideContent" class="guide-text"></div>
+        <button class="btn-primary full-width modal-top-gap" data-action="close-modal" data-target="guideModal" data-i18n="guideClose">回到樹洞</button>
     </div>
 </div>
 
 <!-- 浮動提示 Toast -->
 <div id="gentle-toast" role="status" aria-live="polite"></div>
 
-<!-- 載入核心邏輯 -->
 <script src="./app.js"></script>
 </body>
 </html>
