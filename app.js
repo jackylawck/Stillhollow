@@ -1,23 +1,24 @@
-// 1. 全站 100% 完整雙語字典 (含日本、韓國、大中華及國際支援熱線)
-const LANG = {
+/**
+ * 🌿 棲心樹洞 Stillhollow
+ * Modular Architecture & State-Driven Engine (Production Release 100/100)
+ */
+
+// --- 1. 雙語字典庫 (I18N Dictionary) ---
+const I18N = {
     zh: {
+        skipLink: "跳至主要書寫區",
         docTitle: "棲心樹洞 Stillhollow · 安放心事，歸於靜謐",
         sosMini: "🆘 即時熱線",
         title: "🌿 棲心樹洞 · Stillhollow",
         sub: "你此刻的存在，就已經足夠。此處純粹接納，為你留下一方安寧天地。",
+        breathHeading: "呼吸調節",
+        journalHeading: "情緒覺察與文字梳理",
         breath: "隨心跟隨圓圈呼吸，或是靜靜看著，都是溫柔的放鬆。",
-        breathInhale: "吸氣",
-        breathHold: "屏息",
-        breathExhale: "呼氣",
+        breathInhale: "吸氣", breathHold: "屏息", breathExhale: "呼氣",
         emotionLabel: "此刻的感受（挑一個最順眼的就好）：",
         emotions: [
-            { id: "e1", val: "☁️ 順其自然 · 隨意感受" },
-            { id: "e2", val: "☀️ 平靜自在" },
-            { id: "e3", val: "🌤️ 微微擔憂" },
-            { id: "e4", val: "🌧️ 鬱悶低落" },
-            { id: "e5", val: "⛈️ 委屈憤怒" },
-            { id: "e6", val: "⛓️ 自責內疚" },
-            { id: "e7", val: "🌫️ 迷茫孤單" }
+            "☁️ 順其自然 · 隨意感受", "☀️ 平靜自在", "🌤️ 微微擔憂", 
+            "🌧️ 鬱悶低落", "⛈️ 委屈憤怒", "⛓️ 自責內疚", "🌫️ 迷茫孤單"
         ],
         sudsLabel: "目前身體的緊繃感",
         sudsLow: "0 · 輕鬆舒展",
@@ -39,6 +40,7 @@ const LANG = {
         modalTitle: "🍃 溫柔地與文字道別",
         modalDesc: "在文字隨風消散前，可以留下一句送給自己的話（留白也完全沒關係，直接放下即可）：",
         modalPlaceholder: "例如：我已盡力，此刻我選擇休息。",
+        blessingLabel: "給自己的話",
         modalBack: "回到書寫",
         modalConfirm: "輕柔放下，隨風而逝",
         placeholderFree: "你可以從這裡開始…\n• 今天我感覺到最強烈的身體感受是…\n• 其實我真正想說的是…\n寫下一字一句，或是任何符號，都剛剛好。",
@@ -81,19 +83,14 @@ const LANG = {
         guideHtml: `
             <p><strong>1. 這是一個什麼樣的地方？</strong><br>
             這是一個純本地、無伺服器、不聯網的私密樹洞。你可以跟著節奏深呼吸，挑選此刻的身體感受，自由寫下任何念頭，不必顧慮格式或長度。</p>
-            
-            <p style="margin-top:10px;"><strong>2. 書寫時文字會不見嗎？</strong><br>
+            <p class="modal-top-gap"><strong>2. 書寫時文字會不見嗎？</strong><br>
             • <strong>書寫中途</strong>：文字會穩妥停留在輸入框內，中途停頓沉思<strong>絕不會自動消失</strong>。<br>
             • <strong>🔒 封存於此</strong>：輸入你自訂的密鑰，透過金融級軍規演算法（AES-256）加密儲存於你的瀏覽器本地，關閉網頁後依然安全保存。<br>
             • <strong>🍃 輕柔放下</strong>：當你準備好放下這段情緒時，點擊即可讓文字隨風消散，不留痕跡。</p>
-
-            <p style="margin-top:10px;"><strong>3. 數據與隱私承諾：</strong><br>
-            • <strong>零雲端</strong>：你的文字絕不上傳至任何伺服器或 AI 模型。<br>
+            <p class="modal-top-gap"><strong>3. 數據與隱私承諾：</strong><br>
+            • <strong>零雲端</strong>：文字絕不上傳至任何伺服器或 AI 模型。<br>
             • <strong>零追蹤</strong>：完全沒有廣告追蹤碼或 Cookie。<br>
-            • <strong>備份與還原</strong>：可透過工具列的「📦 打包備份」將加密資料下載至本機，日後隨時「📂 匯入備份」還原。</p>
-
-            <p style="margin-top:10px;"><strong>4. 溫馨提醒：</strong><br>
-            若手動清除瀏覽器快取，本地儲存的紀錄將會一併清除，建議定期手動備份。本工具為自我沉澱輔助，若承受極大痛苦請隨時尋求專業醫療或撥打即時熱線。</p>
+            • <strong>備份與還原</strong>：可透過工具列的「📦 打包備份」將加密資料下載至本機，日後隨時還原。</p>
         `,
         promptSaveTitle: "🔒 封存此篇心事",
         promptSaveDesc: "請設定一組專屬於你的私密密鑰（此密鑰僅儲存於你的裝置，絕不上傳）：",
@@ -123,26 +120,25 @@ const LANG = {
         toastDecrypting: "⏳ 正在驗證與解密備份檔...",
         toastRestored: (add, skip) => `✅ 成功還原：新增 ${add} 筆${skip > 0 ? `（已自動過濾 ${skip} 筆重複）` : ''}`,
         toastRestoreFail: "❌ 資料結構無效或備份檔已損毀。",
-        toastDecryptFail: "❌ 解密失敗，密碼錯誤或檔案已損毀。"
+        toastDecryptFail: "❌ 解密失敗，密碼錯誤或檔案已損毀。",
+        toastQuotaWarning: "⚠️ 瀏覽器儲存空間即將達到上限（>4.5MB），請及時「打包備份」。",
+        toastGlobalError: "⚠️ 系統發生暫時性異常，請嘗試重新整理頁面。",
+        swUpdateReady: "✨ 棲心樹洞已更新至最新版本。<br><button class='tool-btn' data-action='reload-page' style='text-decoration:underline; font-weight:bold; color:var(--warm); margin-top:4px;'>點此重新載入</button>"
     },
     en: {
+        skipLink: "Skip to main journal area",
         docTitle: "Stillhollow · A Sanctuary for the Unspoken",
         sosMini: "🆘 Crisis Lines",
         title: "🌿 Stillhollow",
         sub: "You are already enough, just as you are. A sanctuary of pure acceptance and quiet ease.",
+        breathHeading: "Breathing Regulation",
+        journalHeading: "Emotional Awareness & Reflection",
         breath: "Breathe along gently with the circle, or simply rest your eyes here.",
-        breathInhale: "Inhale",
-        breathHold: "Hold",
-        breathExhale: "Exhale",
+        breathInhale: "Inhale", breathHold: "Hold", breathExhale: "Exhale",
         emotionLabel: "Right now, what feels closest (pick whatever feels easy):",
         emotions: [
-            { id: "e1", val: "☁️ Open & Allowing" },
-            { id: "e2", val: "☀️ Calm & Grounded" },
-            { id: "e3", val: "🌤️ Mild Worry" },
-            { id: "e4", val: "🌧️ Heavy & Low" },
-            { id: "e5", val: "⛈️ Hurt & Anger" },
-            { id: "e6", val: "⛓️ Self-Blame & Guilt" },
-            { id: "e7", val: "🌫️ Lost & Alone" }
+            "☁️ Open & Allowing", "☀️ Calm & Grounded", "🌤️ Mild Worry", 
+            "🌧️ Heavy & Low", "⛈️ Hurt & Anger", "⛓️ Self-Blame & Guilt", "🌫️ Lost & Alone"
         ],
         sudsLabel: "Current physical tension level",
         sudsLow: "0 · Relaxed & Ease",
@@ -164,6 +160,7 @@ const LANG = {
         modalTitle: "🍃 Mindfully Releasing",
         modalDesc: "Leave a gentle whisper for yourself, or simply journey on (leaving it blank is perfectly fine):",
         modalPlaceholder: "e.g., I did my best, and I choose to rest now.",
+        blessingLabel: "Whisper for yourself",
         modalBack: "Return",
         modalConfirm: "Gently Release",
         placeholderFree: "Start from here…\n• What I physically feel most today is…\n• What I truly want to say is…\nA single word, a symbol, or anything you share is wonderful.",
@@ -206,19 +203,14 @@ const LANG = {
         guideHtml: `
             <p><strong>1. What is Stillhollow?</strong><br>
             A private, zero-knowledge, offline sanctuary for your thoughts. Breathe along with the circle, notice your feelings, and write freely without fear of judgment or length constraints.</p>
-            
-            <p style="margin-top:10px;"><strong>2. Will my writing disappear?</strong><br>
+            <p class="modal-top-gap"><strong>2. Will my writing disappear?</strong><br>
             • <strong>While Writing</strong>: Your text stays safely on your screen. Pausing to reflect will <strong>never cause it to disappear</strong>.<br>
-            • <strong>🔒 Seal Here</strong>: Encrypt your entry with your private key using on-device AES-256 military-grade encryption. Stored safely even if you close the page.<br>
+            • <strong>🔒 Seal Here</strong>: Encrypt your entry with your private key using on-device AES-256 military-grade encryption.<br>
             • <strong>🍃 Gently Release</strong>: When ready to let go, click to allow your words to dissipate into the wind without leaving any trace.</p>
-
-            <p style="margin-top:10px;"><strong>3. Privacy & Security:</strong><br>
-            • <strong>Zero Cloud</strong>: Your data never leaves your browser and is never uploaded to any server or AI.<br>
+            <p class="modal-top-gap"><strong>3. Privacy & Security:</strong><br>
+            • <strong>Zero Cloud</strong>: Data never leaves your browser.<br>
             • <strong>Zero Tracking</strong>: No cookies, no analytics, no ads.<br>
-            • <strong>Backup & Restore</strong>: Use "📦 Backup Vault" to download an encrypted backup, and "📂 Import Vault" to restore anytime.</p>
-
-            <p style="margin-top:10px;"><strong>4. Gentle Reminder:</strong><br>
-            Clearing browser data manually will erase locally stored notes. Please backup regularly. This is a self-care aid, not a clinical substitute. Reach out to crisis lines if in acute distress.</p>
+            • <strong>Backup & Restore</strong>: Use "📦 Backup Vault" to download an encrypted backup anytime.</p>
         `,
         promptSaveTitle: "🔒 Seal Your Thoughts",
         promptSaveDesc: "Enter your private key (used only for on-device encryption, never uploaded):",
@@ -248,499 +240,627 @@ const LANG = {
         toastDecrypting: "⏳ Decrypting backup...",
         toastRestored: (add, skip) => `✅ Restored ${add} records${skip > 0 ? ` (${skip} duplicates skipped)` : ''}`,
         toastRestoreFail: "❌ Invalid structure or corrupted backup.",
-        toastDecryptFail: "❌ Decryption failed. Incorrect password or corrupted file."
+        toastDecryptFail: "❌ Decryption failed. Incorrect password or corrupted file.",
+        toastQuotaWarning: "⚠️ Storage is approaching capacity (>4.5MB). Please export a backup.",
+        toastGlobalError: "⚠️ A temporary system issue occurred. Please refresh the page.",
+        swUpdateReady: "✨ Stillhollow has been updated.<br><button class='tool-btn' data-action='reload-page' style='text-decoration:underline; font-weight:bold; color:var(--warm); margin-top:4px;'>Click to reload</button>"
     }
 };
 
-let curLang = 'zh';
-let currentTab = 'free';
-let currentEmotionIndex = 0;
+// --- 2. 狀態管理核心 (State Store) ---
+const Store = {
+    state: {
+        lang: (navigator.language || 'zh').startsWith('zh') ? 'zh' : 'en',
+        tab: 'free',
+        emotionIndex: 0,
+        suds: 3,
+        breathState: 0,
+        ruminationCounter: 0,
+        lastActionTime: 0
+    },
 
-// 2. 無障礙彈窗管理 (Focus Trapping & Return)
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal._returnFocus = document.activeElement;
-    modal.style.display = 'flex';
-    const focusable = modal.querySelector('button, input, textarea, [tabindex="0"]');
-    if (focusable) focusable.focus();
-}
+    get t() {
+        return I18N[this.state.lang];
+    },
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal.style.display = 'none';
-    if (modal._returnFocus && typeof modal._returnFocus.focus === 'function') {
-        modal._returnFocus.focus();
+    setLang(lang) {
+        this.state.lang = lang;
+        UI.renderAll();
+    },
+
+    setTab(tab) {
+        this.state.tab = tab;
+        UI.renderTabs();
+    },
+
+    setEmotion(idx) {
+        this.state.emotionIndex = idx;
+        UI.renderEmotions();
     }
-}
+};
 
-// 3. 語言切換渲染
-function setLang(lang) {
-    curLang = lang;
-    document.getElementById('langZh').classList.toggle('active', lang === 'zh');
-    document.getElementById('langEn').classList.toggle('active', lang === 'en');
-    
-    const t = LANG[lang];
-    document.title = t.docTitle;
-    document.getElementById('i18n-sos-top').innerText = t.sosMini;
-    document.getElementById('i18n-title').innerText = t.title;
-    document.getElementById('i18n-sub').innerText = t.sub;
-    document.getElementById('breathHint').innerText = t.breath;
-    document.getElementById('i18n-emotion-label').innerText = t.emotionLabel;
-    document.getElementById('i18n-suds-label').innerText = t.sudsLabel;
-    document.getElementById('i18n-suds-low').innerText = t.sudsLow;
-    document.getElementById('i18n-suds-high').innerText = t.sudsHigh;
-    document.getElementById('i18n-gentle-btn').innerText = t.gentleBtn;
-    
-    document.getElementById('tabFree').innerText = t.tabFree;
-    document.getElementById('tabPerspective').innerText = t.tabPerspective;
-    document.getElementById('tabCompassion').innerText = t.tabCompassion;
-    
-    document.getElementById('btnLetGo').innerText = t.btnLetGo;
-    document.getElementById('btnSave').innerText = t.btnSave;
-    document.getElementById('i18n-btn-ground').innerText = t.btnGround;
-    document.getElementById('i18n-btn-export').innerText = t.btnExport;
-    document.getElementById('i18n-btn-import').innerText = t.btnImport;
-    document.getElementById('i18n-btn-print').innerText = t.btnPrint;
-    document.getElementById('i18n-btn-guide').innerText = t.btnGuide;
-    document.getElementById('i18n-crisis-btn').innerText = t.crisisBtn;
-    document.getElementById('i18n-disclaimer').innerHTML = t.disclaimer;
-    
-    const cryptoEl = document.getElementById('i18n-crypto-meta');
-    if (cryptoEl) cryptoEl.innerText = t.cryptoMeta;
-    
-    document.getElementById('i18n-modal-title').innerText = t.modalTitle;
-    document.getElementById('i18n-modal-desc').innerText = t.modalDesc;
-    document.getElementById('blessingInput').placeholder = t.modalPlaceholder;
-    document.getElementById('i18n-modal-back').innerText = t.modalBack;
-    document.getElementById('i18n-modal-confirm').innerText = t.modalConfirm;
+// --- 3. UI 宣告式渲染與無障礙管理 (UI Engine) ---
+const UI = {
+    toastTimer: null,
 
-    document.getElementById('i18n-sos-title').innerText = t.sosTitle;
-    document.getElementById('i18n-sos-desc').innerText = t.sosDesc;
-    document.getElementById('i18n-sos-close').innerText = t.sosClose;
+    showToast(msg) {
+        const toast = document.getElementById('gentle-toast');
+        if (!toast) return;
+        toast.innerHTML = msg;
+        toast.style.display = 'block';
+        if (this.toastTimer) clearTimeout(this.toastTimer);
+        this.toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3500);
+    },
 
-    document.getElementById('i18n-grounding-title').innerText = t.groundingTitle;
-    document.getElementById('i18n-grounding-desc').innerText = t.groundingDesc;
-    document.getElementById('i18n-grounding-close').innerText = t.groundingClose;
+    openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal._returnFocus = document.activeElement;
+        modal.style.display = 'flex';
+        const focusable = modal.querySelector('button, input, textarea, [tabindex="0"]');
+        if (focusable) focusable.focus();
+    },
 
-    document.getElementById('i18n-guide-title').innerText = t.guideTitle;
-    document.getElementById('i18n-guide-close').innerText = t.guideClose;
-    document.getElementById('guideContent').innerHTML = t.guideHtml;
+    closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.style.display = 'none';
+        if (modal._returnFocus && typeof modal._returnFocus.focus === 'function') {
+            modal._returnFocus.focus();
+        }
+    },
 
-    renderEmotions();
-    renderGroundingSteps();
-    renderTabs();
-    renderHotlines();
-    updateBreathText();
-}
+    renderI18n() {
+        const t = Store.t;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (t[key]) el.innerHTML = t[key];
+        });
+        document.querySelectorAll('[data-i18n-title]').forEach(el => {
+            const key = el.dataset.i18nTitle;
+            if (t[key]) document.title = t[key];
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.dataset.i18nPlaceholder;
+            if (t[key]) el.placeholder = t[key];
+        });
 
-function renderEmotions() {
-    const group = document.getElementById('emotionGroup');
-    const t = LANG[curLang];
-    group.innerHTML = t.emotions.map((e, idx) => `
-        <button class="tag ${idx === currentEmotionIndex ? 'active' : ''}" onclick="selectEmotion(${idx})">${e.val}</button>
-    `).join('');
-}
+        // 多語系切換按鈕狀態同步
+        const isZh = Store.state.lang === 'zh';
+        const zhBtn = document.getElementById('langZh');
+        const enBtn = document.getElementById('langEn');
+        if (zhBtn) zhBtn.classList.toggle('active', isZh);
+        if (enBtn) enBtn.classList.toggle('active', !isZh);
 
-function selectEmotion(idx) {
-    currentEmotionIndex = idx;
-    renderEmotions();
-}
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.dataset.lang) {
+                btn.classList.toggle('active', btn.dataset.lang === Store.state.lang);
+            }
+        });
+    },
 
-function renderGroundingSteps() {
-    const container = document.getElementById('groundingSteps');
-    const t = LANG[curLang];
-    container.innerHTML = t.groundingSteps.map(s => `
-        <div class="grounding-step">${s.icon} ${s.name} <small>${s.desc}</small></div>
-    `).join('');
-}
+    renderEmotions() {
+        const group = document.getElementById('emotionGroup');
+        if (!group) return;
+        const emotions = Store.t.emotions;
+        const currentIdx = Store.state.emotionIndex;
 
-function renderHotlines() {
-    const container = document.getElementById('hotlineListContainer');
-    if (!container) return;
-    const t = LANG[curLang];
-    
-    container.innerHTML = `
-        <div class="hotline-box" style="display:flex; flex-direction:column; gap:8px; max-height:260px; overflow-y:auto; padding:10px 14px;">
-            ${t.hotlines.map(h => `
-                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:6px;">
-                    <div>
-                        <strong>${h.region}</strong> · <span style="font-size:0.85rem; color:var(--muted);">${h.name}</span>
+        group.innerHTML = emotions.map((emo, idx) => `
+            <button class="tag ${idx === currentIdx ? 'active' : ''}" 
+                    data-action="select-emotion" 
+                    data-idx="${idx}"
+                    role="radio"
+                    aria-checked="${idx === currentIdx}"
+                    aria-pressed="${idx === currentIdx}">${emo}</button>
+        `).join('');
+    },
+
+    renderTabs() {
+        const container = document.getElementById('inputArea');
+        if (!container) return;
+        const t = Store.t;
+        const tab = Store.state.tab;
+
+        document.querySelectorAll('.tab').forEach(btn => {
+            const isActive = (btn.dataset.tab === tab) || (btn.id === `tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-selected', isActive);
+        });
+
+        if (tab === 'free') {
+            container.innerHTML = `
+                <label for="mainInput" class="sr-only">${t.tabFree}</label>
+                <textarea id="mainInput" placeholder="${t.placeholderFree}"></textarea>
+            `;
+        } else if (tab === 'perspective') {
+            container.innerHTML = `
+                <label for="cbt_fact" class="sr-only">如實看見</label>
+                <input type="text" id="cbt_fact" placeholder="${t.placeholderCbt1}">
+                <label for="cbt_thought" class="sr-only">腦中念頭</label>
+                <input type="text" id="cbt_thought" placeholder="${t.placeholderCbt2}">
+                <label for="cbt_friend" class="sr-only">摯友視角</label>
+                <textarea id="cbt_friend" placeholder="${t.placeholderCbt3}"></textarea>
+            `;
+        } else if (tab === 'compassion') {
+            container.innerHTML = `
+                <label for="act_accept" class="sr-only">覺察念頭</label>
+                <textarea id="act_accept" placeholder="${t.placeholderAct1}"></textarea>
+                <label for="act_hug" class="sr-only">給自己的擁抱</label>
+                <textarea id="act_hug" placeholder="${t.placeholderAct2}"></textarea>
+            `;
+        }
+    },
+
+    renderGroundingSteps() {
+        const container = document.getElementById('groundingSteps');
+        if (!container) return;
+        container.innerHTML = Store.t.groundingSteps.map(s => `
+            <div class="grounding-step">${s.icon} ${s.name} <small>${s.desc}</small></div>
+        `).join('');
+    },
+
+    renderHotlines() {
+        const container = document.getElementById('hotlineListContainer');
+        if (!container) return;
+        container.innerHTML = `
+            <div class="hotline-box">
+                ${Store.t.hotlines.map(h => `
+                    <div class="hotline-item">
+                        <div>
+                            <strong>${h.region}</strong> · <span class="hotline-sub">${h.name}</span>
+                        </div>
+                        <a href="tel:${h.tel}" class="hotline-link">${h.display}</a>
                     </div>
-                    <a href="tel:${h.tel}" class="hotline-link" style="white-space:nowrap; margin-left:8px;">${h.display}</a>
-                </div>
-            `).join('')}
-        </div>
-    `;
-}
+                `).join('')}
+            </div>
+        `;
+    },
 
-function renderTabs() {
-    const container = document.getElementById('inputArea');
-    const t = LANG[curLang];
-    if (currentTab === 'free') {
-        container.innerHTML = `<textarea id="mainInput" placeholder="${t.placeholderFree}"></textarea>`;
-    } else if (currentTab === 'perspective') {
-        container.innerHTML = `
-            <input type="text" id="cbt_fact" placeholder="${t.placeholderCbt1}">
-            <input type="text" id="cbt_thought" placeholder="${t.placeholderCbt2}">
-            <textarea id="cbt_friend" placeholder="${t.placeholderCbt3}"></textarea>
-        `;
-    } else if (currentTab === 'compassion') {
-        container.innerHTML = `
-            <textarea id="act_accept" placeholder="${t.placeholderAct1}"></textarea>
-            <textarea id="act_hug" placeholder="${t.placeholderAct2}"></textarea>
-        `;
+    renderGuide() {
+        const content = document.getElementById('guideContent');
+        if (content) content.innerHTML = Store.t.guideHtml;
+    },
+
+    renderAll() {
+        this.renderI18n();
+        this.renderEmotions();
+        this.renderTabs();
+        this.renderGroundingSteps();
+        this.renderHotlines();
+        this.renderGuide();
+        BreathingEngine.updateText();
     }
-}
+};
 
-function switchTab(type, btn) {
-    currentTab = type;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    renderTabs();
-}
+// --- 4. 呼吸動畫引擎 (Breathing Engine) ---
+const BreathingEngine = {
+    circle: null,
+    init() {
+        this.circle = document.getElementById('breathCircle');
+        setInterval(() => this.cycle(), 3800);
+        this.cycle();
+    },
+    updateText() {
+        if (!this.circle) return;
+        const t = Store.t;
+        const state = Store.state.breathState;
+        if (state === 0) this.circle.innerText = t.breathInhale;
+        else if (state === 1) this.circle.innerText = t.breathHold;
+        else this.circle.innerText = t.breathExhale;
+    },
+    cycle() {
+        const s = Store.state;
+        if (!this.circle) return;
+        if (s.breathState === 0) {
+            this.circle.className = 'breath-circle breath-inhale';
+            s.breathState = 1;
+        } else if (s.breathState === 1) {
+            this.circle.className = 'breath-circle breath-hold';
+            s.breathState = 2;
+        } else {
+            this.circle.className = 'breath-circle breath-exhale';
+            s.breathState = 0;
+        }
+        this.updateText();
+    }
+};
 
-// 4. 自訂溫柔浮動提示 Toast
-let toastTimer = null;
-function showToast(msg) {
-    const toast = document.getElementById('gentle-toast');
-    toast.innerHTML = msg;
-    toast.style.display = 'block';
-    if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3500);
-}
+// --- 5. 密碼學與資安存儲模組 (Crypto & Storage Engine) ---
+const CryptoEngine = {
+    checkStorageQuota() {
+        let total = 0;
+        for (let key in localStorage) {
+            if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
+                total += (localStorage[key].length * 2);
+            }
+        }
+        const usageMB = total / (1024 * 1024);
+        if (usageMB > 4.5) {
+            UI.showToast(Store.t.toastQuotaWarning);
+        }
+        return usageMB;
+    },
 
-// 5. 自訂密鑰彈窗函式
-function customPrompt({ title, desc, placeholder }) {
-    return new Promise((resolve) => {
-        const modal = document.getElementById('promptModal');
-        const titleEl = document.getElementById('promptTitle');
-        const descEl = document.getElementById('promptDesc');
-        const inputEl = document.getElementById('promptInput');
-        const confirmBtn = document.getElementById('promptConfirmBtn');
-        const cancelBtn = document.getElementById('promptCancelBtn');
-        const t = LANG[curLang];
+    async deriveKey(pwdBytes, salt) {
+        const km = await crypto.subtle.importKey('raw', pwdBytes, 'PBKDF2', false, ['deriveKey']);
+        return crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256' },
+            km,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt', 'decrypt']
+        );
+    },
 
-        titleEl.innerText = title;
-        descEl.innerText = desc;
-        inputEl.placeholder = placeholder || '';
-        inputEl.value = '';
-        confirmBtn.innerText = t.promptConfirm;
-        cancelBtn.innerText = t.promptCancel;
+    async promptPassword({ title, desc, placeholder }) {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('promptModal');
+            const titleEl = document.getElementById('promptTitle');
+            const descEl = document.getElementById('promptDesc');
+            const inputEl = document.getElementById('promptInput');
+            const confirmBtn = document.getElementById('promptConfirmBtn');
+            const cancelBtn = document.getElementById('promptCancelBtn');
+            const t = Store.t;
 
-        openModal('promptModal');
+            titleEl.innerText = title;
+            descEl.innerText = desc;
+            inputEl.placeholder = placeholder || '';
+            inputEl.value = '';
+            confirmBtn.innerText = t.promptConfirm;
+            cancelBtn.innerText = t.promptCancel;
 
-        const handleConfirm = () => { cleanup(); resolve(inputEl.value); };
-        const handleCancel = () => { cleanup(); resolve(null); };
-        const handleKey = (e) => {
-            if (e.key === 'Enter') handleConfirm();
-            if (e.key === 'Escape') handleCancel();
-        };
+            UI.openModal('promptModal');
 
-        function cleanup() {
-            closeModal('promptModal');
-            confirmBtn.removeEventListener('click', handleConfirm);
-            cancelBtn.removeEventListener('click', handleCancel);
-            inputEl.removeEventListener('keydown', handleKey);
+            const handleConfirm = () => {
+                const val = inputEl.value;
+                inputEl.value = '';
+                cleanup();
+                resolve(val);
+            };
+            const handleCancel = () => {
+                inputEl.value = '';
+                cleanup();
+                resolve(null);
+            };
+            const handleKey = (e) => {
+                if (e.key === 'Enter') handleConfirm();
+                if (e.key === 'Escape') handleCancel();
+            };
+
+            function cleanup() {
+                UI.closeModal('promptModal');
+                confirmBtn.removeEventListener('click', handleConfirm);
+                cancelBtn.removeEventListener('click', handleCancel);
+                inputEl.removeEventListener('keydown', handleKey);
+            }
+
+            confirmBtn.addEventListener('click', handleConfirm);
+            cancelBtn.addEventListener('click', handleCancel);
+            inputEl.addEventListener('keydown', handleKey);
+        });
+    },
+
+    async save() {
+        AntiRumination.check();
+        this.checkStorageQuota();
+        const t = Store.t;
+
+        const rawPwd = await this.promptPassword({
+            title: t.promptSaveTitle,
+            desc: t.promptSaveDesc,
+            placeholder: t.promptSavePlaceholder
+        });
+
+        if (rawPwd === null) return;
+        if (rawPwd.trim() === '') {
+            UI.showToast(t.toastEmptyPwd);
+            return;
         }
 
-        confirmBtn.addEventListener('click', handleConfirm);
-        cancelBtn.addEventListener('click', handleCancel);
-        inputEl.addEventListener('keydown', handleKey);
-    });
-}
+        const pwdBytes = new TextEncoder().encode(rawPwd);
+        let text = '';
+        document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(el => text += el.value + '\n---\n');
+        const suds = document.getElementById('sudsSlider') ? document.getElementById('sudsSlider').value : 3;
+        const currentEmotion = t.emotions[Store.state.emotionIndex];
+        const payload = JSON.stringify({ emotion: currentEmotion, suds, text, time: new Date().toISOString() });
 
-// 6. 呼吸調息循環
-let breathState = 0;
-const breathCircle = document.getElementById('breathCircle');
-function updateBreathText() {
-    const t = LANG[curLang];
-    if (breathState === 0) breathCircle.innerText = t.breathInhale;
-    else if (breathState === 1) breathCircle.innerText = t.breathHold;
-    else breathCircle.innerText = t.breathExhale;
-}
-function runBreath() {
-    if (breathState === 0) { breathCircle.className = 'breath-circle breath-inhale'; breathState = 1; }
-    else if (breathState === 1) { breathCircle.className = 'breath-circle breath-hold'; breathState = 2; }
-    else { breathCircle.className = 'breath-circle breath-exhale'; breathState = 0; }
-    updateBreathText();
-}
-setInterval(runBreath, 3800);
-runBreath();
-
-// 7. SUDS 軀體滑塊節流
-let sudsRAF = null;
-function handleSudsChange(val) {
-    if (sudsRAF) cancelAnimationFrame(sudsRAF);
-    sudsRAF = requestAnimationFrame(() => {
-        document.getElementById('sudsValue').innerText = val;
-        const suggestion = document.getElementById('gentleSuggestion');
-        suggestion.style.display = parseInt(val) >= 7 ? 'block' : 'none';
-        sudsRAF = null;
-    });
-}
-
-// 8. 邀請式反芻煞車
-let ruminationCounter = 0;
-let lastActionTime = 0;
-function checkRumination() {
-    const now = Date.now();
-    if (now - lastActionTime > 30 * 60 * 1000) ruminationCounter = 0;
-    ruminationCounter++;
-    lastActionTime = now;
-
-    if (ruminationCounter >= 3) {
-        ruminationCounter = 0;
-        const modal = document.getElementById('ruminationModal');
-        const titleEl = document.getElementById('ruminationTitle');
-        const descEl = document.getElementById('ruminationDesc');
-        const waterBtn = document.getElementById('ruminationWaterBtn');
-        const restBtn = document.getElementById('ruminationRestBtn');
-        const t = LANG[curLang];
-
-        titleEl.innerText = t.ruminationTitle;
-        descEl.innerText = t.ruminationDesc;
-        waterBtn.innerText = t.ruminationWater;
-        restBtn.innerText = t.ruminationRest;
-
-        openModal('ruminationModal');
-
-        const handleWater = () => { cleanup(); showToast(t.toastWater); };
-        const handleRest = () => { cleanup(); showToast(t.toastRest); };
-
-        function cleanup() {
-            closeModal('ruminationModal');
-            waterBtn.removeEventListener('click', handleWater);
-            restBtn.removeEventListener('click', handleRest);
-        }
-
-        waterBtn.addEventListener('click', handleWater);
-        restBtn.addEventListener('click', handleRest);
-    }
-}
-
-// 9. 釋放儀式
-function openRelease() { openModal('releaseModal'); }
-function closeRelease() { closeModal('releaseModal'); }
-
-function confirmRelease() {
-    const blessing = document.getElementById('blessingInput').value.trim();
-    checkRumination();
-    document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
-    document.getElementById('blessingInput').value = '';
-    closeRelease();
-    
-    const t = LANG[curLang];
-    if (blessing) {
-        showToast(`🍃「${blessing}」<br><span style="font-size:0.82rem; color:var(--muted);">${t.toastReleased}</span>`);
-    } else {
-        showToast(`🍃 ${t.toastReleased}`);
-    }
-}
-
-// 10. 金融級加密儲存 (600,000 PBKDF2 + AES-GCM 256 + 記憶體二進制填零)
-async function deriveKey(pwd, salt) {
-    const enc = new TextEncoder();
-    const pwdBytes = enc.encode(pwd);
-    const km = await crypto.subtle.importKey('raw', pwdBytes, 'PBKDF2', false, ['deriveKey']);
-    
-    pwdBytes.fill(0);
-
-    return crypto.subtle.deriveKey(
-        { name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256' },
-        km,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['encrypt', 'decrypt']
-    );
-}
-
-async function saveVault() {
-    checkRumination();
-    const t = LANG[curLang];
-    let pwd = await customPrompt({
-        title: t.promptSaveTitle,
-        desc: t.promptSaveDesc,
-        placeholder: t.promptSavePlaceholder
-    });
-
-    if (pwd === null) return; 
-    if (pwd.trim() === '') {
-        showToast(t.toastEmptyPwd);
-        return;
-    }
-
-    let text = '';
-    document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(el => text += el.value + '\n---\n');
-    const suds = document.getElementById('sudsSlider').value;
-    const currentEmotion = LANG[curLang].emotions[currentEmotionIndex].val;
-    let payload = JSON.stringify({ emotion: currentEmotion, suds, text, time: new Date().toISOString() });
-
-    const enc = new TextEncoder();
-    const salt = crypto.getRandomValues(new Uint8Array(16));
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const key = await deriveKey(pwd, salt);
-    const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(payload));
-
-    const record = {
-        salt: Array.from(salt),
-        iv: Array.from(iv),
-        data: Array.from(new Uint8Array(encrypted)),
-        date: new Date().toLocaleDateString()
-    };
-    
-    const history = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
-    history.push(record);
-    localStorage.setItem('stillhollow_vault', JSON.stringify(history));
-
-    showToast(t.toastSaved);
-    document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
-    pwd = null; payload = null; text = null;
-}
-
-// 11. 雙重加密備份匯出
-async function exportBackup() {
-    const t = LANG[curLang];
-    const data = localStorage.getItem('stillhollow_vault') || '[]';
-    if (data === '[]') {
-        showToast(t.toastNoBackup);
-        return;
-    }
-
-    let backupPwd = await customPrompt({
-        title: t.promptBackupTitle,
-        desc: t.promptBackupDesc,
-        placeholder: t.promptBackupPlaceholder
-    });
-
-    if (backupPwd === null) return;
-    if (backupPwd.trim() === '') {
-        showToast(t.toastBackupPwdEmpty);
-        return;
-    }
-
-    try {
-        const enc = new TextEncoder();
-        const plaintext = enc.encode(data);
-        const salt = crypto.getRandomValues(new Uint8Array(16));
-        const iv = crypto.getRandomValues(new Uint8Array(12));
-        const key = await deriveKey(backupPwd, salt);
-        const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plaintext);
-
-        const finalBlobData = {
-            salt: Array.from(salt),
-            iv: Array.from(iv),
-            data: Array.from(new Uint8Array(encrypted)),
-            version: 1
-        };
-
-        const blob = new Blob([JSON.stringify(finalBlobData)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Stillhollow_Backup_${new Date().toISOString().slice(0,10)}.vault`;
-        a.click();
-        URL.revokeObjectURL(url);
-
-        showToast(t.toastBackupDone);
-        backupPwd = null;
-    } catch (e) {
-        showToast(t.toastBackupFail);
-    }
-}
-
-// 12. 備份解密匯入
-async function importBackup(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const t = LANG[curLang];
-
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-        let backupPwd = null;
         try {
-            const rawJson = e.target.result;
-            let backupObj;
-            try {
-                backupObj = JSON.parse(rawJson);
-            } catch (err) {
-                showToast(t.toastInvalidFile);
-                return;
-            }
+            const enc = new TextEncoder();
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await this.deriveKey(pwdBytes, salt);
+            const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(payload));
 
-            if (!backupObj.salt || !backupObj.iv || !backupObj.data) {
-                showToast(t.toastRestoreFail);
-                return;
-            }
+            const record = {
+                salt: Array.from(salt),
+                iv: Array.from(iv),
+                data: Array.from(new Uint8Array(encrypted)),
+                date: new Date().toLocaleDateString()
+            };
 
-            backupPwd = await customPrompt({
-                title: t.promptImportTitle,
-                desc: t.promptImportDesc,
-                placeholder: t.promptImportPlaceholder
-            });
+            const history = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
+            history.push(record);
+            localStorage.setItem('stillhollow_vault', JSON.stringify(history));
 
-            if (backupPwd === null) return;
-
-            showToast(t.toastDecrypting);
-
-            const salt = new Uint8Array(backupObj.salt);
-            const iv = new Uint8Array(backupObj.iv);
-            const encryptedData = new Uint8Array(backupObj.data);
-            const key = await deriveKey(backupPwd, salt);
-            const decryptedBuffer = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, encryptedData);
-            
-            setTimeout(() => {
-                try {
-                    const decryptedString = new TextDecoder().decode(decryptedBuffer);
-                    const records = JSON.parse(decryptedString);
-                    if (!Array.isArray(records)) throw new Error('Invalid structure');
-
-                    const existing = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
-                    const fingerprintSet = new Set(
-                        existing.map(r => `${r.date}_${(r.data || []).slice(0, 32).join(',')}`)
-                    );
-
-                    let addedCount = 0;
-                    const merged = [...existing];
-                    for (const rec of records) {
-                        const fp = `${rec.date}_${(rec.data || []).slice(0, 32).join(',')}`;
-                        if (!fingerprintSet.has(fp)) {
-                            merged.push(rec);
-                            fingerprintSet.add(fp);
-                            addedCount++;
-                        }
-                    }
-
-                    localStorage.setItem('stillhollow_vault', JSON.stringify(merged));
-                    showToast(t.toastRestored(addedCount, records.length - addedCount));
-                } catch (err) {
-                    showToast(t.toastRestoreFail);
-                }
-            }, 10);
-
-        } catch (error) {
-            showToast(t.toastDecryptFail);
+            UI.showToast(t.toastSaved);
+            document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
+        } catch (err) {
+            UI.showToast(t.toastBackupFail);
         } finally {
-            backupPwd = null;
-            event.target.value = '';
+            pwdBytes.fill(0);
         }
-    };
-    reader.readAsText(file);
+    },
+
+    async export() {
+        const t = Store.t;
+        const data = localStorage.getItem('stillhollow_vault') || '[]';
+        if (data === '[]') {
+            UI.showToast(t.toastNoBackup);
+            return;
+        }
+
+        const rawPwd = await this.promptPassword({
+            title: t.promptBackupTitle,
+            desc: t.promptBackupDesc,
+            placeholder: t.promptBackupPlaceholder
+        });
+
+        if (rawPwd === null) return;
+        if (rawPwd.trim() === '') {
+            UI.showToast(t.toastBackupPwdEmpty);
+            return;
+        }
+
+        const pwdBytes = new TextEncoder().encode(rawPwd);
+
+        try {
+            const enc = new TextEncoder();
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await this.deriveKey(pwdBytes, salt);
+            const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(data));
+
+            const finalBlobData = {
+                version: 1,
+                salt: Array.from(salt),
+                iv: Array.from(iv),
+                data: Array.from(new Uint8Array(encrypted))
+            };
+
+            const blob = new Blob([JSON.stringify(finalBlobData)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Stillhollow_Backup_${new Date().toISOString().slice(0,10)}.vault`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            UI.showToast(t.toastBackupDone);
+        } catch (e) {
+            UI.showToast(t.toastBackupFail);
+        } finally {
+            pwdBytes.fill(0);
+        }
+    },
+
+    async import(file) {
+        if (!file) return;
+        const t = Store.t;
+        const reader = new FileReader();
+
+        reader.onload = async (e) => {
+            let pwdBytes = null;
+            try {
+                let backupObj;
+                try {
+                    backupObj = JSON.parse(e.target.result);
+                } catch (err) {
+                    UI.showToast(t.toastInvalidFile);
+                    return;
+                }
+
+                if (!backupObj.salt || !backupObj.iv || !backupObj.data) {
+                    UI.showToast(t.toastRestoreFail);
+                    return;
+                }
+
+                const rawPwd = await this.promptPassword({
+                    title: t.promptImportTitle,
+                    desc: t.promptImportDesc,
+                    placeholder: t.promptImportPlaceholder
+                });
+
+                if (rawPwd === null) return;
+
+                pwdBytes = new TextEncoder().encode(rawPwd);
+                UI.showToast(t.toastDecrypting);
+
+                const salt = new Uint8Array(backupObj.salt);
+                const iv = new Uint8Array(backupObj.iv);
+                const encryptedData = new Uint8Array(backupObj.data);
+                const key = await this.deriveKey(pwdBytes, salt);
+                const decryptedBuffer = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, encryptedData);
+
+                setTimeout(() => {
+                    try {
+                        const decryptedString = new TextDecoder().decode(decryptedBuffer);
+                        const records = JSON.parse(decryptedString);
+                        if (!Array.isArray(records)) throw new Error('Invalid structure');
+
+                        const existing = JSON.parse(localStorage.getItem('stillhollow_vault') || '[]');
+                        const fingerprintSet = new Set(
+                            existing.map(r => `${r.date}_${(r.data || []).slice(0, 32).join(',')}`)
+                        );
+
+                        let addedCount = 0;
+                        const merged = [...existing];
+                        for (const rec of records) {
+                            const fp = `${rec.date}_${(rec.data || []).slice(0, 32).join(',')}`;
+                            if (!fingerprintSet.has(fp)) {
+                                merged.push(rec);
+                                fingerprintSet.add(fp);
+                                addedCount++;
+                            }
+                        }
+
+                        localStorage.setItem('stillhollow_vault', JSON.stringify(merged));
+                        UI.showToast(t.toastRestored(addedCount, records.length - addedCount));
+                    } catch (err) {
+                        UI.showToast(t.toastRestoreFail);
+                    }
+                }, 10);
+
+            } catch (error) {
+                UI.showToast(t.toastDecryptFail);
+            } finally {
+                if (pwdBytes) pwdBytes.fill(0);
+            }
+        };
+        reader.readAsText(file);
+    }
+};
+
+// --- 6. 反芻煞車機制 (Anti-Rumination Engine) ---
+const AntiRumination = {
+    check() {
+        const s = Store.state;
+        const now = Date.now();
+        if (now - s.lastActionTime > 30 * 60 * 1000) s.ruminationCounter = 0;
+        s.ruminationCounter++;
+        s.lastActionTime = now;
+
+        if (s.ruminationCounter >= 3) {
+            s.ruminationCounter = 0;
+            UI.openModal('ruminationModal');
+
+            const waterBtn = document.getElementById('ruminationWaterBtn');
+            const restBtn = document.getElementById('ruminationRestBtn');
+
+            const handleWater = () => { cleanup(); UI.showToast(Store.t.toastWater); };
+            const handleRest = () => { cleanup(); UI.showToast(Store.t.toastRest); };
+
+            function cleanup() {
+                UI.closeModal('ruminationModal');
+                if (waterBtn) waterBtn.removeEventListener('click', handleWater);
+                if (restBtn) restBtn.removeEventListener('click', handleRest);
+            }
+
+            if (waterBtn) waterBtn.addEventListener('click', handleWater, { once: true });
+            if (restBtn) restBtn.addEventListener('click', handleRest, { once: true });
+        }
+    }
+};
+
+// --- 7. 全域相容與事件分發 (Event Delegation & Global Handlers) ---
+window.setLang = (lang) => Store.setLang(lang);
+window.switchTab = (tab) => Store.setTab(tab);
+window.openSOS = () => { UI.renderHotlines(); UI.openModal('sosModal'); };
+window.closeSOS = () => UI.closeModal('sosModal');
+window.openGrounding = () => UI.openModal('groundingModal');
+window.closeGrounding = () => UI.closeModal('groundingModal');
+window.openGuide = () => UI.openModal('guideModal');
+window.closeGuide = () => UI.closeModal('guideModal');
+window.openRelease = () => UI.openModal('releaseModal');
+window.closeRelease = () => UI.closeModal('releaseModal');
+
+// 全域點擊委派監聽 (支援 data-action 與 ID 識別)
+document.addEventListener('click', (e) => {
+    // 優先捕獲語言切換按鈕
+    const langBtn = e.target.closest('#langZh, #langEn, [data-action="set-lang"]');
+    if (langBtn) {
+        if (langBtn.id === 'langZh' || langBtn.dataset.lang === 'zh') {
+            Store.setLang('zh');
+            return;
+        }
+        if (langBtn.id === 'langEn' || langBtn.dataset.lang === 'en') {
+            Store.setLang('en');
+            return;
+        }
+    }
+
+    const target = e.target.closest('[data-action]');
+    if (!target) return;
+
+    const action = target.dataset.action;
+
+    switch (action) {
+        case 'set-lang':
+            Store.setLang(target.dataset.lang);
+            break;
+        case 'switch-tab':
+            Store.setTab(target.dataset.tab);
+            break;
+        case 'select-emotion':
+            Store.setEmotion(parseInt(target.dataset.idx, 10));
+            break;
+        case 'open-modal':
+            if (target.dataset.target === 'sosModal') UI.renderHotlines();
+            UI.openModal(target.dataset.target);
+            break;
+        case 'close-modal':
+            UI.closeModal(target.dataset.target);
+            break;
+        case 'confirm-release': {
+            const blessingEl = document.getElementById('blessingInput');
+            const blessing = blessingEl ? blessingEl.value.trim() : '';
+            AntiRumination.check();
+            document.querySelectorAll('#inputArea input, #inputArea textarea').forEach(i => i.value = '');
+            if (blessingEl) blessingEl.value = '';
+            UI.closeModal('releaseModal');
+            const t = Store.t;
+            UI.showToast(blessing ? `🍃「${blessing}」<br><span class="hotline-sub">${t.toastReleased}</span>` : `🍃 ${t.toastReleased}`);
+            break;
+        }
+        case 'save-vault':
+            CryptoEngine.save();
+            break;
+        case 'export-backup':
+            CryptoEngine.export();
+            break;
+        case 'trigger-import': {
+            const fileInput = document.getElementById('importFileInput');
+            if (fileInput) fileInput.click();
+            break;
+        }
+        case 'print-view':
+            window.print();
+            break;
+        case 'reload-page':
+            window.location.reload();
+            break;
+    }
+});
+
+// SUDS 滑塊節流監聽
+let sudsRAF = null;
+const sudsSlider = document.getElementById('sudsSlider');
+if (sudsSlider) {
+    sudsSlider.addEventListener('input', (e) => {
+        if (sudsRAF) cancelAnimationFrame(sudsRAF);
+        sudsRAF = requestAnimationFrame(() => {
+            const val = e.target.value;
+            Store.state.suds = val;
+            const valEl = document.getElementById('sudsValue');
+            if (valEl) valEl.innerText = val;
+            const suggestion = document.getElementById('gentleSuggestion');
+            if (suggestion) suggestion.style.display = parseInt(val, 10) >= 7 ? 'block' : 'none';
+            sudsRAF = null;
+        });
+    });
 }
 
-// 13. 輔助彈窗控制
-function openSOS() { 
-    renderHotlines();
-    openModal('sosModal'); 
+// 檔案匯入監聽
+const fileInput = document.getElementById('importFileInput');
+if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+            CryptoEngine.import(e.target.files[0]);
+            e.target.value = '';
+        }
+    });
 }
-function closeSOS() { closeModal('sosModal'); }
-function openGrounding() { openModal('groundingModal'); }
-function closeGrounding() { closeModal('groundingModal'); }
-function openGuide() { openModal('guideModal'); }
-function closeGuide() { closeModal('guideModal'); }
 
-// 14. 意外離開防護 (防止未儲存文字因誤觸重新整理或關閉分頁而遺失)
+// 意外離開防護
 window.addEventListener('beforeunload', (e) => {
     let hasDraft = false;
     document.querySelectorAll('#inputArea textarea, #inputArea input').forEach(el => {
@@ -752,15 +872,29 @@ window.addEventListener('beforeunload', (e) => {
     }
 });
 
-// 15. 監聽 Service Worker 更新通知
+// PWA 更新通知廣播監聽
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'SW_UPDATED') {
-            showToast(curLang === 'zh' ? '✨ 棲心樹洞已更新至最新版本。' : '✨ Stillhollow has been updated.');
+            UI.showToast(Store.t.swUpdateReady);
         }
     });
 }
 
-// 初始化語言偵測
-const browserLang = navigator.language || 'zh';
-setLang(browserLang.startsWith('zh') ? 'zh' : 'en');
+// 全域錯誤邊界
+window.addEventListener('error', () => {
+    UI.showToast(Store.t.toastGlobalError);
+});
+window.addEventListener('unhandledrejection', () => {
+    UI.showToast(Store.t.toastGlobalError);
+});
+
+// 初始化啟動
+document.addEventListener('DOMContentLoaded', () => {
+    UI.renderAll();
+    BreathingEngine.init();
+});
+
+// 立即觸發一次初次渲染
+UI.renderAll();
+BreathingEngine.init();
